@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RIHLAH — Sistem Monitoring Jamaah</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script>
+    // Terapkan tema secepat mungkin agar tidak ada flicker saat halaman dimuat
+    (function () {
+      try {
+        var saved = localStorage.getItem('rihlah-theme');
+        var theme = (saved === 'light' || saved === 'dark')
+          ? saved
+          : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- ==============================
+       LOGIN SCREEN
+  ============================== -->
+  <div class="login-screen" id="loginScreen" role="main" aria-label="Halaman Login">
+    <!-- Theme toggle on login page -->
+    <button class="login-theme-toggle" id="loginThemeToggle" aria-label="Ganti tema" title="Ganti tema">
+      <svg class="theme-icon theme-icon--sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <circle cx="10" cy="10" r="3.4"/>
+        <path d="M10 2.2v2M10 15.8v2M3.6 3.6l1.4 1.4M15 15l1.4 1.4M2.2 10h2M15.8 10h2M3.6 16.4l1.4-1.4M15 5l1.4-1.4"/>
+      </svg>
+      <svg class="theme-icon theme-icon--moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+        <path d="M17 11.3A7 7 0 018.7 3a7 7 0 109.6 11.7" fill="currentColor" fill-opacity="0.18"/>
+      </svg>
+    </button>
+
+    <div class="login-card">
+      <!-- Brand -->
+      <div class="login-card__brand">
+        <div class="login-card__logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M16 8 C16 8, 10 13, 10 18 C10 21.3 12.7 24 16 24 C19.3 24 22 21.3 22 18 C22 13 16 8 16 8Z" fill="currentColor" opacity="0.3"/>
+            <circle cx="16" cy="18" r="3" fill="currentColor"/>
+          </svg>
+        </div>
+        <div>
+          <div class="login-card__brand-name">RIHLAH</div>
+          <div class="login-card__brand-tagline">Sistem Monitoring Jamaah</div>
+        </div>
+      </div>
+
+      <h1 class="login-card__heading">Selamat datang</h1>
+      <p class="login-card__subheading">Masuk untuk mengakses dasbor monitoring</p>
+
+      <!-- Error message -->
+      <div class="login-error" id="loginError" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="10" cy="10" r="8"/>
+          <path d="M10 6v4M10 14h.01"/>
+        </svg>
+        <span id="loginErrorMsg">ID atau kata sandi salah.</span>
+      </div>
+
+      <form class="login-form" id="loginForm" novalidate>
+        <!-- User ID -->
+        <div class="login-field">
+          <label class="login-label" for="loginId">ID Pengguna</label>
+          <div class="login-input-wrap">
+            <input
+              class="login-input"
+              type="text"
+              id="loginId"
+              name="loginId"
+              placeholder="Contoh: PWS-001"
+              autocomplete="username"
+              spellcheck="false"
+              required
+            />
+            <span class="login-input-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6">
+                <circle cx="10" cy="7" r="3.5"/>
+                <path d="M3 18c0-3.9 3.1-7 7-7s7 3.1 7 7"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="login-field">
+          <label class="login-label" for="loginPw">Kata Sandi</label>
+          <div class="login-input-wrap">
+            <input
+              class="login-input"
+              type="password"
+              id="loginPw"
+              name="loginPw"
+              placeholder="Masukkan kata sandi"
+              autocomplete="current-password"
+              required
+            />
+            <span class="login-input-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6">
+                <rect x="4" y="9" width="12" height="9" rx="2"/>
+                <path d="M7 9V6a3 3 0 016 0v3"/>
+              </svg>
+            </span>
+            <button type="button" class="login-pw-toggle" id="loginPwToggle" aria-label="Tampilkan kata sandi">
+              <svg class="pw-eye-show" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <ellipse cx="10" cy="10" rx="8" ry="5"/>
+                <circle cx="10" cy="10" r="2"/>
+              </svg>
+              <svg class="pw-eye-hide" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" style="display:none">
+                <line x1="3" y1="3" x2="17" y2="17"/>
+                <path d="M7.4 7.4A5 5 0 0112.6 12.6M5 5.5C3.8 6.6 3 8 3 10c1.5 3 4 5 7 5a8 8 0 003.5-.8M10 5c3 0 5.5 2 7 5-.5 1.3-1.3 2.4-2.3 3.2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="login-submit" id="loginSubmit">
+          <div class="login-submit__spinner"></div>
+          <span class="login-submit__text">Masuk ke Dasbor</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==============================
+       SIDEBAR NAVIGATION
+  ============================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar__brand">
+      <div class="brand__logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M16 8 C16 8, 10 13, 10 18 C10 21.3 12.7 24 16 24 C19.3 24 22 21.3 22 18 C22 13 16 8 16 8Z" fill="currentColor" opacity="0.3"/>
+          <circle cx="16" cy="18" r="3" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="brand__text">
+        <span class="brand__name">RIHLAH</span>
+        <span class="brand__tagline">Sistem Monitoring Jamaah</span>
+      </div>
+    </div>
+
+    <nav class="sidebar__nav">
+      <ul class="nav__list">
+        <li class="nav__item nav__item--active" data-page="dashboard">
+          <a class="nav__link" href="#dashboard">
+            <span class="nav__icon">
+              <!-- Dashboard icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="2" y="2" width="7" height="7" rx="1"/>
+                <rect x="11" y="2" width="7" height="7" rx="1"/>
+                <rect x="2" y="11" width="7" height="7" rx="1"/>
+                <rect x="11" y="11" width="7" height="7" rx="1"/>
+              </svg>
+            </span>
+            <span class="nav__label">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav__item" data-page="monitoring">
+          <a class="nav__link" href="#monitoring">
+            <span class="nav__icon">
+              <!-- People icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="8" cy="6" r="3"/>
+                <path d="M2 18c0-3.3 2.7-6 6-6s6 2.7 6 6"/>
+                <circle cx="15" cy="6" r="2.5"/>
+                <path d="M18 18c0-2.8-1.6-5-4-5.7"/>
+              </svg>
+            </span>
+            <span class="nav__label">Monitoring Jamaah</span>
+          </a>
+        </li>
+        <li class="nav__item" data-page="settings">
+          <a class="nav__link" href="#settings">
+            <span class="nav__icon">
+              <!-- Settings icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="10" cy="10" r="2.5"/>
+                <path d="M10 2v2M10 16v2M2 10h2M16 10h2M4.2 4.2l1.4 1.4M14.4 14.4l1.4 1.4M4.2 15.8l1.4-1.4M14.4 5.6l1.4-1.4"/>
+              </svg>
+            </span>
+            <span class="nav__label">Settings</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar__footer">
+      <!-- Profile Popup (rendered above the footer) -->
+      <div class="profile-popup" id="profilePopup" hidden role="dialog" aria-label="Menu profil">
+
+        <!-- Current user info -->
+        <div class="profile-popup__header">
+          <div class="profile-popup__avatar" id="ppAvatar">PW</div>
+          <div class="profile-popup__info">
+            <div class="profile-popup__name" id="ppName">Pengawas Pusat</div>
+            <div class="profile-popup__role" id="ppRole">Admin</div>
+            <div class="profile-popup__id" id="ppId">PWS-001</div>
+          </div>
+        </div>
+
+        <!-- Saved accounts list -->
+        <div class="profile-accounts" id="profileAccountsList">
+          <div class="profile-accounts__label">Akun Tersimpan</div>
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Menu actions -->
+        <div class="profile-menu">
+          <button class="profile-menu__item" id="profileAddAccount">
+            <span class="profile-menu__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="8" cy="7" r="3"/>
+                <path d="M2 18c0-3.3 2.7-6 6-6"/>
+                <line x1="15" y1="11" x2="15" y2="19"/>
+                <line x1="11" y1="15" x2="19" y2="15"/>
+              </svg>
+            </span>
+            Masuk dengan akun lain
+          </button>
+          <div class="profile-menu__divider"></div>
+          <button class="profile-menu__item profile-menu__item--danger" id="profileLogout">
+            <span class="profile-menu__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M13 3h4a1 1 0 011 1v12a1 1 0 01-1 1h-4"/>
+                <path d="M8 15l5-5-5-5"/>
+                <line x1="13" y1="10" x2="2" y2="10"/>
+              </svg>
+            </span>
+            Keluar
+          </button>
+        </div>
+      </div>
+
+      <!-- Clickable user widget -->
+      <div class="sidebar__user" id="sidebarUserBtn" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="Buka menu profil">
+        <div class="user__avatar" id="sidebarAvatar">PW</div>
+        <div class="user__info">
+          <span class="user__name" id="sidebarUserName">Pengawas Pusat</span>
+          <span class="user__role" id="sidebarUserRole">Admin</span>
+        </div>
+        <span class="user__chevron">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="5 8 10 13 15 8"/>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobile Sidebar Overlay -->
+  <div class="sidebar__overlay" id="sidebarOverlay"></div>
+
+  <!-- ==============================
+       MAIN CONTENT WRAPPER
+  ============================== -->
+  <div class="main-wrapper">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <button class="topbar__hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topbar__breadcrumb">
+        <span class="breadcrumb__page" id="breadcrumbLabel">Dashboard</span>
+      </div>
+      <div class="topbar__actions">
+        <div class="topbar__timestamp">
+          <span class="timestamp__label">Diperbarui</span>
+          <span class="timestamp__value" id="lastUpdated">—</span>
+        </div>
+        <button class="topbar__theme-btn" id="themeToggleBtn" type="button" aria-label="Ganti ke mode terang" title="Mode Gelap">
+          <svg class="theme-icon theme-icon--sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <circle cx="10" cy="10" r="3.4"/>
+            <path d="M10 2.2v2M10 15.8v2M3.6 3.6l1.4 1.4M15 15l1.4 1.4M2.2 10h2M15.8 10h2M3.6 16.4l1.4-1.4M15 5l1.4-1.4"/>
+          </svg>
+          <svg class="theme-icon theme-icon--moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+            <path d="M17 11.3A7 7 0 018.7 3a7 7 0 109.6 11.7" fill="currentColor" fill-opacity="0.18"/>
+          </svg>
+        </button>
+        <button class="topbar__alert-btn" id="alertBellBtn" aria-label="Lihat alert">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M10 2a6 6 0 00-6 6v3l-1.5 2.5h15L16 11V8a6 6 0 00-6-6z"/>
+            <path d="M8.5 17a1.5 1.5 0 003 0"/>
+          </svg>
+          <span class="alert-badge" id="alertBadge">3</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ==============================
+         PAGE 1: DASHBOARD
+    ============================== -->
+    <main class="page page--active" id="page-dashboard">
+
+      <section class="page__header">
+        <h1 class="page__title">Dashboard</h1>
+        <p class="page__subtitle">Kondisi terkini seluruh jamaah haji</p>
+      </section>
+
+      <!-- STAT CARDS -->
+      <section class="stats-grid" aria-label="Statistik Jamaah">
+
+        <div class="stat-card stat-card--total">
+          <div class="stat-card__label">Total Jamaah</div>
+          <div class="stat-card__value" id="statTotal">—</div>
+          <div class="stat-card__meta">Terdaftar dalam sistem</div>
+        </div>
+
+        <div class="stat-card stat-card--active">
+          <div class="stat-card__label">Jamaah Aktif</div>
+          <div class="stat-card__value" id="statActive">—</div>
+          <div class="stat-card__meta">Gelang terhubung</div>
+        </div>
+
+        <div class="stat-card stat-card--hijau">
+          <div class="stat-card__indicator"></div>
+          <div class="stat-card__label">Status Hijau</div>
+          <div class="stat-card__value" id="statHijau">—</div>
+          <div class="stat-card__meta">Kondisi normal</div>
+        </div>
+
+        <div class="stat-card stat-card--kuning">
+          <div class="stat-card__indicator"></div>
+          <div class="stat-card__label">Status Kuning</div>
+          <div class="stat-card__value" id="statKuning">—</div>
+          <div class="stat-card__meta">Perlu pemantauan</div>
+        </div>
+
+        <div class="stat-card stat-card--merah">
+          <div class="stat-card__indicator"></div>
+          <div class="stat-card__label">Status Merah</div>
+          <div class="stat-card__value" id="statMerah">—</div>
+          <div class="stat-card__meta">Butuh penanganan segera</div>
+        </div>
+
+        <div class="stat-card stat-card--alert">
+          <div class="stat-card__label">Alert Aktif</div>
+          <div class="stat-card__value" id="statAlert">—</div>
+          <div class="stat-card__meta">Perlu respons</div>
+        </div>
+
+      </section>
+
+      <!-- QUICK ACTION BUTTONS -->
+      <section class="quick-actions" aria-label="Aksi Cepat">
+        <button class="btn btn--primary" data-goto="monitoring">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="8" cy="6" r="3"/>
+            <path d="M2 18c0-3.3 2.7-6 6-6s6 2.7 6 6"/>
+            <circle cx="15" cy="6" r="2.5"/>
+            <path d="M18 18c0-2.8-1.6-5-4-5.7"/>
+          </svg>
+          Monitoring Jamaah
+        </button>
+        <button class="btn btn--danger" id="btnLihatAlert">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M10 2a6 6 0 00-6 6v3l-1.5 2.5h15L16 11V8a6 6 0 00-6-6z"/>
+            <path d="M8.5 17a1.5 1.5 0 003 0"/>
+          </svg>
+          Lihat Alert
+        </button>
+      </section>
+
+      <!-- ACTIVE ALERTS PANEL -->
+      <section class="alerts-panel" id="alertsPanel" aria-live="polite">
+        <div class="panel__header">
+          <h2 class="panel__title">Alert Aktif</h2>
+          <span class="panel__count" id="alertCount">—</span>
+        </div>
+        <ul class="alerts-list" id="alertsList">
+          <!-- Populated by JS -->
+          <li class="alerts-list__empty">Memuat data alert...</li>
+        </ul>
+      </section>
+
+      <!-- TREND CHART -->
+      <section class="chart-panel">
+        <div class="panel__header">
+          <h2 class="panel__title">Tren Kondisi Jamaah</h2>
+          <div class="chart-legend">
+            <span class="legend-item legend-item--hijau">Hijau</span>
+            <span class="legend-item legend-item--kuning">Kuning</span>
+            <span class="legend-item legend-item--merah">Merah</span>
+          </div>
+        </div>
+        <div class="chart-container" id="trendChart" role="img" aria-label="Grafik tren kondisi jamaah">
+          <!-- SVG chart rendered by JS -->
+          <div class="chart-placeholder">Memuat grafik...</div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ==============================
+         PAGE 2: MONITORING JAMAAH
+    ============================== -->
+    <main class="page" id="page-monitoring">
+
+      <section class="page__header">
+        <h1 class="page__title">Monitoring Jamaah</h1>
+        <p class="page__subtitle">Pemantauan dan triase per kelompok</p>
+      </section>
+
+      <!-- FILTER & SEARCH -->
+      <section class="monitoring-toolbar">
+        <div class="search-box">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="9" cy="9" r="6"/>
+            <path d="M15 15l3 3"/>
+          </svg>
+          <input type="search" class="search-box__input" id="jamaahSearch" placeholder="Cari nama jamaah..." aria-label="Cari jamaah" />
+        </div>
+        <div class="filter-chips" role="group" aria-label="Filter status">
+          <button class="chip chip--active" data-filter="all">Semua</button>
+          <button class="chip chip--hijau" data-filter="hijau">🟩 Hijau</button>
+          <button class="chip chip--kuning" data-filter="kuning">🟨 Kuning</button>
+          <button class="chip chip--merah" data-filter="merah">🟥 Merah</button>
+        </div>
+      </section>
+
+      <!-- JAMAAH LIST PER GROUP -->
+      <div class="groups-container" id="groupsContainer">
+        <!-- Populated by JS — structure below is the template -->
+
+        <!-- GROUP TEMPLATE (replicated per ketua kelompok) -->
+        <!--
+        <div class="group-block" data-group="kelompok-1">
+          <div class="group-header">
+            <div class="group-header__left">
+              <span class="group-badge">Kelompok 1</span>
+              <span class="group-leader">Ketua: H. Musthofa Kamal</span>
+            </div>
+            <div class="group-header__right">
+              <span class="group-count">12 jamaah</span>
+              <span class="group-status-dots">
+                <span class="dot dot--hijau">9</span>
+                <span class="dot dot--kuning">2</span>
+                <span class="dot dot--merah">1</span>
+              </span>
+            </div>
+          </div>
+
+          <ul class="jamaah-list">
+
+            JAMAAH ROW
+            <li class="jamaah-row" data-id="001" data-status="hijau">
+              <button class="jamaah-row__toggle" aria-expanded="false" aria-controls="detail-001">
+                <span class="jamaah-row__status-dot status-dot--hijau" aria-label="Status hijau"></span>
+                <span class="jamaah-row__name">Ahmad Fauzi</span>
+                <span class="jamaah-row__meta">
+                  <span class="gelang-id">RIH001</span>
+                  <span class="vitals-mini">SpO₂ 98% · HR 72</span>
+                </span>
+                <span class="jamaah-row__chevron">
+                  <svg>chevron down</svg>
+                </span>
+              </button>
+
+              EXPANDABLE DETAIL CARD
+              <div class="jamaah-detail" id="detail-001" hidden>
+                ...detail content...
+              </div>
+            </li>
+
+          </ul>
+        </div>
+        -->
+
+        <div class="groups-placeholder">Memuat data jamaah...</div>
+      </div>
+
+    </main>
+
+    <!-- ==============================
+         PAGE 3: SETTINGS
+    ============================== -->
+    <main class="page" id="page-settings">
+
+      <section class="page__header">
+        <h1 class="page__title">Settings</h1>
+        <p class="page__subtitle">Administrasi sistem RIHLAH</p>
+      </section>
+
+      <!-- SETTINGS SECTIONS -->
+      <div class="settings-container">
+
+        <!-- AKUN -->
+        <section class="settings-section">
+          <div class="settings-section__header">
+            <div class="settings-section__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="10" cy="7" r="4"/>
+                <path d="M3 19c0-3.9 3.1-7 7-7s7 3.1 7 7"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="settings-section__title">Akun</h2>
+              <p class="settings-section__desc">Kelola pengguna dan akses sistem</p>
+            </div>
+          </div>
+
+          <div class="settings-cards">
+            <div class="settings-card">
+              <div class="settings-card__body">
+                <span class="settings-card__role-badge badge--pengawas">Pengawas Pusat</span>
+                <h3 class="settings-card__name">H. Dr. Abdul Rahman, M.Kes</h3>
+                <p class="settings-card__detail">
+                  <span>ID: PWS-001</span>
+                  <span>Akses: Seluruh Data</span>
+                </p>
+              </div>
+              <div class="settings-card__actions">
+                <button class="btn-text">Edit</button>
+                <button class="btn-text btn-text--danger">Nonaktifkan</button>
+              </div>
+            </div>
+
+            <div class="settings-card settings-card--add">
+              <button class="settings-card__add-btn" id="btnTambahKetua">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="10" cy="10" r="8"/>
+                  <line x1="10" y1="6" x2="10" y2="14"/>
+                  <line x1="6" y1="10" x2="14" y2="10"/>
+                </svg>
+                Tambah Ketua Kelompok
+              </button>
+            </div>
+          </div>
+
+          <!-- Ketua Kelompok List -->
+          <div class="ketua-list" id="ketuaList">
+            <!-- Populated by JS -->
+          </div>
+        </section>
+
+        <!-- GELANG RIHLAH -->
+        <section class="settings-section">
+          <div class="settings-section__header">
+            <div class="settings-section__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="10" cy="10" r="7"/>
+                <circle cx="10" cy="10" r="3"/>
+                <path d="M10 3V1M10 19v-2M3 10H1M19 10h-2"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="settings-section__title">Gelang RIHLAH</h2>
+              <p class="settings-section__desc">Registrasi, status, dan distribusi gelang</p>
+            </div>
+          </div>
+
+          <!-- Sub-tabs -->
+          <div class="subtabs" role="tablist">
+            <button class="subtab subtab--active" role="tab" data-subtab="registrasi" aria-selected="true">Registrasi</button>
+            <button class="subtab" role="tab" data-subtab="status" aria-selected="false">Status Gelang</button>
+            <button class="subtab" role="tab" data-subtab="distribusi" aria-selected="false">Distribusi</button>
+          </div>
+
+          <!-- Registrasi Gelang Tab -->
+          <div class="subtab-panel subtab-panel--active" id="subtab-registrasi" role="tabpanel">
+            <div class="register-form">
+              <div class="form-row">
+                <label class="form-label" for="gelangId">ID Gelang</label>
+                <input type="text" class="form-input" id="gelangId" placeholder="Contoh: RIH021" />
+              </div>
+              <div class="form-row">
+                <label class="form-label" for="gelangJamaah">Nama Jamaah</label>
+                <input type="text" class="form-input" id="gelangJamaah" placeholder="Cari nama jamaah..." />
+              </div>
+              <div class="form-row">
+                <label class="form-label" for="gelangKelompok">Kelompok</label>
+                <select class="form-select" id="gelangKelompok">
+                  <option value="">Pilih kelompok</option>
+                  <option value="1">Kelompok 1 — H. Musthofa Kamal</option>
+                  <option value="2">Kelompok 2 — H. Wahyu Santoso</option>
+                  <option value="3">Kelompok 3 — Hj. Fatimah Zahra</option>
+                </select>
+              </div>
+              <button class="btn btn--primary" id="btnDaftarGelang">Daftarkan Gelang</button>
+            </div>
+          </div>
+
+          <!-- Status Gelang Tab -->
+          <div class="subtab-panel" id="subtab-status" role="tabpanel" hidden>
+            <div class="gelang-status-grid" id="gelangStatusGrid">
+              <!-- Populated by JS -->
+              <div class="gelang-placeholder">Memuat status gelang...</div>
+            </div>
+          </div>
+
+          <!-- Distribusi Gelang Tab -->
+          <div class="subtab-panel" id="subtab-distribusi" role="tabpanel" hidden>
+            <div class="distribusi-table-wrapper">
+              <table class="distribusi-table" id="distribusiTable">
+                <thead>
+                  <tr>
+                    <th>ID Gelang</th>
+                    <th>Jamaah</th>
+                    <th>Kelompok</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="distribusiTableBody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- NOTIFIKASI -->
+        <section class="settings-section">
+          <div class="settings-section__header">
+            <div class="settings-section__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M10 2a6 6 0 00-6 6v3l-1.5 2.5h15L16 11V8a6 6 0 00-6-6z"/>
+                <path d="M8.5 17a1.5 1.5 0 003 0"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="settings-section__title">Notifikasi</h2>
+              <p class="settings-section__desc">Atur jenis dan saluran notifikasi alert</p>
+            </div>
+          </div>
+
+          <div class="notif-list">
+
+            <div class="notif-item">
+              <div class="notif-item__left">
+                <span class="notif-item__icon notif-icon--kuning">🟨</span>
+                <div class="notif-item__text">
+                  <span class="notif-item__name">Alert Risiko Kuning</span>
+                  <span class="notif-item__desc">Jamaah masuk kategori pemantauan</span>
+                </div>
+              </div>
+              <label class="toggle" aria-label="Aktifkan alert risiko kuning">
+                <input type="checkbox" class="toggle__input" id="notifKuning" checked />
+                <span class="toggle__slider"></span>
+              </label>
+            </div>
+
+            <div class="notif-item">
+              <div class="notif-item__left">
+                <span class="notif-item__icon notif-icon--merah">🟥</span>
+                <div class="notif-item__text">
+                  <span class="notif-item__name">Alert Risiko Merah</span>
+                  <span class="notif-item__desc">Kondisi kritis — butuh penanganan segera</span>
+                </div>
+              </div>
+              <label class="toggle" aria-label="Aktifkan alert risiko merah">
+                <input type="checkbox" class="toggle__input" id="notifMerah" checked />
+                <span class="toggle__slider"></span>
+              </label>
+            </div>
+
+            <div class="notif-item">
+              <div class="notif-item__left">
+                <span class="notif-item__icon">📵</span>
+                <div class="notif-item__text">
+                  <span class="notif-item__name">Gelang Offline</span>
+                  <span class="notif-item__desc">Gelang tidak terdeteksi lebih dari 5 menit</span>
+                </div>
+              </div>
+              <label class="toggle" aria-label="Aktifkan notifikasi gelang offline">
+                <input type="checkbox" class="toggle__input" id="notifOffline" checked />
+                <span class="toggle__slider"></span>
+              </label>
+            </div>
+
+            <div class="notif-item">
+              <div class="notif-item__left">
+                <span class="notif-item__icon">🔋</span>
+                <div class="notif-item__text">
+                  <span class="notif-item__name">Baterai Rendah</span>
+                  <span class="notif-item__desc">Baterai gelang di bawah 20%</span>
+                </div>
+              </div>
+              <label class="toggle" aria-label="Aktifkan notifikasi baterai rendah">
+                <input type="checkbox" class="toggle__input" id="notifBaterai" />
+                <span class="toggle__slider"></span>
+              </label>
+            </div>
+
+          </div>
+
+          <div class="notif-threshold">
+            <h3 class="threshold__title">Ambang Batas Otomatis</h3>
+            <div class="threshold-grid">
+              <div class="threshold-item">
+                <label class="form-label" for="thresholdSpO2">SpO₂ Minimum (%)</label>
+                <input type="number" class="form-input form-input--sm" id="thresholdSpO2" value="94" min="80" max="100" />
+              </div>
+              <div class="threshold-item">
+                <label class="form-label" for="thresholdHR">Heart Rate Maks (bpm)</label>
+                <input type="number" class="form-input form-input--sm" id="thresholdHR" value="110" min="60" max="200" />
+              </div>
+              <div class="threshold-item">
+                <label class="form-label" for="thresholdRR">Resp. Rate Maks (bpm)</label>
+                <input type="number" class="form-input form-input--sm" id="thresholdRR" value="24" min="10" max="40" />
+              </div>
+              <div class="threshold-item">
+                <label class="form-label" for="thresholdBatt">Baterai Minimum (%)</label>
+                <input type="number" class="form-input form-input--sm" id="thresholdBatt" value="20" min="5" max="50" />
+              </div>
+            </div>
+            <button class="btn btn--primary btn--sm" id="btnSaveThreshold">Simpan Ambang Batas</button>
+          </div>
+
+        </section>
+
+      </div>
+      <!-- end .settings-container -->
+
+    </main>
+    <!-- end page-settings -->
+
+  </div>
+  <!-- end .main-wrapper -->
+
+  <!-- ==============================
+       MODAL: ALERT DETAIL
+  ============================== -->
+  <div class="modal-overlay" id="alertModal" hidden role="dialog" aria-modal="true" aria-labelledby="alertModalTitle">
+    <div class="modal">
+      <div class="modal__header">
+        <h2 class="modal__title" id="alertModalTitle">Detail Alert</h2>
+        <button class="modal__close" id="alertModalClose" aria-label="Tutup">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="5" x2="15" y2="15"/>
+            <line x1="15" y1="5" x2="5" y2="15"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal__body" id="alertModalBody">
+        <!-- Populated by JS -->
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--danger" id="btnHubungiPetugas">Hubungi Petugas Kesehatan</button>
+        <button class="btn btn--secondary" id="alertModalCancel">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================
+       MODAL: TAMBAH KETUA KELOMPOK
+  ============================== -->
+  <div class="modal-overlay" id="ketuaModal" hidden role="dialog" aria-modal="true" aria-labelledby="ketuaModalTitle">
+    <div class="modal">
+      <div class="modal__header">
+        <h2 class="modal__title" id="ketuaModalTitle">Tambah Ketua Kelompok</h2>
+        <button class="modal__close" id="ketuaModalClose" aria-label="Tutup">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="5" x2="15" y2="15"/>
+            <line x1="15" y1="5" x2="5" y2="15"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal__body">
+        <div class="form-row">
+          <label class="form-label" for="ketuaDisplayId">ID Login</label>
+          <input type="text" class="form-input" id="ketuaDisplayId" placeholder="Contoh: KTU-004" autocomplete="off" />
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="ketuaNama">Nama Lengkap</label>
+          <input type="text" class="form-input" id="ketuaNama" placeholder="H. Nama Lengkap" autocomplete="off" />
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="ketuaShortName">Nama Singkat</label>
+          <input type="text" class="form-input" id="ketuaShortName" placeholder="H. Nama" autocomplete="off" />
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="ketuaKelompok">Memimpin Kelompok</label>
+          <select class="form-select" id="ketuaKelompok">
+            <option value="">Pilih kelompok...</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="ketuaPassword">Password Awal</label>
+          <input type="password" class="form-input" id="ketuaPassword" placeholder="Minimal 6 karakter" autocomplete="new-password" />
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--primary" id="btnSimpanKetua">Simpan</button>
+        <button class="btn btn--secondary" id="ketuaModalCancel">Batal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================
+       TOAST NOTIFICATIONS
+  ============================== -->
+  <div class="toast-container" id="toastContainer" aria-live="assertive" aria-atomic="true">
+    <!-- Toasts injected by JS -->
+  </div>
+
+  <!-- Supabase CDN — harus dimuat sebelum supabase.js dan app.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- RIHLAH Supabase client & queries -->
+  <script src="supabase.js"></script>
+  <!-- RIHLAH App -->
+  <script src="app.js"></script>
+</body>
+</html>
