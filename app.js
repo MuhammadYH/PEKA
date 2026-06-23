@@ -1,5 +1,5 @@
 /* ============================================================
-   PEKA DASHBOARD — app.js
+   RIHLAH DASHBOARD — app.js
    Batch 3: Full JS — data, routing, rendering, interactions
    ============================================================ */
 
@@ -89,7 +89,7 @@ function initLogin() {
     loginSubmit.classList.add('login-submit--loading');
     loginSubmit.disabled = true;
 
-    const result = await window.PEKA_DB.authLogin(inputId, inputPw);
+    const result = await window.RIHLAH_DB.authLogin(inputId, inputPw);
 
     loginSubmit.classList.remove('login-submit--loading');
     loginSubmit.disabled = false;
@@ -242,7 +242,7 @@ function initProfilePopup() {
   // Logout
   logoutBtn?.addEventListener('click', async () => {
     closePopup();
-    await window.PEKA_DB.authLogout();
+    await window.RIHLAH_DB.authLogout();
     clearSession();
     showLoginScreen();
     if (typeof showToast === 'function') {
@@ -1314,7 +1314,7 @@ async function submitArmadaForm() {
   DOM.btnSimpanArmada.disabled = true;
   DOM.btnSimpanArmada.textContent = 'Menyimpan...';
 
-  const result = await window.PEKA_DB.insertArmada(nama);
+  const result = await window.RIHLAH_DB.insertArmada(nama);
 
   DOM.btnSimpanArmada.disabled = false;
   DOM.btnSimpanArmada.textContent = 'Simpan';
@@ -1376,7 +1376,7 @@ async function submitSupervisorForm() {
   DOM.btnSimpanSupervisor.disabled = true;
   DOM.btnSimpanSupervisor.textContent = 'Menyimpan...';
 
-  const result = await window.PEKA_DB.createSupervisorArmada({
+  const result = await window.RIHLAH_DB.createSupervisorArmada({
     displayId, nama, shortName, password, armadaId,
   });
 
@@ -1625,7 +1625,7 @@ async function handleJmSubmitClick() {
   DOM.jmBtnSubmit.disabled = true;
   DOM.jmBtnSubmit.textContent = 'Mengirim...';
 
-  const { data, error } = await window.PEKA_DB.insertSopirBulk(payload);
+  const { data, error } = await window.RIHLAH_DB.insertSopirBulk(payload);
 
   DOM.jmBtnSubmit.disabled = false;
   DOM.jmBtnSubmit.textContent = 'Kirim ke Database';
@@ -1946,9 +1946,9 @@ async function loadAppData() {
   // Muat data dari Supabase dan update DATA global
   try {
     const [sopirRes, armadaRes, alertsRes] = await Promise.all([
-      window.PEKA_DB.fetchSopir(),
-      window.PEKA_DB.fetchArmada(),
-      window.PEKA_DB.fetchActiveAlerts(),
+      window.RIHLAH_DB.fetchSopir(),
+      window.RIHLAH_DB.fetchArmada(),
+      window.RIHLAH_DB.fetchActiveAlerts(),
     ]);
 
     if (!sopirRes.error && sopirRes.data) {
@@ -1986,36 +1986,47 @@ async function loadAppData() {
     renderAlerts();
     requestAnimationFrame(() => renderTrendChart());
 
-    // Subscribe realtime updates
-    window.PEKA_DB.subscribeSopirUpdates((payload) => {
-      const updated = payload.new;
-      const idx = DATA.sopir.findIndex(j => j.id === updated.id);
-      if (idx >= 0) {
-        DATA.sopir[idx].status = updated.last_status || DATA.sopir[idx].status;
-        DATA.sopir[idx].spo2   = updated.last_spo2   ?? DATA.sopir[idx].spo2;
-        DATA.sopir[idx].hr     = updated.last_hr     ?? DATA.sopir[idx].hr;
-        DATA.sopir[idx].rr     = updated.last_rr     ?? DATA.sopir[idx].rr;
-        if (STATE.activePage === 'dashboard') { renderStats(); renderAlerts(); }
-      }
-    });
+    // Subscribe realtime updates — HANYA SEKALI per sesi.
+    // loadAppData() dipanggil berulang (setelah tambah armada/supervisor, dll),
+    // tapi channel realtime tidak boleh di-subscribe dua kali dengan nama yang sama.
+    subscribeRealtimeOnce();
 
-    window.PEKA_DB.subscribeNewAlerts((payload) => {
-      const a = payload.new;
-      showToast(
-        a.severity === 'merah' ? 'danger' : 'warning',
-        'Alert Baru',
-        a.pesan || a.nilai || 'Cek monitoring segera.',
-        6000
-      );
-      if (STATE.activePage === 'dashboard') renderAlerts();
-    });
-
-    showToast('info', 'PEKA Aktif', 'Sistem monitoring sopir berjalan normal.', 4000);
+    showToast('info', 'RIHLAH Aktif', 'Sistem monitoring sopir berjalan normal.', 4000);
 
   } catch (err) {
     console.error('loadAppData error:', err);
     showToast('warning', 'Gagal memuat data', 'Periksa koneksi internet Anda.', 5000);
   }
+}
+
+let _realtimeSubscribed = false;
+
+function subscribeRealtimeOnce() {
+  if (_realtimeSubscribed) return;
+  _realtimeSubscribed = true;
+
+  window.RIHLAH_DB.subscribeSopirUpdates((payload) => {
+    const updated = payload.new;
+    const idx = DATA.sopir.findIndex(j => j.id === updated.id);
+    if (idx >= 0) {
+      DATA.sopir[idx].status = updated.last_status || DATA.sopir[idx].status;
+      DATA.sopir[idx].spo2   = updated.last_spo2   ?? DATA.sopir[idx].spo2;
+      DATA.sopir[idx].hr     = updated.last_hr     ?? DATA.sopir[idx].hr;
+      DATA.sopir[idx].rr     = updated.last_rr     ?? DATA.sopir[idx].rr;
+      if (STATE.activePage === 'dashboard') { renderStats(); renderAlerts(); }
+    }
+  });
+
+  window.RIHLAH_DB.subscribeNewAlerts((payload) => {
+    const a = payload.new;
+    showToast(
+      a.severity === 'merah' ? 'danger' : 'warning',
+      'Alert Baru',
+      a.pesan || a.nilai || 'Cek monitoring segera.',
+      6000
+    );
+    if (STATE.activePage === 'dashboard') renderAlerts();
+  });
 }
 
 /* ============================================================
@@ -2026,11 +2037,11 @@ async function boot() {
   initProfilePopup();
 
   // Cek sesi Supabase yang masih aktif (misal: refresh halaman)
-  const session = await window.PEKA_DB.authGetSession();
+  const session = await window.RIHLAH_DB.authGetSession();
 
   if (session) {
     // Sudah login — ambil profil & langsung buka app
-    const profileRes = await window.PEKA_DB.fetchCurrentUserProfile();
+    const profileRes = await window.RIHLAH_DB.fetchCurrentUserProfile();
     if (profileRes.data) {
       _currentProfile = profileRes.data;
       saveAccount(profileRes.data);
