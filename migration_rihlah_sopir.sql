@@ -1,5 +1,5 @@
 -- ============================================================
--- RIHLAH — Migrasi Skema: Jamaah Haji → Monitoring Sopir
+-- PEKA — Migrasi Skema: Jamaah Haji → Monitoring Sopir
 -- Jalankan di Supabase Dashboard → SQL Editor (project oqtavdokazhbukzproam)
 --
 -- PENTING:

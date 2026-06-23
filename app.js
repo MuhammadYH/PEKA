@@ -1,5 +1,5 @@
 /* ============================================================
-   RIHLAH DASHBOARD — app.js
+   PEKA DASHBOARD — app.js
    Batch 3: Full JS — data, routing, rendering, interactions
    ============================================================ */
 
@@ -89,7 +89,7 @@ function initLogin() {
     loginSubmit.classList.add('login-submit--loading');
     loginSubmit.disabled = true;
 
-    const result = await window.RIHLAH_DB.authLogin(inputId, inputPw);
+    const result = await window.PEKA_DB.authLogin(inputId, inputPw);
 
     loginSubmit.classList.remove('login-submit--loading');
     loginSubmit.disabled = false;
@@ -242,7 +242,7 @@ function initProfilePopup() {
   // Logout
   logoutBtn?.addEventListener('click', async () => {
     closePopup();
-    await window.RIHLAH_DB.authLogout();
+    await window.PEKA_DB.authLogout();
     clearSession();
     showLoginScreen();
     if (typeof showToast === 'function') {
@@ -1314,7 +1314,7 @@ async function submitArmadaForm() {
   DOM.btnSimpanArmada.disabled = true;
   DOM.btnSimpanArmada.textContent = 'Menyimpan...';
 
-  const result = await window.RIHLAH_DB.insertArmada(nama);
+  const result = await window.PEKA_DB.insertArmada(nama);
 
   DOM.btnSimpanArmada.disabled = false;
   DOM.btnSimpanArmada.textContent = 'Simpan';
@@ -1376,7 +1376,7 @@ async function submitSupervisorForm() {
   DOM.btnSimpanSupervisor.disabled = true;
   DOM.btnSimpanSupervisor.textContent = 'Menyimpan...';
 
-  const result = await window.RIHLAH_DB.createSupervisorArmada({
+  const result = await window.PEKA_DB.createSupervisorArmada({
     displayId, nama, shortName, password, armadaId,
   });
 
@@ -1625,7 +1625,7 @@ async function handleJmSubmitClick() {
   DOM.jmBtnSubmit.disabled = true;
   DOM.jmBtnSubmit.textContent = 'Mengirim...';
 
-  const { data, error } = await window.RIHLAH_DB.insertSopirBulk(payload);
+  const { data, error } = await window.PEKA_DB.insertSopirBulk(payload);
 
   DOM.jmBtnSubmit.disabled = false;
   DOM.jmBtnSubmit.textContent = 'Kirim ke Database';
@@ -1946,9 +1946,9 @@ async function loadAppData() {
   // Muat data dari Supabase dan update DATA global
   try {
     const [sopirRes, armadaRes, alertsRes] = await Promise.all([
-      window.RIHLAH_DB.fetchSopir(),
-      window.RIHLAH_DB.fetchArmada(),
-      window.RIHLAH_DB.fetchActiveAlerts(),
+      window.PEKA_DB.fetchSopir(),
+      window.PEKA_DB.fetchArmada(),
+      window.PEKA_DB.fetchActiveAlerts(),
     ]);
 
     if (!sopirRes.error && sopirRes.data) {
@@ -1987,7 +1987,7 @@ async function loadAppData() {
     requestAnimationFrame(() => renderTrendChart());
 
     // Subscribe realtime updates
-    window.RIHLAH_DB.subscribeSopirUpdates((payload) => {
+    window.PEKA_DB.subscribeSopirUpdates((payload) => {
       const updated = payload.new;
       const idx = DATA.sopir.findIndex(j => j.id === updated.id);
       if (idx >= 0) {
@@ -1999,7 +1999,7 @@ async function loadAppData() {
       }
     });
 
-    window.RIHLAH_DB.subscribeNewAlerts((payload) => {
+    window.PEKA_DB.subscribeNewAlerts((payload) => {
       const a = payload.new;
       showToast(
         a.severity === 'merah' ? 'danger' : 'warning',
@@ -2010,7 +2010,7 @@ async function loadAppData() {
       if (STATE.activePage === 'dashboard') renderAlerts();
     });
 
-    showToast('info', 'RIHLAH Aktif', 'Sistem monitoring sopir berjalan normal.', 4000);
+    showToast('info', 'PEKA Aktif', 'Sistem monitoring sopir berjalan normal.', 4000);
 
   } catch (err) {
     console.error('loadAppData error:', err);
@@ -2026,11 +2026,11 @@ async function boot() {
   initProfilePopup();
 
   // Cek sesi Supabase yang masih aktif (misal: refresh halaman)
-  const session = await window.RIHLAH_DB.authGetSession();
+  const session = await window.PEKA_DB.authGetSession();
 
   if (session) {
     // Sudah login — ambil profil & langsung buka app
-    const profileRes = await window.RIHLAH_DB.fetchCurrentUserProfile();
+    const profileRes = await window.PEKA_DB.fetchCurrentUserProfile();
     if (profileRes.data) {
       _currentProfile = profileRes.data;
       saveAccount(profileRes.data);

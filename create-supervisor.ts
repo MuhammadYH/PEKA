@@ -1,5 +1,5 @@
 // ============================================================
-// RIHLAH — Edge Function: create-supervisor
+// PEKA — Edge Function: create-supervisor
 // Membuat akun login supervisor armada baru (auth.users + public.users)
 // dan menetapkannya sebagai supervisor di tabel armada.
 //

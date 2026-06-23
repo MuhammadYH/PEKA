@@ -1,5 +1,5 @@
 /* ============================================================
-   RIHLAH — supabase.js
+   PEKA — supabase.js
    Supabase client, auth, dan semua query ke database.
    Import file ini sebelum app.js di index.html.
    ============================================================ */
@@ -458,7 +458,7 @@ function calcStats(sopirList) {
 /* ============================================================
    EXPORT — semua fungsi tersedia global (vanilla JS, no bundler)
    ============================================================ */
-window.RIHLAH_DB = {
+window.PEKA_DB = {
   client: db,
 
   // Auth
