@@ -89,7 +89,7 @@ function initLogin() {
     loginSubmit.classList.add('login-submit--loading');
     loginSubmit.disabled = true;
 
-    const result = await window.RIHLAH_DB.authLogin(inputId, inputPw);
+    const result = await window.PEKA_DB.authLogin(inputId, inputPw);
 
     loginSubmit.classList.remove('login-submit--loading');
     loginSubmit.disabled = false;
