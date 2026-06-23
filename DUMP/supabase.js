@@ -26,10 +26,10 @@ const db = createClient(SUPABASE_URL, SUPABASE_ANON);
 
 /**
  * Login dengan email & password via Supabase Auth.
- * Email dibangun dari display_id: "PWS-001" → "pws-001@rihlah.internal"
+ * Email dibangun dari display_id: "ADM-001" → "adm-001@rihlah.internal"
  * sehingga user tetap input ID seperti sebelumnya.
  *
- * @param {string} displayId  — e.g. "PWS-001"
+ * @param {string} displayId  — e.g. "ADM-001"
  * @param {string} password
  * @returns {{ user, profile } | { error }}
  */
@@ -89,21 +89,57 @@ async function fetchCurrentUserProfile() {
 }
 
 /* ============================================================
-   KELOMPOK
+   ADMIN — Buat akun supervisor armada via Edge Function
    ============================================================ */
 
 /**
- * Ambil semua kelompok beserta nama ketua.
- * Admin: semua kelompok. Ketua: kelompok sendiri (RLS otomatis).
+ * Buat akun login supervisor armada baru.
+ * Memanggil Edge Function 'create-supervisor' (pakai service role di server,
+ * jadi TIDAK mengubah sesi login admin yang sedang aktif).
+ *
+ * @param {{ displayId: string, nama: string, shortName: string,
+ *           password: string, armadaId: string }} payload
+ * @returns {{ success: true, userId: string } | { error: string }}
  */
-async function fetchKelompok() {
+async function createSupervisorArmada(payload) {
+  const { data: { session } } = await db.auth.getSession();
+  if (!session) return { error: 'Sesi tidak ditemukan, silakan login ulang.' };
+
+  try {
+    const res = await fetch(`${SUPABASE_URL}/functions/v1/create-supervisor`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${session.access_token}`,
+        'apikey': SUPABASE_ANON,
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const result = await res.json();
+    if (!res.ok) return { error: result.error || 'Gagal membuat supervisor armada.' };
+    return result;
+  } catch (e) {
+    return { error: `Gagal terhubung ke server: ${e.message}` };
+  }
+}
+
+/* ============================================================
+   ARMADA
+   ============================================================ */
+
+/**
+ * Ambil semua armada beserta nama supervisor.
+ * Admin: semua armada. Supervisor: armada sendiri (RLS otomatis).
+ */
+async function fetchArmada() {
   const { data, error } = await db
-    .from('kelompok')
+    .from('armada')
     .select(`
       id,
       nama,
-      ketua_id,
-      users:ketua_id ( display_id, short_name, nama )
+      supervisor_id,
+      users:supervisor_id ( display_id, short_name, nama )
     `)
     .order('nama');
 
@@ -111,29 +147,29 @@ async function fetchKelompok() {
 }
 
 /* ============================================================
-   JAMAAH
+   SOPIR
    ============================================================ */
 
 /**
- * Ambil semua jamaah dengan kelompok & band info.
- * Filter RLS otomatis untuk ketua (hanya kelompoknya).
+ * Ambil semua sopir dengan armada & band info.
+ * Filter RLS otomatis untuk supervisor (hanya armadanya).
  */
-async function fetchJamaah() {
+async function fetchSopir() {
   const { data, error } = await db
-    .from('jamaah')
+    .from('sopir')
     .select(`
       id,
       nama,
       umur,
-      penyakit,
-      kelompok_id,
+      riwayat_kesehatan,
+      armada_id,
       last_spo2,
       last_hr,
       last_rr,
       last_status,
       last_reading_at,
-      kelompok:kelompok_id ( nama ),
-      hajj_band:hajj_band_id ( band_code, is_active, battery_pct, last_seen_at )
+      armada:armada_id ( nama ),
+      smart_band:smart_band_id ( band_code, is_active, battery_pct, last_seen_at )
     `)
     .order('nama');
 
@@ -141,65 +177,75 @@ async function fetchJamaah() {
 }
 
 /**
- * Ambil satu jamaah dengan detail lengkap.
- * @param {string} jamaahId — UUID
+ * Ambil satu sopir dengan detail lengkap.
+ * @param {string} sopirId — UUID
  */
-async function fetchJamaahById(jamaahId) {
+async function fetchSopirById(sopirId) {
   const { data, error } = await db
-    .from('jamaah')
+    .from('sopir')
     .select(`
       id,
       nama,
       umur,
-      penyakit,
-      kelompok_id,
+      riwayat_kesehatan,
+      armada_id,
       last_spo2,
       last_hr,
       last_rr,
       last_status,
       last_reading_at,
-      kelompok:kelompok_id ( nama ),
-      hajj_band:hajj_band_id ( band_code, is_active, battery_pct, last_seen_at )
+      armada:armada_id ( nama ),
+      smart_band:smart_band_id ( band_code, is_active, battery_pct, last_seen_at )
     `)
-    .eq('id', jamaahId)
+    .eq('id', sopirId)
     .single();
 
   return { data, error };
 }
 
+/**
+ * Insert banyak sopir sekaligus.
+ * @param {Array<{nama:string, umur:number, riwayat_kesehatan:string|null, armada_id:string}>} rows
+ * @returns {{ data, error }}
+ */
+async function insertSopirBulk(rows) {
+  const { data, error } = await db.from('sopir').insert(rows).select();
+  return { data, error };
+}
+
 /* ============================================================
-   HAJJ BANDS
+   SMART BANDS
    ============================================================ */
 
 /**
- * Ambil semua hajj band yang belum di-assign ke jamaah.
+ * Ambil semua smart band yang belum di-assign ke sopir.
  */
 async function fetchUnassignedBands() {
-  // Band unassigned = tidak ada jamaah yang punya hajj_band_id ini
+  // Band unassigned = tidak ada sopir yang punya smart_band_id ini
   const { data, error } = await db
-    .from('hajj_bands')
+    .from('smart_bands')
     .select('id, band_code, battery_pct')
     .not('id', 'in', `(
-      select hajj_band_id from jamaah where hajj_band_id is not null
+      select smart_band_id from sopir where smart_band_id is not null
     )`);
 
   return { data, error };
 }
 
 /**
- * Assign hajj band ke jamaah.
- * @param {string} jamaahId
- * @param {string} bandId — UUID hajj_band
+ * Assign smart band ke sopir.
+ * @param {string} sopirId
+ * @param {string} bandId — UUID smart_band
  */
-async function assignBandToJamaah(jamaahId, bandId) {
+async function assignBandToSopir(sopirId, bandId) {
   const { error } = await db
-    .from('jamaah')
-    .update({ hajj_band_id: bandId })
-    .eq('id', jamaahId);
+    .from('sopir')
+    .update({ smart_band_id: bandId })
+    .eq('id', sopirId);
 
   if (!error) {
     // Aktifkan band
-    await db.from('hajj_bands').update({ is_active: true }).eq('id', bandId);
+    await db.from('smart_bands').update({ is_active: true }).eq('id', bandId);
   }
 
   return { error };
@@ -210,15 +256,15 @@ async function assignBandToJamaah(jamaahId, bandId) {
    ============================================================ */
 
 /**
- * Ambil riwayat vital signs satu jamaah (N data terakhir).
- * @param {string} jamaahId
+ * Ambil riwayat vital signs satu sopir (N data terakhir).
+ * @param {string} sopirId
  * @param {number} limit — default 50
  */
-async function fetchVitalHistory(jamaahId, limit = 50) {
+async function fetchVitalHistory(sopirId, limit = 50) {
   const { data, error } = await db
     .from('vital_readings')
     .select('id, spo2, hr, rr, battery_pct, lat, lng, recorded_at')
-    .eq('jamaah_id', jamaahId)
+    .eq('sopir_id', sopirId)
     .order('recorded_at', { ascending: false })
     .limit(limit);
 
@@ -226,16 +272,16 @@ async function fetchVitalHistory(jamaahId, limit = 50) {
 }
 
 /**
- * Ambil vital reading terakhir untuk semua jamaah (untuk dasbor).
- * Menggunakan snapshot di tabel jamaah (last_spo2, dll) — lebih cepat.
+ * Ambil vital reading terakhir untuk semua sopir (untuk dasbor).
+ * Menggunakan snapshot di tabel sopir (last_spo2, dll) — lebih cepat.
  * Fungsi ini untuk refresh manual jika snapshot belum terupdate.
  */
 async function fetchLatestVitalsAll() {
   const { data, error } = await db
     .from('vital_readings')
-    .select('jamaah_id, spo2, hr, rr, battery_pct, recorded_at')
+    .select('sopir_id, spo2, hr, rr, battery_pct, recorded_at')
     .order('recorded_at', { ascending: false })
-    // Ambil 1 per jamaah — Supabase belum support DISTINCT ON via JS client,
+    // Ambil 1 per sopir — Supabase belum support DISTINCT ON via JS client,
     // jadi kita pakai RPC (lihat fungsi fetchLatestVitalsRpc di bawah)
     .limit(200);
 
@@ -243,18 +289,18 @@ async function fetchLatestVitalsAll() {
 }
 
 /**
- * Ambil vital terbaru per jamaah via Supabase RPC (PostgreSQL function).
+ * Ambil vital terbaru per sopir via Supabase RPC (PostgreSQL function).
  * Jalankan SQL ini di Supabase terlebih dulu:
  *
  * create or replace function get_latest_vitals()
  * returns table (
- *   jamaah_id uuid, spo2 smallint, hr smallint,
+ *   sopir_id uuid, spo2 smallint, hr smallint,
  *   rr smallint, battery_pct smallint, recorded_at timestamptz
  * ) language sql security definer as $$
- *   select distinct on (jamaah_id)
- *     jamaah_id, spo2, hr, rr, battery_pct, recorded_at
+ *   select distinct on (sopir_id)
+ *     sopir_id, spo2, hr, rr, battery_pct, recorded_at
  *   from vital_readings
- *   order by jamaah_id, recorded_at desc;
+ *   order by sopir_id, recorded_at desc;
  * $$;
  */
 async function fetchLatestVitalsRpc() {
@@ -280,8 +326,8 @@ async function fetchActiveAlerts(limit = 20) {
       nilai,
       pesan,
       created_at,
-      jamaah:jamaah_id ( id, nama, kelompok_id,
-        kelompok:kelompok_id ( nama )
+      sopir:sopir_id ( id, nama, armada_id,
+        armada:armada_id ( nama )
       )
     `)
     .eq('is_resolved', false)
@@ -311,15 +357,15 @@ async function resolveAlert(alertId) {
 }
 
 /**
- * Ambil semua alert (termasuk resolved) untuk satu jamaah.
- * @param {string} jamaahId
+ * Ambil semua alert (termasuk resolved) untuk satu sopir.
+ * @param {string} sopirId
  * @param {number} limit
  */
-async function fetchAlertsByJamaah(jamaahId, limit = 30) {
+async function fetchAlertsBySopir(sopirId, limit = 30) {
   const { data, error } = await db
     .from('alerts')
     .select('id, alert_type, severity, nilai, pesan, is_resolved, created_at, resolved_at')
-    .eq('jamaah_id', jamaahId)
+    .eq('sopir_id', sopirId)
     .order('created_at', { ascending: false })
     .limit(limit);
 
@@ -331,19 +377,19 @@ async function fetchAlertsByJamaah(jamaahId, limit = 30) {
    ============================================================ */
 
 /**
- * Subscribe ke perubahan tabel jamaah (snapshot vital terupdate).
+ * Subscribe ke perubahan tabel sopir (snapshot vital terupdate).
  * Berguna untuk update dasbor otomatis tanpa polling.
  *
  * @param {function} onUpdate — dipanggil dengan payload perubahan
  * @returns channel — simpan untuk bisa unsubscribe nanti
  */
-function subscribeJamaahUpdates(onUpdate) {
+function subscribeSopirUpdates(onUpdate) {
   return db
-    .channel('jamaah-updates')
+    .channel('sopir-updates')
     .on('postgres_changes', {
       event:  'UPDATE',
       schema: 'public',
-      table:  'jamaah',
+      table:  'sopir',
     }, onUpdate)
     .subscribe();
 }
@@ -373,20 +419,20 @@ function unsubscribe(channel) {
 }
 
 /* ============================================================
-   STATS HELPER — hitung statistik dasbor dari data jamaah
+   STATS HELPER — hitung statistik dasbor dari data sopir
    ============================================================ */
 
 /**
- * Hitung statistik ringkas dari array jamaah (sama strukturnya
- * dengan DATA.jamaah di mock data lama, tapi dari Supabase).
- * @param {Array} jamaahList
+ * Hitung statistik ringkas dari array sopir (sama strukturnya
+ * dengan DATA.sopir di mock data lama, tapi dari Supabase).
+ * @param {Array} sopirList
  */
-function calcStats(jamaahList) {
-  const total  = jamaahList.length;
-  const active = jamaahList.filter(j => j.hajj_band?.is_active).length;
-  const hijau  = jamaahList.filter(j => j.last_status === 'hijau').length;
-  const kuning = jamaahList.filter(j => j.last_status === 'kuning').length;
-  const merah  = jamaahList.filter(j => j.last_status === 'merah').length;
+function calcStats(sopirList) {
+  const total  = sopirList.length;
+  const active = sopirList.filter(j => j.smart_band?.is_active).length;
+  const hijau  = sopirList.filter(j => j.last_status === 'hijau').length;
+  const kuning = sopirList.filter(j => j.last_status === 'kuning').length;
+  const merah  = sopirList.filter(j => j.last_status === 'merah').length;
   return { total, active, hijau, kuning, merah };
 }
 
@@ -403,20 +449,24 @@ window.RIHLAH_DB = {
   authOnChange,
   fetchCurrentUserProfile,
 
+  // Admin
+  createSupervisorArmada,
+
   // Data
-  fetchKelompok,
-  fetchJamaah,
-  fetchJamaahById,
+  fetchArmada,
+  fetchSopir,
+  fetchSopirById,
+  insertSopirBulk,
   fetchUnassignedBands,
-  assignBandToJamaah,
+  assignBandToSopir,
   fetchVitalHistory,
   fetchLatestVitalsRpc,
   fetchActiveAlerts,
   resolveAlert,
-  fetchAlertsByJamaah,
+  fetchAlertsBySopir,
 
   // Realtime
-  subscribeJamaahUpdates,
+  subscribeSopirUpdates,
   subscribeNewAlerts,
   unsubscribe,
 

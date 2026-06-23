@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RIHLAH — Sistem Monitoring Jamaah</title>
+  <title>RIHLAH — Sistem Monitoring Sopir</title>
+  <link rel="icon" type="image/x-icon" href="assets/icons/x-favicon.ico" />
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -43,15 +44,8 @@
       <!-- Brand -->
       <div class="login-card__brand">
         <div class="login-card__logo">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-            <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M16 8 C16 8, 10 13, 10 18 C10 21.3 12.7 24 16 24 C19.3 24 22 21.3 22 18 C22 13 16 8 16 8Z" fill="currentColor" opacity="0.3"/>
-            <circle cx="16" cy="18" r="3" fill="currentColor"/>
-          </svg>
-        </div>
-        <div>
-          <div class="login-card__brand-name">RIHLAH</div>
-          <div class="login-card__brand-tagline">Sistem Monitoring Jamaah</div>
+          <img class="logo-img logo-img--dark" src="assets/icons/x-darkLogo.png" alt="RIHLAH" />
+          <img class="logo-img logo-img--light" src="assets/icons/x-lightLogo.png" alt="RIHLAH" />
         </div>
       </div>
 
@@ -77,7 +71,7 @@
               type="text"
               id="loginId"
               name="loginId"
-              placeholder="Contoh: PWS-001"
+              placeholder="Contoh: ADM-001"
               autocomplete="username"
               spellcheck="false"
               required
@@ -137,15 +131,8 @@
   <aside class="sidebar" id="sidebar">
     <div class="sidebar__brand">
       <div class="brand__logo">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-          <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M16 8 C16 8, 10 13, 10 18 C10 21.3 12.7 24 16 24 C19.3 24 22 21.3 22 18 C22 13 16 8 16 8Z" fill="currentColor" opacity="0.3"/>
-          <circle cx="16" cy="18" r="3" fill="currentColor"/>
-        </svg>
-      </div>
-      <div class="brand__text">
-        <span class="brand__name">RIHLAH</span>
-        <span class="brand__tagline">Sistem Monitoring Jamaah</span>
+        <img class="logo-img logo-img--dark" src="assets/icons/x-darkLogo.png" alt="RIHLAH" />
+        <img class="logo-img logo-img--light" src="assets/icons/x-lightLogo.png" alt="RIHLAH" />
       </div>
     </div>
 
@@ -176,7 +163,7 @@
                 <path d="M18 18c0-2.8-1.6-5-4-5.7"/>
               </svg>
             </span>
-            <span class="nav__label">Monitoring Jamaah</span>
+            <span class="nav__label">Monitoring Sopir</span>
           </a>
         </li>
         <li class="nav__item" data-page="settings">
@@ -200,11 +187,11 @@
 
         <!-- Current user info -->
         <div class="profile-popup__header">
-          <div class="profile-popup__avatar" id="ppAvatar">PW</div>
+          <div class="profile-popup__avatar" id="ppAvatar">AP</div>
           <div class="profile-popup__info">
-            <div class="profile-popup__name" id="ppName">Pengawas Pusat</div>
+            <div class="profile-popup__name" id="ppName">Admin Pusat</div>
             <div class="profile-popup__role" id="ppRole">Admin</div>
-            <div class="profile-popup__id" id="ppId">PWS-001</div>
+            <div class="profile-popup__id" id="ppId">ADM-001</div>
           </div>
         </div>
 
@@ -243,9 +230,9 @@
 
       <!-- Clickable user widget -->
       <div class="sidebar__user" id="sidebarUserBtn" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="Buka menu profil">
-        <div class="user__avatar" id="sidebarAvatar">PW</div>
+        <div class="user__avatar" id="sidebarAvatar">AP</div>
         <div class="user__info">
-          <span class="user__name" id="sidebarUserName">Pengawas Pusat</span>
+          <span class="user__name" id="sidebarUserName">Admin Pusat</span>
           <span class="user__role" id="sidebarUserRole">Admin</span>
         </div>
         <span class="user__chevron">
@@ -304,22 +291,22 @@
 
       <section class="page__header">
         <h1 class="page__title">Dashboard</h1>
-        <p class="page__subtitle">Kondisi terkini seluruh jamaah haji</p>
+        <p class="page__subtitle">Kondisi terkini seluruh sopir</p>
       </section>
 
       <!-- STAT CARDS -->
-      <section class="stats-grid" aria-label="Statistik Jamaah">
+      <section class="stats-grid" aria-label="Statistik Sopir">
 
         <div class="stat-card stat-card--total">
-          <div class="stat-card__label">Total Jamaah</div>
+          <div class="stat-card__label">Total Sopir</div>
           <div class="stat-card__value" id="statTotal">—</div>
           <div class="stat-card__meta">Terdaftar dalam sistem</div>
         </div>
 
         <div class="stat-card stat-card--active">
-          <div class="stat-card__label">Jamaah Aktif</div>
+          <div class="stat-card__label">Sopir Aktif</div>
           <div class="stat-card__value" id="statActive">—</div>
-          <div class="stat-card__meta">Gelang terhubung</div>
+          <div class="stat-card__meta">Smartwatch terhubung</div>
         </div>
 
         <div class="stat-card stat-card--hijau">
@@ -360,7 +347,7 @@
             <circle cx="15" cy="6" r="2.5"/>
             <path d="M18 18c0-2.8-1.6-5-4-5.7"/>
           </svg>
-          Monitoring Jamaah
+          Monitoring Sopir
         </button>
         <button class="btn btn--danger" id="btnLihatAlert">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -386,14 +373,14 @@
       <!-- TREND CHART -->
       <section class="chart-panel">
         <div class="panel__header">
-          <h2 class="panel__title">Tren Kondisi Jamaah</h2>
+          <h2 class="panel__title">Tren Kondisi Sopir</h2>
           <div class="chart-legend">
             <span class="legend-item legend-item--hijau">Hijau</span>
             <span class="legend-item legend-item--kuning">Kuning</span>
             <span class="legend-item legend-item--merah">Merah</span>
           </div>
         </div>
-        <div class="chart-container" id="trendChart" role="img" aria-label="Grafik tren kondisi jamaah">
+        <div class="chart-container" id="trendChart" role="img" aria-label="Grafik tren kondisi sopir">
           <!-- SVG chart rendered by JS -->
           <div class="chart-placeholder">Memuat grafik...</div>
         </div>
@@ -402,13 +389,13 @@
     </main>
 
     <!-- ==============================
-         PAGE 2: MONITORING JAMAAH
+         PAGE 2: MONITORING SOPIR
     ============================== -->
     <main class="page" id="page-monitoring">
 
       <section class="page__header">
-        <h1 class="page__title">Monitoring Jamaah</h1>
-        <p class="page__subtitle">Pemantauan dan triase per kelompok</p>
+        <h1 class="page__title">Monitoring Sopir</h1>
+        <p class="page__subtitle">Pemantauan dan triase per armada</p>
       </section>
 
       <!-- FILTER & SEARCH -->
@@ -418,7 +405,7 @@
             <circle cx="9" cy="9" r="6"/>
             <path d="M15 15l3 3"/>
           </svg>
-          <input type="search" class="search-box__input" id="jamaahSearch" placeholder="Cari nama jamaah..." aria-label="Cari jamaah" />
+          <input type="search" class="search-box__input" id="sopirSearch" placeholder="Cari nama sopir..." aria-label="Cari sopir" />
         </div>
         <div class="filter-chips" role="group" aria-label="Filter status">
           <button class="chip chip--active" data-filter="all">Semua</button>
@@ -428,20 +415,20 @@
         </div>
       </section>
 
-      <!-- JAMAAH LIST PER GROUP -->
+      <!-- SOPIR LIST PER GROUP -->
       <div class="groups-container" id="groupsContainer">
         <!-- Populated by JS — structure below is the template -->
 
-        <!-- GROUP TEMPLATE (replicated per ketua kelompok) -->
+        <!-- GROUP TEMPLATE (replicated per supervisor armada) -->
         <!--
-        <div class="group-block" data-group="kelompok-1">
+        <div class="group-block" data-group="armada-1">
           <div class="group-header">
             <div class="group-header__left">
-              <span class="group-badge">Kelompok 1</span>
-              <span class="group-leader">Ketua: H. Musthofa Kamal</span>
+              <span class="group-badge">Armada 1</span>
+              <span class="group-leader">Supervisor: Musthofa Kamal</span>
             </div>
             <div class="group-header__right">
-              <span class="group-count">12 jamaah</span>
+              <span class="group-count">12 sopir</span>
               <span class="group-status-dots">
                 <span class="dot dot--hijau">9</span>
                 <span class="dot dot--kuning">2</span>
@@ -450,24 +437,24 @@
             </div>
           </div>
 
-          <ul class="jamaah-list">
+          <ul class="sopir-list">
 
-            JAMAAH ROW
-            <li class="jamaah-row" data-id="001" data-status="hijau">
-              <button class="jamaah-row__toggle" aria-expanded="false" aria-controls="detail-001">
-                <span class="jamaah-row__status-dot status-dot--hijau" aria-label="Status hijau"></span>
-                <span class="jamaah-row__name">Ahmad Fauzi</span>
-                <span class="jamaah-row__meta">
-                  <span class="gelang-id">RIH001</span>
+            SOPIR ROW
+            <li class="sopir-row" data-id="001" data-status="hijau">
+              <button class="sopir-row__toggle" aria-expanded="false" aria-controls="detail-001">
+                <span class="sopir-row__status-dot status-dot--hijau" aria-label="Status hijau"></span>
+                <span class="sopir-row__name">Ahmad Fauzi</span>
+                <span class="sopir-row__meta">
+                  <span class="smartwatch-id">SWT001</span>
                   <span class="vitals-mini">SpO₂ 98% · HR 72</span>
                 </span>
-                <span class="jamaah-row__chevron">
+                <span class="sopir-row__chevron">
                   <svg>chevron down</svg>
                 </span>
               </button>
 
               EXPANDABLE DETAIL CARD
-              <div class="jamaah-detail" id="detail-001" hidden>
+              <div class="sopir-detail" id="detail-001" hidden>
                 ...detail content...
               </div>
             </li>
@@ -476,7 +463,7 @@
         </div>
         -->
 
-        <div class="groups-placeholder">Memuat data jamaah...</div>
+        <div class="groups-placeholder">Memuat data sopir...</div>
       </div>
 
     </main>
@@ -512,10 +499,10 @@
           <div class="settings-cards">
             <div class="settings-card">
               <div class="settings-card__body">
-                <span class="settings-card__role-badge badge--pengawas">Pengawas Pusat</span>
-                <h3 class="settings-card__name">H. Dr. Abdul Rahman, M.Kes</h3>
+                <span class="settings-card__role-badge badge--admin">Admin Pusat</span>
+                <h3 class="settings-card__name">Dr. Abdul Rahman, M.Kes</h3>
                 <p class="settings-card__detail">
-                  <span>ID: PWS-001</span>
+                  <span>ID: ADM-001</span>
                   <span>Akses: Seluruh Data</span>
                 </p>
               </div>
@@ -526,24 +513,53 @@
             </div>
 
             <div class="settings-card settings-card--add">
-              <button class="settings-card__add-btn" id="btnTambahKetua">
+              <button class="settings-card__add-btn" id="btnTambahSupervisor">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
                   <circle cx="10" cy="10" r="8"/>
                   <line x1="10" y1="6" x2="10" y2="14"/>
                   <line x1="6" y1="10" x2="14" y2="10"/>
                 </svg>
-                Tambah Ketua Kelompok
+                Tambah Supervisor Armada
               </button>
             </div>
           </div>
 
-          <!-- Ketua Kelompok List -->
-          <div class="ketua-list" id="ketuaList">
+          <!-- Supervisor Armada List -->
+          <div class="supervisor-list" id="supervisorList">
             <!-- Populated by JS -->
           </div>
         </section>
 
-        <!-- GELANG RIHLAH -->
+        <!-- DATA SOPIR -->
+        <section class="settings-section">
+          <div class="settings-section__header">
+            <div class="settings-section__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M4 4h12v12H4z"/>
+                <path d="M4 8h12M8 4v12"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="settings-section__title">Data Sopir</h2>
+              <p class="settings-section__desc">Tambahkan sopir baru — upload XLSX atau input manual</p>
+            </div>
+          </div>
+
+          <div class="settings-cards">
+            <div class="settings-card settings-card--add">
+              <button class="settings-card__add-btn" id="btnTambahSopirMassal">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="10" cy="10" r="8"/>
+                  <line x1="10" y1="6" x2="10" y2="14"/>
+                  <line x1="6" y1="10" x2="14" y2="10"/>
+                </svg>
+                Tambah Sopir
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- SMARTWATCH RIHLAH -->
         <section class="settings-section">
           <div class="settings-section__header">
             <div class="settings-section__icon">
@@ -554,59 +570,59 @@
               </svg>
             </div>
             <div>
-              <h2 class="settings-section__title">Gelang RIHLAH</h2>
-              <p class="settings-section__desc">Registrasi, status, dan distribusi gelang</p>
+              <h2 class="settings-section__title">Smartwatch RIHLAH</h2>
+              <p class="settings-section__desc">Registrasi, status, dan distribusi smartwatch</p>
             </div>
           </div>
 
           <!-- Sub-tabs -->
           <div class="subtabs" role="tablist">
             <button class="subtab subtab--active" role="tab" data-subtab="registrasi" aria-selected="true">Registrasi</button>
-            <button class="subtab" role="tab" data-subtab="status" aria-selected="false">Status Gelang</button>
+            <button class="subtab" role="tab" data-subtab="status" aria-selected="false">Status Smartwatch</button>
             <button class="subtab" role="tab" data-subtab="distribusi" aria-selected="false">Distribusi</button>
           </div>
 
-          <!-- Registrasi Gelang Tab -->
+          <!-- Registrasi Smartwatch Tab -->
           <div class="subtab-panel subtab-panel--active" id="subtab-registrasi" role="tabpanel">
             <div class="register-form">
               <div class="form-row">
-                <label class="form-label" for="gelangId">ID Gelang</label>
-                <input type="text" class="form-input" id="gelangId" placeholder="Contoh: RIH021" />
+                <label class="form-label" for="smartwatchId">ID Smartwatch</label>
+                <input type="text" class="form-input" id="smartwatchId" placeholder="Contoh: SWT021" />
               </div>
               <div class="form-row">
-                <label class="form-label" for="gelangJamaah">Nama Jamaah</label>
-                <input type="text" class="form-input" id="gelangJamaah" placeholder="Cari nama jamaah..." />
+                <label class="form-label" for="smartwatchSopir">Nama Sopir</label>
+                <input type="text" class="form-input" id="smartwatchSopir" placeholder="Cari nama sopir..." />
               </div>
               <div class="form-row">
-                <label class="form-label" for="gelangKelompok">Kelompok</label>
-                <select class="form-select" id="gelangKelompok">
-                  <option value="">Pilih kelompok</option>
-                  <option value="1">Kelompok 1 — H. Musthofa Kamal</option>
-                  <option value="2">Kelompok 2 — H. Wahyu Santoso</option>
-                  <option value="3">Kelompok 3 — Hj. Fatimah Zahra</option>
+                <label class="form-label" for="smartwatchArmada">Armada</label>
+                <select class="form-select" id="smartwatchArmada">
+                  <option value="">Pilih armada</option>
+                  <option value="1">Armada 1 — Musthofa Kamal</option>
+                  <option value="2">Armada 2 — Wahyu Santoso</option>
+                  <option value="3">Armada 3 — Fatimah Zahra</option>
                 </select>
               </div>
-              <button class="btn btn--primary" id="btnDaftarGelang">Daftarkan Gelang</button>
+              <button class="btn btn--primary" id="btnDaftarSmartwatch">Daftarkan Smartwatch</button>
             </div>
           </div>
 
-          <!-- Status Gelang Tab -->
+          <!-- Status Smartwatch Tab -->
           <div class="subtab-panel" id="subtab-status" role="tabpanel" hidden>
-            <div class="gelang-status-grid" id="gelangStatusGrid">
+            <div class="smartwatch-status-grid" id="smartwatchStatusGrid">
               <!-- Populated by JS -->
-              <div class="gelang-placeholder">Memuat status gelang...</div>
+              <div class="smartwatch-placeholder">Memuat status smartwatch...</div>
             </div>
           </div>
 
-          <!-- Distribusi Gelang Tab -->
+          <!-- Distribusi Smartwatch Tab -->
           <div class="subtab-panel" id="subtab-distribusi" role="tabpanel" hidden>
             <div class="distribusi-table-wrapper">
               <table class="distribusi-table" id="distribusiTable">
                 <thead>
                   <tr>
-                    <th>ID Gelang</th>
-                    <th>Jamaah</th>
-                    <th>Kelompok</th>
+                    <th>ID Smartwatch</th>
+                    <th>Sopir</th>
+                    <th>Armada</th>
                     <th>Status</th>
                   </tr>
                 </thead>
@@ -640,7 +656,7 @@
                 <span class="notif-item__icon notif-icon--kuning">🟨</span>
                 <div class="notif-item__text">
                   <span class="notif-item__name">Alert Risiko Kuning</span>
-                  <span class="notif-item__desc">Jamaah masuk kategori pemantauan</span>
+                  <span class="notif-item__desc">Sopir masuk kategori pemantauan</span>
                 </div>
               </div>
               <label class="toggle" aria-label="Aktifkan alert risiko kuning">
@@ -667,11 +683,11 @@
               <div class="notif-item__left">
                 <span class="notif-item__icon">📵</span>
                 <div class="notif-item__text">
-                  <span class="notif-item__name">Gelang Offline</span>
-                  <span class="notif-item__desc">Gelang tidak terdeteksi lebih dari 5 menit</span>
+                  <span class="notif-item__name">Smartwatch Offline</span>
+                  <span class="notif-item__desc">Smartwatch tidak terdeteksi lebih dari 5 menit</span>
                 </div>
               </div>
-              <label class="toggle" aria-label="Aktifkan notifikasi gelang offline">
+              <label class="toggle" aria-label="Aktifkan notifikasi smartwatch offline">
                 <input type="checkbox" class="toggle__input" id="notifOffline" checked />
                 <span class="toggle__slider"></span>
               </label>
@@ -682,7 +698,7 @@
                 <span class="notif-item__icon">🔋</span>
                 <div class="notif-item__text">
                   <span class="notif-item__name">Baterai Rendah</span>
-                  <span class="notif-item__desc">Baterai gelang di bawah 20%</span>
+                  <span class="notif-item__desc">Baterai smartwatch di bawah 20%</span>
                 </div>
               </div>
               <label class="toggle" aria-label="Aktifkan notifikasi baterai rendah">
@@ -745,8 +761,145 @@
         <!-- Populated by JS -->
       </div>
       <div class="modal__footer">
-        <button class="btn btn--danger" id="btnHubungiPetugas">Hubungi Petugas Kesehatan</button>
+        <button class="btn btn--danger" id="btnHubungiK3">Hubungi Tim K3/HSE</button>
         <button class="btn btn--secondary" id="alertModalCancel">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================
+       MODAL: TAMBAH SUPERVISOR ARMADA
+  ============================== -->
+  <div class="modal-overlay" id="supervisorModal" hidden role="dialog" aria-modal="true" aria-labelledby="supervisorModalTitle">
+    <div class="modal">
+      <div class="modal__header">
+        <h2 class="modal__title" id="supervisorModalTitle">Tambah Supervisor Armada</h2>
+        <button class="modal__close" id="supervisorModalClose" aria-label="Tutup">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="5" x2="15" y2="15"/>
+            <line x1="15" y1="5" x2="5" y2="15"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal__body">
+        <div class="form-row">
+          <label class="form-label" for="supervisorDisplayId">ID Login</label>
+          <input type="text" class="form-input" id="supervisorDisplayId" placeholder="Contoh: SPV-004" autocomplete="off" />
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="supervisorNama">Nama Lengkap</label>
+          <input type="text" class="form-input" id="supervisorNama" placeholder="Contoh: Budi Santoso" autocomplete="off" />
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="supervisorShortName">Nama Singkat</label>
+          <input type="text" class="form-input" id="supervisorShortName" placeholder="Contoh: Budi" autocomplete="off" />
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="supervisorArmada">Memimpin Armada</label>
+          <select class="form-select" id="supervisorArmada">
+            <option value="">Pilih armada...</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="supervisorPassword">Password Awal</label>
+          <input type="password" class="form-input" id="supervisorPassword" placeholder="Minimal 6 karakter" autocomplete="new-password" />
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--primary" id="btnSimpanSupervisor">Simpan</button>
+        <button class="btn btn--secondary" id="supervisorModalCancel">Batal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================
+       MODAL: TAMBAH SOPIR MASSAL
+  ============================== -->
+  <div class="modal-overlay" id="sopirMassalModal" hidden role="dialog" aria-modal="true" aria-labelledby="sopirMassalTitle">
+    <div class="modal modal--wide">
+      <div class="modal__header">
+        <h2 class="modal__title" id="sopirMassalTitle">Tambah Sopir</h2>
+        <button class="modal__close" id="sopirMassalClose" aria-label="Tutup">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="5" x2="15" y2="15"/>
+            <line x1="15" y1="5" x2="5" y2="15"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal__body">
+
+        <!-- Step 1: pilih sumber data -->
+        <div id="sopirStepSource">
+          <div class="jm-source-tabs" role="tablist">
+            <button class="jm-source-tab jm-source-tab--active" role="tab" data-jmsubtab="upload" aria-selected="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M10 13V3M10 3l-3 3M10 3l3 3"/>
+                <path d="M4 13v2a2 2 0 002 2h8a2 2 0 002-2v-2"/>
+              </svg>
+              Upload XLSX
+            </button>
+            <button class="jm-source-tab" role="tab" data-jmsubtab="manual" aria-selected="false">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M4 5h12M4 10h12M4 15h7"/>
+              </svg>
+              Input Manual
+            </button>
+          </div>
+
+          <!-- Upload XLSX -->
+          <div class="jm-panel jm-panel--active" id="jmPanel-upload">
+            <p class="form-hint">
+              Gunakan template agar header kolom sesuai. Kolom: <code>nama</code>, <code>umur</code>, <code>riwayat_kesehatan</code>, <code>armada</code>.
+            </p>
+            <a href="template_sopir.xlsx" download class="btn-text">⬇ Unduh Template XLSX</a>
+
+            <div class="form-row" style="margin-top:12px">
+              <label class="form-label" for="jmFileInput">Pilih File</label>
+              <input type="file" id="jmFileInput" accept=".xlsx,.xls" />
+            </div>
+            <div id="jmFileStatus" class="form-hint"></div>
+          </div>
+
+          <!-- Input Manual -->
+          <div class="jm-panel" id="jmPanel-manual" hidden>
+            <div class="form-row">
+              <label class="form-label" for="jmManualArmada">Armada (untuk semua baris di bawah)</label>
+              <select class="form-select" id="jmManualArmada">
+                <option value="">Pilih armada...</option>
+              </select>
+            </div>
+
+            <table class="jm-manual-table" id="jmManualTable">
+              <thead>
+                <tr><th>Nama</th><th>Umur</th><th>Riwayat Kesehatan (opsional)</th><th></th></tr>
+              </thead>
+              <tbody id="jmManualBody"><!-- rows via JS --></tbody>
+            </table>
+            <button class="btn-text" id="jmAddRow">+ Tambah Baris</button>
+          </div>
+        </div>
+
+        <!-- Step 2: preview -->
+        <div id="sopirStepPreview" hidden>
+          <p class="form-hint" id="jmPreviewSummary"></p>
+          <div class="jm-preview-wrap">
+            <table class="jm-preview-table" id="jmPreviewTable">
+              <thead>
+                <tr><th>#</th><th>Nama</th><th>Umur</th><th>Riwayat Kesehatan</th><th>Armada</th><th>Status</th></tr>
+              </thead>
+              <tbody id="jmPreviewBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal__footer">
+        <button class="btn btn--secondary" id="jmBtnBack" hidden>‹ Kembali</button>
+        <button class="btn btn--secondary" id="sopirMassalCancel">Batal</button>
+        <button class="btn btn--primary" id="jmBtnPreview">Preview Data ›</button>
+        <button class="btn btn--primary" id="jmBtnSubmit" hidden>Kirim ke Database</button>
       </div>
     </div>
   </div>
@@ -760,6 +913,8 @@
 
   <!-- Supabase CDN — harus dimuat sebelum supabase.js dan app.js -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- SheetJS — untuk parsing file XLSX upload Tambah Sopir -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <!-- RIHLAH Supabase client & queries -->
   <script src="supabase.js"></script>
   <!-- RIHLAH App -->

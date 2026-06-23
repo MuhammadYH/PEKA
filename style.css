@@ -133,11 +133,26 @@
   --shadow-lg:  0 8px 32px rgba(15, 23, 42, 0.14);
 }
 
-/* Small polish: the "Ketua" violet badge needs a darker tone for AA contrast
+/* Small polish: the "Supervisor" violet badge needs a darker tone for AA contrast
    on light surfaces (it's a non-token accent, not part of the main palette). */
-:root[data-theme="light"] .badge--ketua,
-:root[data-theme="light"] .ketua-item__avatar {
+:root[data-theme="light"] .badge--supervisor,
+:root[data-theme="light"] .supervisor-item__avatar {
   color: #7c3aed;
+}
+
+/* Fix: --color-text-inverse stays dark on purpose (for the bright dark-theme
+   teal), but light theme's teal is much darker, so dark-on-dark text/knobs
+   lose contrast. Force white where teal is used as a solid fill. */
+:root[data-theme="light"] .btn--primary {
+  color: #ffffff;
+}
+
+:root[data-theme="light"] .login-submit__spinner {
+  border-top-color: #ffffff;
+}
+
+:root[data-theme="light"] .toggle__input:checked + .toggle__slider::before {
+  background: #ffffff;
 }
 
 /* ============================================================
@@ -169,8 +184,8 @@ body {
 /* Ease the dark/light switch across the main surfaces without
    fighting the more specific hover/focus transitions elsewhere. */
 .sidebar, .topbar, .stat-card, .alerts-panel, .chart-panel, .group-block,
-.jamaah-detail, .vital-card, .settings-section, .settings-card, .ketua-item,
-.gelang-status-card, .distribusi-table-wrapper, .modal, .toast, .form-input,
+.sopir-detail, .vital-card, .settings-section, .settings-card, .supervisor-item,
+.smartwatch-status-card, .distribusi-table-wrapper, .modal, .toast, .form-input,
 .form-select, .register-form, .threshold-item, .search-box, .chip, .subtab,
 .alert-item, .nav__link {
   transition: background-color var(--transition-normal), border-color var(--transition-normal), color var(--transition-normal);
@@ -255,15 +270,17 @@ svg {
 }
 
 .brand__logo {
-  width: 36px;
-  height: 36px;
-  color: var(--color-teal);
+  height: 32px;
+  width: auto;
+  max-width: 180px;
   flex-shrink: 0;
 }
 
-.brand__logo svg {
-  width: 100%;
+.brand__logo .logo-img {
   height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 .brand__text {
@@ -521,6 +538,13 @@ svg {
 [data-theme="light"] .theme-icon--sun  { display: none; }
 [data-theme="light"] .theme-icon--moon { display: block; }
 
+/* Logo — otomatis ganti versi sesuai tema aktif */
+.logo-img--light { display: none; }
+.logo-img--dark  { display: block; }
+
+[data-theme="light"] .logo-img--dark  { display: none; }
+[data-theme="light"] .logo-img--light { display: block; }
+
 .topbar__alert-btn {
   position: relative;
   width: 36px;
@@ -735,8 +759,8 @@ svg {
 }
 
 .btn--primary:hover {
-  background: #25bfaa;
-  box-shadow: 0 0 16px rgba(45, 212, 191, 0.3);
+  filter: brightness(1.08);
+  box-shadow: 0 4px 16px var(--color-teal-glow);
 }
 
 .btn--danger {
@@ -764,6 +788,18 @@ svg {
 .btn--sm {
   padding: var(--space-2) var(--space-4);
   font-size: 12px;
+}
+
+/* .btn pakai display:inline-flex, yang menimpa default UA-stylesheet
+   untuk [hidden]. Perlu rule eksplisit supaya hidden tetap bekerja
+   pada tombol (mis. footer modal multi-langkah). */
+.btn[hidden] { display: none; }
+
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .btn-text {
@@ -1055,7 +1091,7 @@ svg {
 }
 
 /* ============================================================
-   13. GROUP BLOCKS & JAMAAH LIST
+   13. GROUP BLOCKS & SOPIR LIST
    ============================================================ */
 .groups-container {
   display: flex;
@@ -1157,21 +1193,21 @@ svg {
   border-color: rgba(239, 68, 68, 0.2);
 }
 
-/* Jamaah List */
-.jamaah-list {
+/* Sopir List */
+.sopir-list {
   display: flex;
   flex-direction: column;
 }
 
-.jamaah-row {
+.sopir-row {
   border-bottom: 1px solid var(--color-border-soft);
 }
 
-.jamaah-row:last-child { border-bottom: none; }
+.sopir-row:last-child { border-bottom: none; }
 
-.jamaah-row--hidden { display: none; }
+.sopir-row--hidden { display: none; }
 
-.jamaah-row__toggle {
+.sopir-row__toggle {
   width: 100%;
   display: flex;
   align-items: center;
@@ -1182,11 +1218,11 @@ svg {
   border-radius: 0;
 }
 
-.jamaah-row__toggle:hover {
+.sopir-row__toggle:hover {
   background: var(--color-surface-2);
 }
 
-.jamaah-row__toggle[aria-expanded="true"] {
+.sopir-row__toggle[aria-expanded="true"] {
   background: var(--color-surface-2);
 }
 
@@ -1216,7 +1252,7 @@ svg {
   50%       { box-shadow: 0 0 0 5px rgba(239, 68, 68, 0); }
 }
 
-.jamaah-row__name {
+.sopir-row__name {
   font-size: 13px;
   font-weight: 600;
   color: var(--color-text-primary);
@@ -1224,14 +1260,14 @@ svg {
   min-width: 0;
 }
 
-.jamaah-row__meta {
+.sopir-row__meta {
   display: flex;
   align-items: center;
   gap: var(--space-4);
   flex-shrink: 0;
 }
 
-.gelang-id {
+.smartwatch-id {
   font-size: 11px;
   font-family: var(--font-mono);
   color: var(--color-teal);
@@ -1246,7 +1282,7 @@ svg {
   color: var(--color-text-muted);
 }
 
-.jamaah-row__chevron {
+.sopir-row__chevron {
   width: 16px;
   height: 16px;
   color: var(--color-text-muted);
@@ -1254,19 +1290,19 @@ svg {
   transition: transform var(--transition-fast);
 }
 
-.jamaah-row__chevron svg {
+.sopir-row__chevron svg {
   width: 100%;
   height: 100%;
 }
 
-.jamaah-row__toggle[aria-expanded="true"] .jamaah-row__chevron {
+.sopir-row__toggle[aria-expanded="true"] .sopir-row__chevron {
   transform: rotate(180deg);
 }
 
 /* ============================================================
-   14. EXPANDABLE JAMAAH DETAIL CARD
+   14. EXPANDABLE SOPIR DETAIL CARD
    ============================================================ */
-.jamaah-detail {
+.sopir-detail {
   padding: var(--space-5) var(--space-5) var(--space-5) calc(var(--space-5) + 10px + var(--space-4));
   background: var(--color-surface-2);
   border-top: 1px solid var(--color-border-soft);
@@ -1275,7 +1311,7 @@ svg {
   gap: var(--space-5);
 }
 
-.jamaah-detail[hidden] { display: none; }
+.sopir-detail[hidden] { display: none; }
 
 .detail-section { display: flex; flex-direction: column; gap: var(--space-3); }
 
@@ -1554,13 +1590,13 @@ svg {
   margin-bottom: var(--space-2);
 }
 
-.badge--pengawas {
+.badge--admin {
   background: var(--color-teal-glow);
   color: var(--color-teal);
   border: 1px solid rgba(45, 212, 191, 0.2);
 }
 
-.badge--ketua {
+.badge--supervisor {
   background: rgba(139, 92, 246, 0.1);
   color: #a78bfa;
   border: 1px solid rgba(139, 92, 246, 0.2);
@@ -1619,25 +1655,26 @@ svg {
   color: var(--color-teal);
 }
 
-/* Ketua List */
-.ketua-list {
+/* Supervisor List */
+.supervisor-list {
   padding: var(--space-4) var(--space-6);
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
 }
 
-.ketua-item {
+.supervisor-item {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-3);
   padding: var(--space-3) var(--space-4);
   background: var(--color-surface-2);
   border: 1px solid var(--color-border-soft);
   border-radius: var(--radius-md);
+  position: relative;
 }
 
-.ketua-item__avatar {
+.supervisor-item__avatar {
   width: 28px;
   height: 28px;
   border-radius: 50%;
@@ -1652,17 +1689,83 @@ svg {
   flex-shrink: 0;
 }
 
-.ketua-item__name {
+.supervisor-item__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.supervisor-item__name {
   font-size: 12px;
   font-weight: 500;
   color: var(--color-text-primary);
-  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.ketua-item__group {
+.supervisor-item__group {
   font-size: 11px;
   color: var(--color-text-muted);
   font-family: var(--font-mono);
+}
+
+.supervisor-item__badge {
+  flex-shrink: 0;
+}
+
+.supervisor-item__menu-btn {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.supervisor-item__menu-btn:hover {
+  background: var(--color-surface-3);
+  color: var(--color-text-primary);
+}
+
+.supervisor-item__menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: var(--space-4);
+  min-width: 120px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  z-index: 50;
+  overflow: hidden;
+  animation: slide-up var(--transition-fast);
+}
+
+.supervisor-item__menu[hidden] { display: none; }
+
+.supervisor-item__menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: var(--space-2) var(--space-4);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  transition: background var(--transition-fast);
+}
+
+.supervisor-item__menu button:hover {
+  background: var(--color-surface-2);
+}
+
+.supervisor-item__menu button.supervisor-item__menu-danger {
+  color: var(--color-merah);
 }
 
 /* Sub-tabs */
@@ -1756,14 +1859,14 @@ svg {
   background: var(--color-surface-2);
 }
 
-/* Gelang status grid */
-.gelang-status-grid {
+/* Smartwatch status grid */
+.smartwatch-status-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: var(--space-3);
 }
 
-.gelang-card {
+.smartwatch-card {
   background: var(--color-surface-2);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
@@ -1774,16 +1877,16 @@ svg {
   transition: border-color var(--transition-fast);
 }
 
-.gelang-card:hover { border-color: rgba(45, 212, 191, 0.3); }
+.smartwatch-card:hover { border-color: rgba(45, 212, 191, 0.3); }
 
-.gelang-card__id {
+.smartwatch-card__id {
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 700;
   color: var(--color-teal);
 }
 
-.gelang-card__name {
+.smartwatch-card__name {
   font-size: 12px;
   color: var(--color-text-primary);
   white-space: nowrap;
@@ -1791,7 +1894,7 @@ svg {
   text-overflow: ellipsis;
 }
 
-.gelang-card__status {
+.smartwatch-card__status {
   display: flex;
   align-items: center;
   gap: var(--space-2);
@@ -1800,26 +1903,26 @@ svg {
   font-family: var(--font-mono);
 }
 
-.gelang-status-dot {
+.smartwatch-status-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
 }
 
-.gelang-status-dot--online  { background: var(--color-hijau); }
-.gelang-status-dot--offline { background: var(--color-text-muted); }
-.gelang-status-dot--unset   {
+.smartwatch-status-dot--online  { background: var(--color-hijau); }
+.smartwatch-status-dot--offline { background: var(--color-text-muted); }
+.smartwatch-status-dot--unset   {
   background: transparent;
   border: 1px dashed var(--color-text-muted);
 }
 
-.gelang-card__batt {
+.smartwatch-card__batt {
   font-size: 10px;
   color: var(--color-text-muted);
   font-family: var(--font-mono);
 }
 
-.gelang-placeholder {
+.smartwatch-placeholder {
   grid-column: 1 / -1;
   text-align: center;
   color: var(--color-text-muted);
@@ -2062,9 +2165,150 @@ svg {
   animation: slide-up var(--transition-normal);
 }
 
+.modal--wide {
+  max-width: 720px;
+}
+
 @keyframes slide-up {
   from { transform: translateY(16px); opacity: 0; }
   to   { transform: translateY(0);    opacity: 1; }
+}
+
+/* Tambah Sopir Massal */
+.form-hint {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin: 4px 0 12px;
+  line-height: 1.5;
+}
+
+.form-hint code {
+  background: var(--color-surface-2);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+}
+
+/* Segmented tab control khusus modal Tambah Sopir — perlu kontras
+   lebih kuat dari .subtab biasa karena ruang modal lebih sempit dan
+   harus jelas menunjukkan mode aktif (Upload vs Manual). */
+.jm-source-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  margin-bottom: var(--space-5);
+}
+
+.jm-source-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: var(--space-2) var(--space-4);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast), color var(--transition-fast),
+              box-shadow var(--transition-fast);
+}
+
+.jm-source-tab svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.jm-source-tab:hover:not(.jm-source-tab--active) {
+  color: var(--color-text-primary);
+}
+
+.jm-source-tab--active {
+  background: var(--color-surface);
+  color: var(--color-teal);
+  box-shadow: var(--shadow-sm);
+}
+
+.jm-panel { display: none; }
+.jm-panel--active { display: block; }
+
+.jm-manual-table,
+.jm-preview-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.jm-manual-table th,
+.jm-preview-table th {
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.jm-manual-table td,
+.jm-preview-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--color-border-soft);
+  vertical-align: middle;
+}
+
+.jm-manual-table input {
+  width: 100%;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 6px 8px;
+  font-size: 13px;
+  color: var(--color-text-primary);
+  outline: none;
+}
+
+.jm-manual-table input:focus {
+  border-color: var(--color-teal);
+}
+
+.jm-manual-table .jm-remove-row {
+  background: none;
+  border: none;
+  color: var(--color-merah);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 4px;
+}
+
+.jm-preview-wrap {
+  max-height: 360px;
+  overflow-y: auto;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
+}
+
+.jm-preview-table tr.jm-row--error {
+  background: var(--color-merah-bg);
+}
+
+.jm-preview-table .jm-status-ok {
+  color: var(--color-hijau);
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.jm-preview-table .jm-status-error {
+  color: var(--color-merah);
+  font-weight: 600;
+  font-size: 11px;
 }
 
 .modal__header {
@@ -2223,11 +2467,11 @@ svg {
     grid-column: 1 / -1;
   }
 
-  .jamaah-row__meta {
+  .sopir-row__meta {
     display: none;
   }
 
-  .jamaah-detail {
+  .sopir-detail {
     grid-template-columns: 1fr;
   }
 
@@ -2368,15 +2612,17 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 
 .login-card__logo {
-  width: 40px;
   height: 40px;
-  color: var(--color-teal);
+  width: auto;
+  max-width: 220px;
   flex-shrink: 0;
 }
 
-.login-card__logo svg {
-  width: 100%;
+.login-card__logo .logo-img {
   height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 .login-card__brand-name {

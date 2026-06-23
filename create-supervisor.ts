@@ -1,12 +1,12 @@
 // ============================================================
-// RIHLAH — Edge Function: create-ketua
-// Membuat akun login ketua kelompok baru (auth.users + public.users)
-// dan menetapkannya sebagai ketua di tabel kelompok.
+// RIHLAH — Edge Function: create-supervisor
+// Membuat akun login supervisor armada baru (auth.users + public.users)
+// dan menetapkannya sebagai supervisor di tabel armada.
 //
 // Hanya boleh dipanggil oleh user yang sedang login dengan role 'admin'.
 // Menggunakan SERVICE ROLE KEY di sisi server — TIDAK PERNAH dikirim ke browser.
 //
-// Deploy: supabase functions deploy create-ketua
+// Deploy: supabase functions deploy create-supervisor
 // ============================================================
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
@@ -50,14 +50,14 @@ Deno.serve(async (req) => {
       .single();
 
     if (profileErr || callerProfile?.role !== 'admin') {
-      return json({ error: 'Hanya admin yang dapat menambah ketua kelompok.' }, 403);
+      return json({ error: 'Hanya admin yang dapat menambah supervisor armada.' }, 403);
     }
 
     // 3) Validasi payload
     const body = await req.json();
-    const { displayId, nama, shortName, password, kelompokId } = body ?? {};
+    const { displayId, nama, shortName, password, armadaId } = body ?? {};
 
-    if (!displayId || !nama || !shortName || !password || !kelompokId) {
+    if (!displayId || !nama || !shortName || !password || !armadaId) {
       return json({ error: 'Semua kolom wajib diisi.' }, 400);
     }
     if (password.length < 6) {
@@ -85,7 +85,7 @@ Deno.serve(async (req) => {
       display_id: displayId,
       nama,
       short_name: shortName,
-      role: 'ketua',
+      role: 'supervisor',
     });
 
     if (insertErr) {
@@ -94,14 +94,14 @@ Deno.serve(async (req) => {
       return json({ error: `Gagal membuat profil: ${insertErr.message}` }, 400);
     }
 
-    // 6) Tetapkan sebagai ketua di tabel kelompok
+    // 6) Tetapkan sebagai supervisor di tabel armada
     const { error: updateErr } = await adminClient
-      .from('kelompok')
-      .update({ ketua_id: newUserId })
-      .eq('id', kelompokId);
+      .from('armada')
+      .update({ supervisor_id: newUserId })
+      .eq('id', armadaId);
 
     if (updateErr) {
-      return json({ error: `Akun dibuat, tapi gagal menetapkan kelompok: ${updateErr.message}` }, 400);
+      return json({ error: `Akun dibuat, tapi gagal menetapkan armada: ${updateErr.message}` }, 400);
     }
 
     return json({ success: true, userId: newUserId }, 200);

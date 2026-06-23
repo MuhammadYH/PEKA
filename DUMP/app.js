@@ -284,44 +284,44 @@ function showLoginScreen(prefillId = '') {
    1. MOCK DATA
    ============================================================ */
 const DATA = {
-  pengawas: {
-    nama: 'H. Dr. Abdul Rahman, M.Kes',
-    id: 'PWS-001',
-    role: 'Pengawas Pusat',
+  admin: {
+    nama: 'Dr. Abdul Rahman, M.Kes',
+    id: 'ADM-001',
+    role: 'Admin Pusat',
   },
 
-  kelompok: [
-    { id: 'klp-1', nama: 'Kelompok 1', ketua: 'H. Musthofa Kamal', ketuaId: 'KTU-001' },
-    { id: 'klp-2', nama: 'Kelompok 2', ketua: 'H. Wahyu Santoso',  ketuaId: 'KTU-002' },
-    { id: 'klp-3', nama: 'Kelompok 3', ketua: 'Hj. Fatimah Zahra', ketuaId: 'KTU-003' },
+  armada: [
+    { id: 'arm-1', nama: 'Armada 1', supervisor: 'Musthofa Kamal', supervisorId: 'SPV-001' },
+    { id: 'arm-2', nama: 'Armada 2', supervisor: 'Wahyu Santoso',  supervisorId: 'SPV-002' },
+    { id: 'arm-3', nama: 'Armada 3', supervisor: 'Fatimah Zahra', supervisorId: 'SPV-003' },
   ],
 
-  jamaah: [
-    // Kelompok 1
-    { id: 'JMH-001', gelang: 'RIH001', nama: 'Ahmad Fauzi',         umur: 58, kelompokId: 'klp-1', status: 'hijau',  penyakit: 'Hipertensi',           spo2: 98, hr: 72,  rr: 16, online: true,  batt: 82, alertTerakhir: null,                       waktuAlert: null,           noGelang: '001A' },
-    { id: 'JMH-002', gelang: 'RIH002', nama: 'Siti Aminah',          umur: 63, kelompokId: 'klp-1', status: 'kuning', penyakit: 'Diabetes Tipe 2',      spo2: 95, hr: 88,  rr: 20, online: true,  batt: 61, alertTerakhir: 'SpO₂ turun ke 95%',      waktuAlert: '08:42',        noGelang: '001B' },
-    { id: 'JMH-003', gelang: 'RIH003', nama: 'Yusuf Rahman',         umur: 71, kelompokId: 'klp-1', status: 'merah',  penyakit: 'Jantung Koroner',      spo2: 89, hr: 118, rr: 26, online: true,  batt: 45, alertTerakhir: 'HR melebihi 110 bpm',    waktuAlert: '09:15',        noGelang: '001C' },
-    { id: 'JMH-004', gelang: 'RIH004', nama: 'Halimah Tusyadiah',    umur: 55, kelompokId: 'klp-1', status: 'hijau',  penyakit: '-',                    spo2: 99, hr: 68,  rr: 14, online: true,  batt: 90, alertTerakhir: null,                       waktuAlert: null,           noGelang: '001D' },
-    { id: 'JMH-005', gelang: 'RIH005', nama: 'Ridwan Kamil',         umur: 60, kelompokId: 'klp-1', status: 'hijau',  penyakit: 'Asma ringan',          spo2: 97, hr: 74,  rr: 17, online: true,  batt: 77, alertTerakhir: null,                       waktuAlert: null,           noGelang: '001E' },
-    { id: 'JMH-006', gelang: 'RIH006', nama: 'Nurul Hidayah',        umur: 49, kelompokId: 'klp-1', status: 'hijau',  penyakit: '-',                    spo2: 98, hr: 70,  rr: 15, online: false, batt: 18, alertTerakhir: 'Gelang offline',          waktuAlert: '07:30',        noGelang: '001F' },
-    // Kelompok 2
-    { id: 'JMH-007', gelang: 'RIH007', nama: 'Bambang Sutrisno',     umur: 67, kelompokId: 'klp-2', status: 'hijau',  penyakit: 'Hipertensi',           spo2: 96, hr: 78,  rr: 18, online: true,  batt: 55, alertTerakhir: null,                       waktuAlert: null,           noGelang: '002A' },
-    { id: 'JMH-008', gelang: 'RIH008', nama: 'Aisyah Putri',         umur: 52, kelompokId: 'klp-2', status: 'hijau',  penyakit: '-',                    spo2: 99, hr: 65,  rr: 14, online: true,  batt: 93, alertTerakhir: null,                       waktuAlert: null,           noGelang: '002B' },
-    { id: 'JMH-009', gelang: 'RIH009', nama: 'Darmawan Hadi',        umur: 74, kelompokId: 'klp-2', status: 'kuning', penyakit: 'Stroke Ringan',        spo2: 94, hr: 92,  rr: 21, online: true,  batt: 38, alertTerakhir: 'RR meningkat 21 bpm',     waktuAlert: '09:02',        noGelang: '002C' },
-    { id: 'JMH-010', gelang: 'RIH010', nama: 'Sumiati',              umur: 59, kelompokId: 'klp-2', status: 'hijau',  penyakit: 'Kolesterol',           spo2: 97, hr: 75,  rr: 16, online: true,  batt: 72, alertTerakhir: null,                       waktuAlert: null,           noGelang: '002D' },
-    { id: 'JMH-011', gelang: 'RIH011', nama: 'Fathur Rozy',          umur: 64, kelompokId: 'klp-2', status: 'merah',  penyakit: 'Diabetes + Hipertensi', spo2: 88, hr: 125, rr: 28, online: true,  batt: 50, alertTerakhir: 'SpO₂ kritis 88%',        waktuAlert: '09:20',        noGelang: '002E' },
-    { id: 'JMH-012', gelang: 'RIH012', nama: 'Kartini Wulandari',    umur: 56, kelompokId: 'klp-2', status: 'hijau',  penyakit: '-',                    spo2: 98, hr: 69,  rr: 15, online: true,  batt: 84, alertTerakhir: null,                       waktuAlert: null,           noGelang: '002F' },
-    // Kelompok 3
-    { id: 'JMH-013', gelang: 'RIH013', nama: 'Hj. Mariyam',          umur: 68, kelompokId: 'klp-3', status: 'hijau',  penyakit: 'Asam Urat',            spo2: 97, hr: 71,  rr: 16, online: true,  batt: 66, alertTerakhir: null,                       waktuAlert: null,           noGelang: '003A' },
-    { id: 'JMH-014', gelang: 'RIH014', nama: 'Abdul Hamid',          umur: 70, kelompokId: 'klp-3', status: 'kuning', penyakit: 'Jantung + Hipertensi', spo2: 93, hr: 96,  rr: 22, online: true,  batt: 41, alertTerakhir: 'HR 96 bpm — pantau',      waktuAlert: '08:55',        noGelang: '003B' },
-    { id: 'JMH-015', gelang: 'RIH015', nama: 'Zainab Alatas',        umur: 61, kelompokId: 'klp-3', status: 'hijau',  penyakit: '-',                    spo2: 99, hr: 67,  rr: 14, online: true,  batt: 89, alertTerakhir: null,                       waktuAlert: null,           noGelang: '003C' },
-    { id: 'JMH-016', gelang: 'RIH016', nama: 'Mochtar Effendi',      umur: 66, kelompokId: 'klp-3', status: 'hijau',  penyakit: 'Hipertensi',           spo2: 96, hr: 80,  rr: 17, online: true,  batt: 73, alertTerakhir: null,                       waktuAlert: null,           noGelang: '003D' },
-    { id: 'JMH-017', gelang: 'RIH017', nama: 'Robiatul Adawiyah',    umur: 54, kelompokId: 'klp-3', status: 'hijau',  penyakit: '-',                    spo2: 98, hr: 66,  rr: 13, online: true,  batt: 95, alertTerakhir: null,                       waktuAlert: null,           noGelang: '003E' },
-    { id: 'JMH-018', gelang: 'RIH018', nama: 'Syamsuddin Latif',     umur: 72, kelompokId: 'klp-3', status: 'hijau',  penyakit: 'Kolesterol + Asma',    spo2: 96, hr: 77,  rr: 18, online: false, batt: 12, alertTerakhir: 'Baterai rendah 12%',      waktuAlert: '06:50',        noGelang: '003F' },
+  sopir: [
+    // Armada 1
+    { id: 'SPR-001', smartwatch: 'SWT001', nama: 'Ahmad Fauzi',         umur: 58, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: 'Hipertensi',           spo2: 98, hr: 72,  rr: 16, online: true,  batt: 82, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '001A' },
+    { id: 'SPR-002', smartwatch: 'SWT002', nama: 'Siti Aminah',          umur: 63, armadaId: 'arm-1', status: 'kuning', riwayatKesehatan: 'Diabetes Tipe 2',      spo2: 95, hr: 88,  rr: 20, online: true,  batt: 61, alertTerakhir: 'SpO₂ turun ke 95%',      waktuAlert: '08:42',        noSmartwatch: '001B' },
+    { id: 'SPR-003', smartwatch: 'SWT003', nama: 'Yusuf Rahman',         umur: 71, armadaId: 'arm-1', status: 'merah',  riwayatKesehatan: 'Jantung Koroner',      spo2: 89, hr: 118, rr: 26, online: true,  batt: 45, alertTerakhir: 'HR melebihi 110 bpm',    waktuAlert: '09:15',        noSmartwatch: '001C' },
+    { id: 'SPR-004', smartwatch: 'SWT004', nama: 'Halimah Tusyadiah',    umur: 55, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 99, hr: 68,  rr: 14, online: true,  batt: 90, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '001D' },
+    { id: 'SPR-005', smartwatch: 'SWT005', nama: 'Ridwan Kamil',         umur: 60, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: 'Asma ringan',          spo2: 97, hr: 74,  rr: 17, online: true,  batt: 77, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '001E' },
+    { id: 'SPR-006', smartwatch: 'SWT006', nama: 'Nurul Hidayah',        umur: 49, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 98, hr: 70,  rr: 15, online: false, batt: 18, alertTerakhir: 'Smartwatch offline',          waktuAlert: '07:30',        noSmartwatch: '001F' },
+    // Armada 2
+    { id: 'SPR-007', smartwatch: 'SWT007', nama: 'Bambang Sutrisno',     umur: 67, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: 'Hipertensi',           spo2: 96, hr: 78,  rr: 18, online: true,  batt: 55, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002A' },
+    { id: 'SPR-008', smartwatch: 'SWT008', nama: 'Aisyah Putri',         umur: 52, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 99, hr: 65,  rr: 14, online: true,  batt: 93, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002B' },
+    { id: 'SPR-009', smartwatch: 'SWT009', nama: 'Darmawan Hadi',        umur: 74, armadaId: 'arm-2', status: 'kuning', riwayatKesehatan: 'Stroke Ringan',        spo2: 94, hr: 92,  rr: 21, online: true,  batt: 38, alertTerakhir: 'RR meningkat 21 bpm',     waktuAlert: '09:02',        noSmartwatch: '002C' },
+    { id: 'SPR-010', smartwatch: 'SWT010', nama: 'Sumiati',              umur: 59, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: 'Kolesterol',           spo2: 97, hr: 75,  rr: 16, online: true,  batt: 72, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002D' },
+    { id: 'SPR-011', smartwatch: 'SWT011', nama: 'Fathur Rozy',          umur: 64, armadaId: 'arm-2', status: 'merah',  riwayatKesehatan: 'Diabetes + Hipertensi', spo2: 88, hr: 125, rr: 28, online: true,  batt: 50, alertTerakhir: 'SpO₂ kritis 88%',        waktuAlert: '09:20',        noSmartwatch: '002E' },
+    { id: 'SPR-012', smartwatch: 'SWT012', nama: 'Kartini Wulandari',    umur: 56, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 98, hr: 69,  rr: 15, online: true,  batt: 84, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002F' },
+    // Armada 3
+    { id: 'SPR-013', smartwatch: 'SWT013', nama: 'Mariyam',          umur: 68, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: 'Asam Urat',            spo2: 97, hr: 71,  rr: 16, online: true,  batt: 66, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003A' },
+    { id: 'SPR-014', smartwatch: 'SWT014', nama: 'Abdul Hamid',          umur: 70, armadaId: 'arm-3', status: 'kuning', riwayatKesehatan: 'Jantung + Hipertensi', spo2: 93, hr: 96,  rr: 22, online: true,  batt: 41, alertTerakhir: 'HR 96 bpm — pantau',      waktuAlert: '08:55',        noSmartwatch: '003B' },
+    { id: 'SPR-015', smartwatch: 'SWT015', nama: 'Zainab Alatas',        umur: 61, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 99, hr: 67,  rr: 14, online: true,  batt: 89, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003C' },
+    { id: 'SPR-016', smartwatch: 'SWT016', nama: 'Mochtar Effendi',      umur: 66, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: 'Hipertensi',           spo2: 96, hr: 80,  rr: 17, online: true,  batt: 73, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003D' },
+    { id: 'SPR-017', smartwatch: 'SWT017', nama: 'Robiatul Adawiyah',    umur: 54, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 98, hr: 66,  rr: 13, online: true,  batt: 95, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003E' },
+    { id: 'SPR-018', smartwatch: 'SWT018', nama: 'Syamsuddin Latif',     umur: 72, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: 'Kolesterol + Asma',    spo2: 96, hr: 77,  rr: 18, online: false, batt: 12, alertTerakhir: 'Baterai rendah 12%',      waktuAlert: '06:50',        noSmartwatch: '003F' },
   ],
 
-  // Gelang yang belum dibagikan
-  gelangUnassigned: ['RIH019', 'RIH020', 'RIH021'],
+  // Smartwatch yang belum dibagikan
+  smartwatchUnassigned: ['SWT019', 'SWT020', 'SWT021'],
 
   // Trend data: 7 hari terakhir
   trend: [
@@ -342,7 +342,7 @@ const STATE = {
   activePage: 'dashboard',
   filterStatus: 'all',
   searchQuery: '',
-  expandedJamaah: null,
+  expandedSopir: null,
   expandedVitals: null,
   activeSubtab: 'registrasi',
 };
@@ -377,16 +377,16 @@ const DOM = {
   btnLihatAlert:  $('#btnLihatAlert'),
 
   // Monitoring
-  jamaahSearch:   $('#jamaahSearch'),
+  sopirSearch:   $('#sopirSearch'),
   filterChips:    $$('.chip'),
   groupsContainer:$('#groupsContainer'),
 
   // Settings
-  ketuaList:      $('#ketuaList'),
+  supervisorList:      $('#supervisorList'),
   subtabs:        $$('.subtab'),
-  gelangStatusGrid: $('#gelangStatusGrid'),
+  smartwatchStatusGrid: $('#smartwatchStatusGrid'),
   distribusiBody: $('#distribusiTableBody'),
-  btnDaftarGelang:$('#btnDaftarGelang'),
+  btnDaftarSmartwatch:$('#btnDaftarSmartwatch'),
   btnSaveThreshold: $('#btnSaveThreshold'),
 
   // Modal
@@ -395,7 +395,36 @@ const DOM = {
   alertModalBody: $('#alertModalBody'),
   alertModalClose:$('#alertModalClose'),
   alertModalCancel:$('#alertModalCancel'),
-  btnHubungiPetugas: $('#btnHubungiPetugas'),
+  btnHubungiK3: $('#btnHubungiK3'),
+
+  // Modal: Tambah Supervisor
+  supervisorModal:        $('#supervisorModal'),
+  supervisorModalClose:   $('#supervisorModalClose'),
+  supervisorModalCancel:  $('#supervisorModalCancel'),
+  supervisorDisplayId:    $('#supervisorDisplayId'),
+  supervisorNama:         $('#supervisorNama'),
+  supervisorShortName:    $('#supervisorShortName'),
+  supervisorArmada:     $('#supervisorArmada'),
+  supervisorPassword:     $('#supervisorPassword'),
+  btnSimpanSupervisor:    $('#btnSimpanSupervisor'),
+
+  // Modal: Tambah Sopir Massal
+  btnTambahSopirMassal: $('#btnTambahSopirMassal'),
+  sopirMassalModal:  $('#sopirMassalModal'),
+  sopirMassalClose:  $('#sopirMassalClose'),
+  sopirMassalCancel: $('#sopirMassalCancel'),
+  sopirStepSource:   $('#sopirStepSource'),
+  sopirStepPreview:  $('#sopirStepPreview'),
+  jmFileInput:        $('#jmFileInput'),
+  jmFileStatus:       $('#jmFileStatus'),
+  jmManualArmada:   $('#jmManualArmada'),
+  jmManualBody:       $('#jmManualBody'),
+  jmAddRow:           $('#jmAddRow'),
+  jmPreviewSummary:   $('#jmPreviewSummary'),
+  jmPreviewBody:      $('#jmPreviewBody'),
+  jmBtnBack:          $('#jmBtnBack'),
+  jmBtnPreview:       $('#jmBtnPreview'),
+  jmBtnSubmit:        $('#jmBtnSubmit'),
 
   // Toast
   toastContainer: $('#toastContainer'),
@@ -433,12 +462,12 @@ function formatTime(str) {
   return str;
 }
 
-function getKelompok(id) {
-  return DATA.kelompok.find(k => k.id === id) || {};
+function getArmada(id) {
+  return DATA.armada.find(k => k.id === id) || {};
 }
 
 function getAlerts() {
-  return DATA.jamaah.filter(j => j.alertTerakhir !== null);
+  return DATA.sopir.filter(j => j.alertTerakhir !== null);
 }
 
 function getInitials(name) {
@@ -497,7 +526,7 @@ function dismissToast(id) {
    ============================================================ */
 const PAGE_LABELS = {
   dashboard:  'Dashboard',
-  monitoring: 'Monitoring Jamaah',
+  monitoring: 'Monitoring Sopir',
   settings:   'Settings',
 };
 
@@ -545,11 +574,11 @@ function closeSidebar() {
    8. DASHBOARD — STATS
    ============================================================ */
 function computeStats() {
-  const total    = DATA.jamaah.length;
-  const active   = DATA.jamaah.filter(j => j.online).length;
-  const hijau    = DATA.jamaah.filter(j => j.status === 'hijau').length;
-  const kuning   = DATA.jamaah.filter(j => j.status === 'kuning').length;
-  const merah    = DATA.jamaah.filter(j => j.status === 'merah').length;
+  const total    = DATA.sopir.length;
+  const active   = DATA.sopir.filter(j => j.online).length;
+  const hijau    = DATA.sopir.filter(j => j.status === 'hijau').length;
+  const kuning   = DATA.sopir.filter(j => j.status === 'kuning').length;
+  const merah    = DATA.sopir.filter(j => j.status === 'merah').length;
   const alerts   = getAlerts().length;
   return { total, active, hijau, kuning, merah, alerts };
 }
@@ -597,7 +626,7 @@ function renderAlerts() {
   }
 
   DOM.alertsList.innerHTML = alerts.map(j => {
-    const klp = getKelompok(j.kelompokId);
+    const klp = getArmada(j.armadaId);
     return `
       <li class="alert-item alert-item--${j.status}" 
           role="button" tabindex="0"
@@ -606,7 +635,7 @@ function renderAlerts() {
         <span class="alert-item__dot"></span>
         <div class="alert-item__body">
           <div class="alert-item__name">${j.nama}</div>
-          <div class="alert-item__desc">${j.alertTerakhir} · ${klp.nama || ''} · ${j.gelang}</div>
+          <div class="alert-item__desc">${j.alertTerakhir} · ${klp.nama || ''} · ${j.smartwatch}</div>
         </div>
         <span class="alert-item__time">${formatTime(j.waktuAlert)}</span>
       </li>
@@ -678,7 +707,7 @@ function renderTrendChart() {
     return data.map((d, i) => `
       <circle cx="${xPos(i)}" cy="${yPos(d[key])}" r="3.5"
               fill="${colors[key]}" stroke="${dotStroke}" stroke-width="1.5">
-        <title>${d.hari}: ${d[key]} jamaah ${key}</title>
+        <title>${d.hari}: ${d[key]} sopir ${key}</title>
       </circle>
     `).join('');
   }
@@ -693,7 +722,7 @@ function renderTrendChart() {
 
   const svg = `
     <svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" 
-         role="img" aria-label="Grafik tren kondisi jamaah 7 hari">
+         role="img" aria-label="Grafik tren kondisi sopir 7 hari">
       <defs>
         <linearGradient id="gradH" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="${colors.hijau}" stop-opacity="0.15"/>
@@ -740,23 +769,23 @@ function renderMonitoring() {
   const query  = STATE.searchQuery.toLowerCase().trim();
   const filter = STATE.filterStatus;
 
-  // Filter jamaah
-  let filtered = DATA.jamaah.filter(j => {
+  // Filter sopir
+  let filtered = DATA.sopir.filter(j => {
     const matchStatus = filter === 'all' || j.status === filter;
-    const matchSearch = !query || j.nama.toLowerCase().includes(query) || j.gelang.toLowerCase().includes(query);
+    const matchSearch = !query || j.nama.toLowerCase().includes(query) || j.smartwatch.toLowerCase().includes(query);
     return matchStatus && matchSearch;
   });
 
-  // Group per kelompok
-  const grouped = DATA.kelompok.map(klp => ({
-    kelompok: klp,
-    members: filtered.filter(j => j.kelompokId === klp.id),
+  // Group per armada
+  const grouped = DATA.armada.map(klp => ({
+    armada: klp,
+    members: filtered.filter(j => j.armadaId === klp.id),
   })).filter(g => g.members.length > 0);
 
   if (!grouped.length) {
     DOM.groupsContainer.innerHTML = `
       <div class="groups-placeholder">
-        Tidak ada jamaah yang sesuai dengan filter atau pencarian.
+        Tidak ada sopir yang sesuai dengan filter atau pencarian.
       </div>`;
     return;
   }
@@ -764,8 +793,8 @@ function renderMonitoring() {
   DOM.groupsContainer.innerHTML = grouped.map(g => renderGroupBlock(g)).join('');
 
   // Re-attach expand listeners
-  $$('.jamaah-row__toggle').forEach(btn => {
-    btn.addEventListener('click', () => toggleJamaahDetail(btn));
+  $$('.sopir-row__toggle').forEach(btn => {
+    btn.addEventListener('click', () => toggleSopirDetail(btn));
   });
 
   // Re-attach vitals toggle
@@ -774,20 +803,20 @@ function renderMonitoring() {
   });
 }
 
-function renderGroupBlock({ kelompok, members }) {
+function renderGroupBlock({ armada, members }) {
   const hijauC  = members.filter(m => m.status === 'hijau').length;
   const kuningC = members.filter(m => m.status === 'kuning').length;
   const merahC  = members.filter(m => m.status === 'merah').length;
 
   return `
-    <div class="group-block" data-group="${kelompok.id}">
+    <div class="group-block" data-group="${armada.id}">
       <div class="group-header">
         <div class="group-header__left">
-          <span class="group-badge">${kelompok.nama}</span>
-          <span class="group-leader">Ketua: ${kelompok.ketua}</span>
+          <span class="group-badge">${armada.nama}</span>
+          <span class="group-leader">Supervisor: ${armada.supervisor}</span>
         </div>
         <div class="group-header__right">
-          <span class="group-count">${members.length} jamaah</span>
+          <span class="group-count">${members.length} sopir</span>
           <span class="group-status-dots">
             <span class="dot dot--hijau">${hijauC}</span>
             <span class="dot dot--kuning">${kuningC}</span>
@@ -795,39 +824,39 @@ function renderGroupBlock({ kelompok, members }) {
           </span>
         </div>
       </div>
-      <ul class="jamaah-list">
-        ${members.map(j => renderJamaahRow(j)).join('')}
+      <ul class="sopir-list">
+        ${members.map(j => renderSopirRow(j)).join('')}
       </ul>
     </div>
   `;
 }
 
-function renderJamaahRow(j) {
-  const klp = getKelompok(j.kelompokId);
+function renderSopirRow(j) {
+  const klp = getArmada(j.armadaId);
   return `
-    <li class="jamaah-row" data-id="${j.id}" data-status="${j.status}">
-      <button class="jamaah-row__toggle" 
+    <li class="sopir-row" data-id="${j.id}" data-status="${j.status}">
+      <button class="sopir-row__toggle" 
               aria-expanded="false" 
               aria-controls="detail-${j.id}"
               data-id="${j.id}">
         <span class="status-dot status-dot--${j.status}" 
               aria-label="Status ${getStatusLabel(j.status)}"></span>
-        <span class="jamaah-row__name">${j.nama}</span>
-        <span class="jamaah-row__meta">
-          <span class="gelang-id">${j.gelang}</span>
+        <span class="sopir-row__name">${j.nama}</span>
+        <span class="sopir-row__meta">
+          <span class="smartwatch-id">${j.smartwatch}</span>
           <span class="vitals-mini">
             SpO₂ ${j.spo2}% &nbsp;·&nbsp; HR ${j.hr}
             ${!j.online ? ' &nbsp;·&nbsp; <span style="color:var(--color-text-muted)">Offline</span>' : ''}
           </span>
         </span>
-        <span class="jamaah-row__chevron">
+        <span class="sopir-row__chevron">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M4 6l4 4 4-4"/>
           </svg>
         </span>
       </button>
 
-      <div class="jamaah-detail" id="detail-${j.id}" hidden>
+      <div class="sopir-detail" id="detail-${j.id}" hidden>
         <!-- Informasi Umum -->
         <div class="detail-section">
           <div class="detail-section__title">Informasi Umum</div>
@@ -840,12 +869,12 @@ function renderJamaahRow(j) {
             <span class="detail-row__val">${j.umur} tahun</span>
           </div>
           <div class="detail-row">
-            <span class="detail-row__key">Kelompok</span>
+            <span class="detail-row__key">Armada</span>
             <span class="detail-row__val">${klp.nama || '—'}</span>
           </div>
           <div class="detail-row">
-            <span class="detail-row__key">No. Gelang</span>
-            <span class="detail-row__val">${j.gelang}</span>
+            <span class="detail-row__key">No. Smartwatch</span>
+            <span class="detail-row__val">${j.smartwatch}</span>
           </div>
           <div class="detail-row">
             <span class="detail-row__key">Baterai</span>
@@ -867,8 +896,8 @@ function renderJamaahRow(j) {
             <span class="triage-badge triage-badge--${j.status}">${getStatusLabel(j.status)}</span>
           </div>
           <div class="detail-row">
-            <span class="detail-row__key">Penyakit Bawaan</span>
-            <span class="detail-row__val" style="font-family:var(--font-sans);font-size:12px;text-align:right">${j.penyakit}</span>
+            <span class="detail-row__key">Riwayat Kesehatan</span>
+            <span class="detail-row__val" style="font-family:var(--font-sans);font-size:12px;text-align:right">${j.riwayatKesehatan}</span>
           </div>
         </div>
 
@@ -921,9 +950,9 @@ function renderJamaahRow(j) {
         <!-- Aksi -->
         <div class="detail-actions">
           <button class="btn btn--danger btn--sm" 
-                  data-jamaah-id="${j.id}"
-                  onclick="handleHubungiPetugas('${j.id}')">
-            📞 Hubungi Petugas Kesehatan
+                  data-sopir-id="${j.id}"
+                  onclick="handleHubungiK3('${j.id}')">
+            📞 Hubungi Tim K3/HSE
           </button>
           ${j.status !== 'hijau' ? `
           <button class="btn btn--secondary btn--sm"
@@ -939,22 +968,22 @@ function renderJamaahRow(j) {
 /* ============================================================
    12. MONITORING — EXPAND / COLLAPSE
    ============================================================ */
-function toggleJamaahDetail(btn) {
+function toggleSopirDetail(btn) {
   const id       = btn.dataset.id;
   const detail   = $(`#detail-${id}`);
   const isOpen   = btn.getAttribute('aria-expanded') === 'true';
 
   // Close previously open (optional: single-expand mode)
-  if (STATE.expandedJamaah && STATE.expandedJamaah !== id) {
-    const prevBtn    = $(`[aria-controls="detail-${STATE.expandedJamaah}"]`);
-    const prevDetail = $(`#detail-${STATE.expandedJamaah}`);
+  if (STATE.expandedSopir && STATE.expandedSopir !== id) {
+    const prevBtn    = $(`[aria-controls="detail-${STATE.expandedSopir}"]`);
+    const prevDetail = $(`#detail-${STATE.expandedSopir}`);
     if (prevBtn)    prevBtn.setAttribute('aria-expanded', 'false');
     if (prevDetail) prevDetail.hidden = true;
   }
 
   btn.setAttribute('aria-expanded', String(!isOpen));
   detail.hidden = isOpen;
-  STATE.expandedJamaah = isOpen ? null : id;
+  STATE.expandedSopir = isOpen ? null : id;
 }
 
 function toggleVitals(btn) {
@@ -970,7 +999,7 @@ function toggleVitals(btn) {
    ============================================================ */
 function initMonitoringFilters() {
   // Search
-  DOM.jamaahSearch.addEventListener('input', (e) => {
+  DOM.sopirSearch.addEventListener('input', (e) => {
     STATE.searchQuery = e.target.value;
     renderMonitoring();
   });
@@ -990,74 +1019,121 @@ function initMonitoringFilters() {
    14. SETTINGS — RENDER
    ============================================================ */
 function renderSettings() {
-  renderKetuaList();
-  renderGelangStatus();
+  renderSupervisorList();
+  renderSmartwatchStatus();
   renderDistribusiTable();
 }
 
-function renderKetuaList() {
-  if (!DOM.ketuaList) return;
-  const ketuaData = DATA.kelompok.map(k => ({
-    nama: k.ketua,
-    kelompok: k.nama,
-    id: k.ketuaId,
+function renderSupervisorList() {
+  if (!DOM.supervisorList) return;
+  const supervisorData = DATA.armada.map(k => ({
+    nama: k.supervisor,
+    armada: k.nama,
+    id: k.supervisorId,
+    armadaId: k.id,
   }));
 
-  DOM.ketuaList.innerHTML = ketuaData.map(k => `
-    <div class="ketua-item">
-      <div class="ketua-item__avatar">${getInitials(k.nama)}</div>
-      <span class="ketua-item__name">${k.nama}</span>
-      <span class="ketua-item__group">${k.kelompok}</span>
-      <span class="settings-card__role-badge badge--ketua" style="font-size:10px;padding:2px 8px;border-radius:10px">Ketua</span>
-      <button class="btn-text" style="margin-left:auto">Edit</button>
-      <button class="btn-text btn-text--danger">Hapus</button>
+  DOM.supervisorList.innerHTML = supervisorData.map((k, i) => `
+    <div class="supervisor-item">
+      <div class="supervisor-item__avatar">${getInitials(k.nama)}</div>
+      <div class="supervisor-item__info">
+        <span class="supervisor-item__name">${k.nama}</span>
+        <span class="supervisor-item__group">${k.armada}</span>
+      </div>
+      <span class="settings-card__role-badge badge--supervisor supervisor-item__badge" style="font-size:10px;padding:2px 8px;border-radius:10px">Supervisor</span>
+      <button class="supervisor-item__menu-btn" data-menu-toggle="${i}" aria-label="Menu aksi" aria-haspopup="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <circle cx="10" cy="4" r="1.5"/><circle cx="10" cy="10" r="1.5"/><circle cx="10" cy="16" r="1.5"/>
+        </svg>
+      </button>
+      <div class="supervisor-item__menu" id="supervisorMenu-${i}" hidden data-armada-id="${k.armadaId}">
+        <button type="button" data-action="edit">Edit</button>
+        <button type="button" class="supervisor-item__menu-danger" data-action="hapus">Hapus</button>
+      </div>
     </div>
   `).join('');
 }
 
-function renderGelangStatus() {
-  if (!DOM.gelangStatusGrid) return;
+function closeAllSupervisorMenus() {
+  $$('.supervisor-item__menu').forEach(m => m.hidden = true);
+}
 
-  const assignedCards = DATA.jamaah.map(j => `
-    <div class="gelang-card">
-      <span class="gelang-card__id">${j.gelang}</span>
-      <span class="gelang-card__name">${j.nama}</span>
-      <span class="gelang-card__status">
-        <span class="gelang-status-dot gelang-status-dot--${j.online ? 'online' : 'offline'}"></span>
+function initSupervisorItemMenus() {
+  // Delegasi di level container supaya tetap jalan setelah re-render
+  DOM.supervisorList?.addEventListener('click', (e) => {
+    const toggleBtn = e.target.closest('[data-menu-toggle]');
+    if (toggleBtn) {
+      const idx = toggleBtn.dataset.menuToggle;
+      const menu = document.getElementById(`supervisorMenu-${idx}`);
+      const wasHidden = menu.hidden;
+      closeAllSupervisorMenus();
+      menu.hidden = !wasHidden;
+      return;
+    }
+
+    const actionBtn = e.target.closest('[data-action]');
+    if (actionBtn) {
+      const menu = actionBtn.closest('.supervisor-item__menu');
+      const armadaId = menu?.dataset.armadaId;
+      closeAllSupervisorMenus();
+      if (actionBtn.dataset.action === 'edit') {
+        showToast('info', 'Segera Hadir', 'Fitur edit supervisor armada akan tersedia di versi berikutnya.');
+      } else if (actionBtn.dataset.action === 'hapus') {
+        showToast('info', 'Segera Hadir', 'Fitur hapus supervisor armada akan tersedia di versi berikutnya.');
+      }
+      return;
+    }
+  });
+
+  // Klik di luar menu menutup semua menu yang terbuka
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.supervisor-item')) closeAllSupervisorMenus();
+  });
+}
+
+function renderSmartwatchStatus() {
+  if (!DOM.smartwatchStatusGrid) return;
+
+  const assignedCards = DATA.sopir.map(j => `
+    <div class="smartwatch-card">
+      <span class="smartwatch-card__id">${j.smartwatch}</span>
+      <span class="smartwatch-card__name">${j.nama}</span>
+      <span class="smartwatch-card__status">
+        <span class="smartwatch-status-dot smartwatch-status-dot--${j.online ? 'online' : 'offline'}"></span>
         ${j.online ? 'Online' : 'Offline'}
       </span>
-      <span class="gelang-card__batt">🔋 ${j.batt}%</span>
+      <span class="smartwatch-card__batt">🔋 ${j.batt}%</span>
     </div>
   `).join('');
 
-  const unsetCards = DATA.gelangUnassigned.map(g => `
-    <div class="gelang-card" style="opacity:0.5">
-      <span class="gelang-card__id">${g}</span>
-      <span class="gelang-card__name" style="color:var(--color-text-muted);font-style:italic">Belum Dibagikan</span>
-      <span class="gelang-card__status">
-        <span class="gelang-status-dot gelang-status-dot--unset"></span>
+  const unsetCards = DATA.smartwatchUnassigned.map(g => `
+    <div class="smartwatch-card" style="opacity:0.5">
+      <span class="smartwatch-card__id">${g}</span>
+      <span class="smartwatch-card__name" style="color:var(--color-text-muted);font-style:italic">Belum Dibagikan</span>
+      <span class="smartwatch-card__status">
+        <span class="smartwatch-status-dot smartwatch-status-dot--unset"></span>
         Tidak aktif
       </span>
-      <span class="gelang-card__batt">—</span>
+      <span class="smartwatch-card__batt">—</span>
     </div>
   `).join('');
 
-  DOM.gelangStatusGrid.innerHTML = assignedCards + unsetCards;
+  DOM.smartwatchStatusGrid.innerHTML = assignedCards + unsetCards;
 }
 
 function renderDistribusiTable() {
   if (!DOM.distribusiBody) return;
 
-  const rows = DATA.jamaah.map(j => {
-    const klp = getKelompok(j.kelompokId);
+  const rows = DATA.sopir.map(j => {
+    const klp = getArmada(j.armadaId);
     return `
       <tr>
-        <td>${j.gelang}</td>
+        <td>${j.smartwatch}</td>
         <td style="color:var(--color-text-primary);font-weight:500">${j.nama}</td>
         <td>${klp.nama || '—'}</td>
         <td>
           <span class="distribusi-status distribusi-status--assigned">
-            <span class="gelang-status-dot gelang-status-dot--${j.online ? 'online' : 'offline'}" style="width:6px;height:6px;border-radius:50%;display:inline-block"></span>
+            <span class="smartwatch-status-dot smartwatch-status-dot--${j.online ? 'online' : 'offline'}" style="width:6px;height:6px;border-radius:50%;display:inline-block"></span>
             ${j.online ? 'Aktif' : 'Offline'}
           </span>
         </td>
@@ -1065,7 +1141,7 @@ function renderDistribusiTable() {
     `;
   }).join('');
 
-  const unsetRows = DATA.gelangUnassigned.map(g => `
+  const unsetRows = DATA.smartwatchUnassigned.map(g => `
     <tr>
       <td>${g}</td>
       <td class="td-unset">Belum Dibagikan</td>
@@ -1102,7 +1178,7 @@ function initSubtabs() {
       STATE.activeSubtab = target;
 
       // Lazy render
-      if (target === 'status')     renderGelangStatus();
+      if (target === 'status')     renderSmartwatchStatus();
       if (target === 'distribusi') renderDistribusiTable();
     });
   });
@@ -1111,11 +1187,11 @@ function initSubtabs() {
 /* ============================================================
    16. MODAL
    ============================================================ */
-function openAlertModal(jamaahId) {
-  const j = DATA.jamaah.find(j => j.id === jamaahId);
+function openAlertModal(sopirId) {
+  const j = DATA.sopir.find(j => j.id === sopirId);
   if (!j) return;
 
-  const klp = getKelompok(j.kelompokId);
+  const klp = getArmada(j.armadaId);
 
   DOM.alertModalTitle.textContent = `Alert — ${j.nama}`;
   DOM.alertModalBody.innerHTML = `
@@ -1126,7 +1202,7 @@ function openAlertModal(jamaahId) {
         <span style="font-size:24px">${getStatusEmoji(j.status)}</span>
         <div>
           <div style="font-weight:700;font-size:15px">${j.nama}</div>
-          <div style="font-size:12px;color:var(--color-text-secondary)">${klp.nama} · ${j.gelang}</div>
+          <div style="font-size:12px;color:var(--color-text-secondary)">${klp.nama} · ${j.smartwatch}</div>
         </div>
         <span class="triage-badge triage-badge--${j.status}" style="margin-left:auto">
           ${getStatusLabel(j.status)}
@@ -1162,13 +1238,13 @@ function openAlertModal(jamaahId) {
       </div>
 
       <div style="font-size:12px;color:var(--color-text-secondary)">
-        <strong>Penyakit Bawaan:</strong> ${j.penyakit}
+        <strong>Riwayat Kesehatan:</strong> ${j.riwayatKesehatan}
       </div>
     </div>
   `;
 
-  // Store jamaah id for action button
-  DOM.btnHubungiPetugas.dataset.jamaahId = jamaahId;
+  // Store sopir id for action button
+  DOM.btnHubungiK3.dataset.sopirId = sopirId;
 
   DOM.alertModal.hidden = false;
   document.body.style.overflow = 'hidden';
@@ -1180,15 +1256,364 @@ function closeAlertModal() {
   document.body.style.overflow = '';
 }
 
-function handleHubungiPetugas(jamaahId) {
-  const j = DATA.jamaah.find(j => j.id === (jamaahId || DOM.btnHubungiPetugas.dataset.jamaahId));
+/* ----- Modal: Tambah Supervisor Armada ----- */
+function openSupervisorModal() {
+  // Isi dropdown armada yang BELUM punya supervisor (supervisorId masih placeholder/'-')
+  const opsi = DATA.armada
+    .map(k => `<option value="${k.id}">${k.nama}${k.supervisor && k.supervisor !== '-' ? ` (saat ini: ${k.supervisor})` : ''}</option>`)
+    .join('');
+  DOM.supervisorArmada.innerHTML = `<option value="">Pilih armada...</option>${opsi}`;
+
+  // Reset form
+  DOM.supervisorDisplayId.value = '';
+  DOM.supervisorNama.value = '';
+  DOM.supervisorShortName.value = '';
+  DOM.supervisorPassword.value = '';
+
+  DOM.supervisorModal.hidden = false;
+  document.body.style.overflow = 'hidden';
+  DOM.supervisorDisplayId.focus();
+}
+
+function closeSupervisorModal() {
+  DOM.supervisorModal.hidden = true;
+  document.body.style.overflow = '';
+}
+
+async function submitSupervisorForm() {
+  const displayId   = DOM.supervisorDisplayId.value.trim().toUpperCase();
+  const nama        = DOM.supervisorNama.value.trim();
+  const shortName   = DOM.supervisorShortName.value.trim();
+  const armadaId  = DOM.supervisorArmada.value;
+  const password    = DOM.supervisorPassword.value;
+
+  if (!displayId || !nama || !shortName || !armadaId || !password) {
+    showToast('warning', 'Form Belum Lengkap', 'Harap isi semua kolom sebelum menyimpan.');
+    return;
+  }
+  if (password.length < 6) {
+    showToast('warning', 'Password Terlalu Pendek', 'Password minimal 6 karakter.');
+    return;
+  }
+
+  DOM.btnSimpanSupervisor.disabled = true;
+  DOM.btnSimpanSupervisor.textContent = 'Menyimpan...';
+
+  const result = await window.RIHLAH_DB.createSupervisorArmada({
+    displayId, nama, shortName, password, armadaId,
+  });
+
+  DOM.btnSimpanSupervisor.disabled = false;
+  DOM.btnSimpanSupervisor.textContent = 'Simpan';
+
+  if (result.error) {
+    showToast('error', 'Gagal Menyimpan', result.error);
+    return;
+  }
+
+  showToast('success', 'Supervisor Armada Ditambahkan', `${nama} berhasil ditetapkan sebagai supervisor.`);
+  closeSupervisorModal();
+
+  // Refresh data armada dari server supaya supervisorList & dropdown ter-update
+  if (typeof loadAppData === 'function') await loadAppData();
+  renderSupervisorList();
+}
+
+/* ----- Modal: Tambah Sopir Massal ----- */
+const JM_STATE = {
+  source: 'upload',   // 'upload' | 'manual'
+  rows:   [],          // hasil parsing, sebelum divalidasi
+  manualRowCount: 0,
+};
+
+function openSopirMassalModal() {
+  // Reset state
+  JM_STATE.source = 'upload';
+  JM_STATE.rows = [];
+  JM_STATE.manualRowCount = 0;
+
+  DOM.jmFileInput.value = '';
+  DOM.jmFileStatus.textContent = '';
+  DOM.jmManualBody.innerHTML = '';
+  DOM.jmPreviewBody.innerHTML = '';
+
+  // Isi dropdown armada untuk mode manual
+  const opsi = DATA.armada.map(k => `<option value="${k.id}">${k.nama}</option>`).join('');
+  DOM.jmManualArmada.innerHTML = `<option value="">Pilih armada...</option>${opsi}`;
+
+  // Reset tab ke Upload
+  $$('.jm-source-tab[data-jmsubtab]').forEach(t => {
+    const active = t.dataset.jmsubtab === 'upload';
+    t.classList.toggle('jm-source-tab--active', active);
+    t.setAttribute('aria-selected', active);
+  });
+  $('#jmPanel-upload').classList.add('jm-panel--active');
+  $('#jmPanel-upload').hidden = false;
+  $('#jmPanel-manual').classList.remove('jm-panel--active');
+  $('#jmPanel-manual').hidden = true;
+
+  // Mulai dengan 3 baris kosong di mode manual
+  addManualRow(); addManualRow(); addManualRow();
+
+  // Reset langkah ke step 1 (sumber data)
+  DOM.sopirStepSource.hidden = false;
+  DOM.sopirStepPreview.hidden = true;
+  DOM.jmBtnBack.hidden = true;
+  DOM.jmBtnPreview.hidden = false;
+  DOM.jmBtnSubmit.hidden = true;
+
+  DOM.sopirMassalModal.hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSopirMassalModal() {
+  DOM.sopirMassalModal.hidden = true;
+  document.body.style.overflow = '';
+}
+
+function addManualRow() {
+  JM_STATE.manualRowCount++;
+  const rowId = `mrow-${JM_STATE.manualRowCount}`;
+  const tr = document.createElement('tr');
+  tr.dataset.rowId = rowId;
+  tr.innerHTML = `
+    <td><input type="text" class="jm-input-nama" placeholder="Nama sopir"></td>
+    <td><input type="number" class="jm-input-umur" placeholder="Umur" min="0" max="120"></td>
+    <td><input type="text" class="jm-input-riwayat-kesehatan" placeholder="-"></td>
+    <td><button type="button" class="jm-remove-row" aria-label="Hapus baris">&times;</button></td>
+  `;
+  DOM.jmManualBody.appendChild(tr);
+  tr.querySelector('.jm-remove-row').addEventListener('click', () => tr.remove());
+}
+
+function parseXlsxFile(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const wb = XLSX.read(e.target.result, { type: 'array' });
+        const sheet = wb.Sheets[wb.SheetNames[0]];
+        const json = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+        resolve(json);
+      } catch (err) {
+        reject(err);
+      }
+    };
+    reader.onerror = () => reject(new Error('Gagal membaca file.'));
+    reader.readAsArrayBuffer(file);
+  });
+}
+
+/**
+ * Bangun daftar baris mentah dari sumber yang sedang aktif (upload/manual),
+ * lalu validasi tiap baris. Mengisi JM_STATE.rows dengan hasil + status error.
+ */
+function buildAndValidateRows() {
+  const armadaByName = {};
+  const armadaById = {};
+  DATA.armada.forEach(k => {
+    armadaByName[k.nama.trim().toLowerCase()] = k.id;
+    armadaById[k.id] = k.nama;
+  });
+
+  let rawRows = [];
+
+  if (JM_STATE.source === 'upload') {
+    rawRows = JM_STATE.rows.map(r => ({
+      nama:     String(r.nama ?? '').trim(),
+      umur:     r.umur,
+      riwayatKesehatan: String(r.riwayatKesehatan ?? '').trim(),
+      armadaNama: String(r.armada ?? '').trim(),
+    }));
+  } else {
+    const selectedArmadaId = DOM.jmManualArmada.value;
+    const selectedArmadaNama = armadaById[selectedArmadaId] || '';
+    rawRows = Array.from(DOM.jmManualBody.querySelectorAll('tr')).map(tr => ({
+      nama:     tr.querySelector('.jm-input-nama').value.trim(),
+      umur:     tr.querySelector('.jm-input-umur').value,
+      riwayatKesehatan: tr.querySelector('.jm-input-riwayat-kesehatan').value.trim(),
+      armadaNama: selectedArmadaNama,
+      armadaId:   selectedArmadaId,
+    })).filter(r => r.nama || r.umur || r.riwayatKesehatan); // skip baris benar2 kosong
+  }
+
+  const validated = rawRows.map((r, idx) => {
+    const errors = [];
+    const umurNum = Number(r.umur);
+
+    if (!r.nama) errors.push('Nama kosong');
+    if (r.umur === '' || r.umur === undefined || r.umur === null) {
+      errors.push('Umur kosong');
+    } else if (!Number.isFinite(umurNum) || umurNum <= 0 || umurNum > 120) {
+      errors.push('Umur tidak valid');
+    }
+
+    let armadaId = r.armadaId || null;
+    if (!armadaId) {
+      if (!r.armadaNama) {
+        errors.push('Armada kosong');
+      } else {
+        armadaId = armadaByName[r.armadaNama.toLowerCase()];
+        if (!armadaId) errors.push(`Armada "${r.armadaNama}" tidak dikenal`);
+      }
+    }
+
+    return {
+      no: idx + 1,
+      nama: r.nama,
+      umur: umurNum,
+      riwayatKesehatan: r.riwayatKesehatan || null,
+      armadaNama: r.armadaNama || armadaById[armadaId] || '',
+      armadaId,
+      errors,
+    };
+  });
+
+  return validated;
+}
+
+function renderJmPreview(rows) {
+  const errorCount = rows.filter(r => r.errors.length > 0).length;
+
+  DOM.jmPreviewSummary.textContent = rows.length === 0
+    ? 'Tidak ada data untuk ditampilkan.'
+    : errorCount > 0
+      ? `${rows.length} baris ditemukan, ${errorCount} baris bermasalah. Perbaiki sebelum mengirim.`
+      : `${rows.length} baris siap dikirim ke database.`;
+
+  DOM.jmPreviewBody.innerHTML = rows.map(r => `
+    <tr class="${r.errors.length ? 'jm-row--error' : ''}">
+      <td>${r.no}</td>
+      <td>${escapeHtml(r.nama) || '<em>(kosong)</em>'}</td>
+      <td>${Number.isFinite(r.umur) ? r.umur : '<em>(kosong)</em>'}</td>
+      <td>${escapeHtml(r.riwayatKesehatan) || '-'}</td>
+      <td>${escapeHtml(r.armadaNama) || '<em>(kosong)</em>'}</td>
+      <td>${r.errors.length
+          ? `<span class="jm-status-error">${r.errors.join(', ')}</span>`
+          : '<span class="jm-status-ok">✓ Valid</span>'}</td>
+    </tr>
+  `).join('');
+
+  return errorCount === 0 && rows.length > 0;
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+async function handleJmPreviewClick() {
+  // Kalau sumber upload, JM_STATE.rows sudah diisi saat file dipilih.
+  // Kalau manual, validasi langsung dari DOM saat ini.
+  if (JM_STATE.source === 'manual') {
+    // tidak perlu re-fetch, buildAndValidateRows membaca langsung dari DOM
+  } else if (JM_STATE.rows.length === 0) {
+    showToast('warning', 'Belum Ada File', 'Pilih file XLSX terlebih dahulu.');
+    return;
+  }
+
+  const validated = buildAndValidateRows();
+  const allValid = renderJmPreview(validated);
+
+  JM_STATE.validatedRows = validated;
+  JM_STATE.allValid = allValid;
+
+  DOM.sopirStepSource.hidden = true;
+  DOM.sopirStepPreview.hidden = false;
+  DOM.jmBtnBack.hidden = false;
+  DOM.jmBtnPreview.hidden = true;
+  DOM.jmBtnSubmit.hidden = false;
+  DOM.jmBtnSubmit.disabled = !allValid;
+}
+
+function handleJmBackClick() {
+  DOM.sopirStepSource.hidden = false;
+  DOM.sopirStepPreview.hidden = true;
+  DOM.jmBtnBack.hidden = true;
+  DOM.jmBtnPreview.hidden = false;
+  DOM.jmBtnSubmit.hidden = true;
+}
+
+async function handleJmSubmitClick() {
+  if (!JM_STATE.allValid || !JM_STATE.validatedRows?.length) return;
+
+  const payload = JM_STATE.validatedRows.map(r => ({
+    nama: r.nama,
+    umur: r.umur,
+    riwayatKesehatan: r.riwayatKesehatan,
+    armada_id: r.armadaId,
+  }));
+
+  DOM.jmBtnSubmit.disabled = true;
+  DOM.jmBtnSubmit.textContent = 'Mengirim...';
+
+  const { data, error } = await window.RIHLAH_DB.insertSopirBulk(payload);
+
+  DOM.jmBtnSubmit.disabled = false;
+  DOM.jmBtnSubmit.textContent = 'Kirim ke Database';
+
+  if (error) {
+    showToast('error', 'Gagal Mengirim', error.message || 'Terjadi kesalahan saat menyimpan data.');
+    return;
+  }
+
+  showToast('success', 'Sopir Ditambahkan', `${payload.length} sopir berhasil ditambahkan.`);
+  closeSopirMassalModal();
+
+  if (typeof loadAppData === 'function') await loadAppData();
+}
+
+function initSopirMassalTabs() {
+  $$('.jm-source-tab[data-jmsubtab]').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.jmsubtab;
+      JM_STATE.source = target;
+
+      $$('.jm-source-tab[data-jmsubtab]').forEach(t => {
+        const active = t === tab;
+        t.classList.toggle('jm-source-tab--active', active);
+        t.setAttribute('aria-selected', active);
+      });
+
+      const uploadPanel = $('#jmPanel-upload');
+      const manualPanel = $('#jmPanel-manual');
+      uploadPanel.hidden = target !== 'upload';
+      manualPanel.hidden = target !== 'manual';
+      uploadPanel.classList.toggle('jm-panel--active', target === 'upload');
+      manualPanel.classList.toggle('jm-panel--active', target === 'manual');
+    });
+  });
+
+  DOM.jmFileInput?.addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    DOM.jmFileStatus.textContent = 'Membaca file...';
+    try {
+      const rows = await parseXlsxFile(file);
+      JM_STATE.rows = rows;
+      DOM.jmFileStatus.textContent = `${rows.length} baris terbaca dari "${file.name}".`;
+    } catch (err) {
+      JM_STATE.rows = [];
+      DOM.jmFileStatus.textContent = `Gagal membaca file: ${err.message}`;
+    }
+  });
+
+  DOM.jmAddRow?.addEventListener('click', addManualRow);
+  DOM.jmBtnPreview?.addEventListener('click', handleJmPreviewClick);
+  DOM.jmBtnBack?.addEventListener('click', handleJmBackClick);
+  DOM.jmBtnSubmit?.addEventListener('click', handleJmSubmitClick);
+}
+
+function handleHubungiK3(sopirId) {
+  const j = DATA.sopir.find(j => j.id === (sopirId || DOM.btnHubungiK3.dataset.sopirId));
   if (!j) return;
   closeAlertModal();
-  showToast('danger', 'Petugas Dihubungi', `Permintaan bantuan untuk ${j.nama} telah dikirim ke petugas kesehatan.`);
+  showToast('danger', 'Tim K3/HSE Dihubungi', `Permintaan bantuan untuk ${j.nama} telah dikirim ke tim K3/HSE.`);
 }
 
 // Expose to inline onclick
-window.handleHubungiPetugas = handleHubungiPetugas;
+window.handleHubungiK3 = handleHubungiK3;
 window.openAlertModal = openAlertModal;
 
 /* ============================================================
@@ -1202,7 +1627,7 @@ function updateTimestamp() {
    18. SIMULATED LIVE DATA (mild fluctuation every 8s)
    ============================================================ */
 function fluctuateData() {
-  DATA.jamaah.forEach(j => {
+  DATA.sopir.forEach(j => {
     if (!j.online) return;
     // Small random walk on vitals
     j.spo2 = Math.min(100, Math.max(80,  j.spo2  + (Math.random() > 0.5 ? 1 : -1)));
@@ -1242,23 +1667,23 @@ function fluctuateData() {
    19. SETTINGS ACTIONS
    ============================================================ */
 function initSettingsActions() {
-  // Daftarkan Gelang
-  if (DOM.btnDaftarGelang) {
-    DOM.btnDaftarGelang.addEventListener('click', () => {
-      const gelangId  = $('#gelangId')?.value.trim();
-      const jamaahNm  = $('#gelangJamaah')?.value.trim();
-      const kelompok  = $('#gelangKelompok')?.value;
+  // Daftarkan Smartwatch
+  if (DOM.btnDaftarSmartwatch) {
+    DOM.btnDaftarSmartwatch.addEventListener('click', () => {
+      const smartwatchId  = $('#smartwatchId')?.value.trim();
+      const sopirNm  = $('#smartwatchSopir')?.value.trim();
+      const armada  = $('#smartwatchArmada')?.value;
 
-      if (!gelangId || !jamaahNm || !kelompok) {
-        showToast('warning', 'Form Belum Lengkap', 'Harap isi semua kolom sebelum mendaftarkan gelang.');
+      if (!smartwatchId || !sopirNm || !armada) {
+        showToast('warning', 'Form Belum Lengkap', 'Harap isi semua kolom sebelum mendaftarkan smartwatch.');
         return;
       }
 
-      showToast('success', 'Gelang Terdaftar', `${gelangId} berhasil ditetapkan ke ${jamaahNm}`);
+      showToast('success', 'Smartwatch Terdaftar', `${smartwatchId} berhasil ditetapkan ke ${sopirNm}`);
       // Reset form
-      if ($('#gelangId'))       $('#gelangId').value = '';
-      if ($('#gelangJamaah'))   $('#gelangJamaah').value = '';
-      if ($('#gelangKelompok')) $('#gelangKelompok').value = '';
+      if ($('#smartwatchId'))       $('#smartwatchId').value = '';
+      if ($('#smartwatchSopir'))   $('#smartwatchSopir').value = '';
+      if ($('#smartwatchArmada')) $('#smartwatchArmada').value = '';
     });
   }
 
@@ -1269,12 +1694,10 @@ function initSettingsActions() {
     });
   }
 
-  // Tambah Ketua placeholder
-  const btnTambah = $('#btnTambahKetua');
+  // Tambah Supervisor Armada
+  const btnTambah = $('#btnTambahSupervisor');
   if (btnTambah) {
-    btnTambah.addEventListener('click', () => {
-      showToast('info', 'Segera Hadir', 'Fitur tambah ketua kelompok akan tersedia di versi berikutnya.');
-    });
+    btnTambah.addEventListener('click', openSupervisorModal);
   }
 }
 
@@ -1363,12 +1786,32 @@ function initEventListeners() {
     if (e.target === DOM.alertModal) closeAlertModal();
   });
 
-  // --- Modal Hubungi Petugas ---
-  DOM.btnHubungiPetugas?.addEventListener('click', handleHubungiPetugas);
+  // --- Modal Hubungi K3 ---
+  DOM.btnHubungiK3?.addEventListener('click', handleHubungiK3);
+
+  // --- Modal: Tambah Supervisor Armada ---
+  DOM.supervisorModalClose?.addEventListener('click',  closeSupervisorModal);
+  DOM.supervisorModalCancel?.addEventListener('click', closeSupervisorModal);
+  DOM.supervisorModal?.addEventListener('click', (e) => {
+    if (e.target === DOM.supervisorModal) closeSupervisorModal();
+  });
+  DOM.btnSimpanSupervisor?.addEventListener('click', submitSupervisorForm);
+
+  // --- Modal: Tambah Sopir Massal ---
+  DOM.btnTambahSopirMassal?.addEventListener('click', openSopirMassalModal);
+  DOM.sopirMassalClose?.addEventListener('click',  closeSopirMassalModal);
+  DOM.sopirMassalCancel?.addEventListener('click', closeSopirMassalModal);
+  DOM.sopirMassalModal?.addEventListener('click', (e) => {
+    if (e.target === DOM.sopirMassalModal) closeSopirMassalModal();
+  });
+  initSopirMassalTabs();
+  initSupervisorItemMenus();
 
   // Escape closes modal
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !DOM.alertModal.hidden) closeAlertModal();
+    if (e.key === 'Escape' && DOM.supervisorModal && !DOM.supervisorModal.hidden) closeSupervisorModal();
+    if (e.key === 'Escape' && DOM.sopirMassalModal && !DOM.sopirMassalModal.hidden) closeSopirMassalModal();
   });
 
   // --- Monitoring filters ---
@@ -1411,39 +1854,39 @@ async function loadAppData() {
 
   // Muat data dari Supabase dan update DATA global
   try {
-    const [jamaahRes, kelompokRes, alertsRes] = await Promise.all([
-      window.RIHLAH_DB.fetchJamaah(),
-      window.RIHLAH_DB.fetchKelompok(),
+    const [sopirRes, armadaRes, alertsRes] = await Promise.all([
+      window.RIHLAH_DB.fetchSopir(),
+      window.RIHLAH_DB.fetchArmada(),
       window.RIHLAH_DB.fetchActiveAlerts(),
     ]);
 
-    if (!jamaahRes.error && jamaahRes.data) {
-      // Adaptasi format Supabase → format DATA.jamaah yang dipakai renderer
-      DATA.jamaah = jamaahRes.data.map(j => ({
+    if (!sopirRes.error && sopirRes.data) {
+      // Adaptasi format Supabase → format DATA.sopir yang dipakai renderer
+      DATA.sopir = sopirRes.data.map(j => ({
         id:           j.id,
-        gelang:       j.hajj_band?.band_code || '-',
+        smartwatch:       j.smart_band?.band_code || '-',
         nama:         j.nama,
         umur:         j.umur,
-        kelompokId:   j.kelompok_id,
+        armadaId:   j.armada_id,
         status:       j.last_status || 'hijau',
-        penyakit:     j.penyakit || '-',
+        riwayatKesehatan:     j.riwayat_kesehatan || '-',
         spo2:         j.last_spo2 || 0,
         hr:           j.last_hr   || 0,
         rr:           j.last_rr   || 0,
-        online:       j.hajj_band?.is_active ?? false,
-        batt:         j.hajj_band?.battery_pct ?? 0,
+        online:       j.smart_band?.is_active ?? false,
+        batt:         j.smart_band?.battery_pct ?? 0,
         alertTerakhir: null,
         waktuAlert:   null,
-        noGelang:     j.hajj_band?.band_code || '-',
+        noSmartwatch:     j.smart_band?.band_code || '-',
       }));
     }
 
-    if (!kelompokRes.error && kelompokRes.data) {
-      DATA.kelompok = kelompokRes.data.map(k => ({
+    if (!armadaRes.error && armadaRes.data) {
+      DATA.armada = armadaRes.data.map(k => ({
         id:      k.id,
         nama:    k.nama,
-        ketua:   k.users?.short_name || '-',
-        ketuaId: k.users?.display_id || '-',
+        supervisor:   k.users?.short_name || '-',
+        supervisorId: k.users?.display_id || '-',
       }));
     }
 
@@ -1453,14 +1896,14 @@ async function loadAppData() {
     requestAnimationFrame(() => renderTrendChart());
 
     // Subscribe realtime updates
-    window.RIHLAH_DB.subscribeJamaahUpdates((payload) => {
+    window.RIHLAH_DB.subscribeSopirUpdates((payload) => {
       const updated = payload.new;
-      const idx = DATA.jamaah.findIndex(j => j.id === updated.id);
+      const idx = DATA.sopir.findIndex(j => j.id === updated.id);
       if (idx >= 0) {
-        DATA.jamaah[idx].status = updated.last_status || DATA.jamaah[idx].status;
-        DATA.jamaah[idx].spo2   = updated.last_spo2   ?? DATA.jamaah[idx].spo2;
-        DATA.jamaah[idx].hr     = updated.last_hr     ?? DATA.jamaah[idx].hr;
-        DATA.jamaah[idx].rr     = updated.last_rr     ?? DATA.jamaah[idx].rr;
+        DATA.sopir[idx].status = updated.last_status || DATA.sopir[idx].status;
+        DATA.sopir[idx].spo2   = updated.last_spo2   ?? DATA.sopir[idx].spo2;
+        DATA.sopir[idx].hr     = updated.last_hr     ?? DATA.sopir[idx].hr;
+        DATA.sopir[idx].rr     = updated.last_rr     ?? DATA.sopir[idx].rr;
         if (STATE.activePage === 'dashboard') { renderStats(); renderAlerts(); }
       }
     });
@@ -1476,7 +1919,7 @@ async function loadAppData() {
       if (STATE.activePage === 'dashboard') renderAlerts();
     });
 
-    showToast('info', 'RIHLAH Aktif', 'Sistem monitoring jamaah berjalan normal.', 4000);
+    showToast('info', 'RIHLAH Aktif', 'Sistem monitoring sopir berjalan normal.', 4000);
 
   } catch (err) {
     console.error('loadAppData error:', err);
