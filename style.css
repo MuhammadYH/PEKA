@@ -1,6 +1,6 @@
 /* ============================================================
    PEKA DASHBOARD — style.css
-   Design: Dark medical-ops palette. Deep navy base, teal accent,
+   Design: Dark medical-ops palette. Deep navy base, blue accent,
    high-contrast status colors. IBM Plex Mono for data/IDs,
    Inter for all prose. Signature: status color bleeds on cards.
    ============================================================ */
@@ -24,9 +24,9 @@
   --color-text-inverse:   #0d1117;
 
   /* --- Brand / Accent --- */
-  --color-teal:        #2dd4bf;
-  --color-teal-dim:    #1a7a6e;
-  --color-teal-glow:   rgba(45, 212, 191, 0.12);
+  --color-biru:        #3b82f6;
+  --color-biru-dim:    #1e3a8a;
+  --color-biru-glow:   rgba(59, 130, 246, 0.12);
 
   /* --- Status colors --- */
   --color-hijau:       #22c55e;
@@ -107,9 +107,9 @@
   /* --color-text-inverse stays dark — used as text on bright accent fills */
 
   /* --- Brand / Accent --- */
-  --color-teal:        #0f766e;
-  --color-teal-dim:    #ccfbf1;
-  --color-teal-glow:   rgba(15, 118, 110, 0.10);
+  --color-biru:        #1d4ed8;
+  --color-biru-dim:    #dbeafe;
+  --color-biru-glow:   rgba(29, 78, 216, 0.10);
 
   /* --- Status colors --- */
   --color-hijau:       #16a34a;
@@ -149,8 +149,8 @@
 }
 
 /* Fix: --color-text-inverse stays dark on purpose (for the bright dark-theme
-   teal), but light theme's teal is much darker, so dark-on-dark text/knobs
-   lose contrast. Force white where teal is used as a solid fill. */
+   blue), but light theme's blue is much darker, so dark-on-dark text/knobs
+   lose contrast. Force white where blue is used as a solid fill. */
 :root[data-theme="light"] .btn--primary {
   color: #ffffff;
 }
@@ -302,7 +302,7 @@ svg {
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: var(--color-teal);
+  color: var(--color-biru);
   font-family: var(--font-mono);
 }
 
@@ -351,8 +351,8 @@ svg {
 }
 
 .nav__item--active .nav__link {
-  background: var(--color-teal-glow);
-  color: var(--color-teal);
+  background: var(--color-biru-glow);
+  color: var(--color-biru);
   border: 1px solid rgba(45, 212, 191, 0.15);
 }
 
@@ -387,8 +387,8 @@ svg {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--color-teal-dim);
-  color: var(--color-teal);
+  background: var(--color-biru-dim);
+  color: var(--color-biru);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -396,7 +396,7 @@ svg {
   font-weight: 700;
   font-family: var(--font-mono);
   flex-shrink: 0;
-  border: 1px solid var(--color-teal-dim);
+  border: 1px solid var(--color-biru-dim);
 }
 
 .user__info {
@@ -533,7 +533,7 @@ svg {
 
 .topbar__theme-btn:hover {
   background: var(--color-surface-3);
-  color: var(--color-teal);
+  color: var(--color-biru);
 }
 
 .theme-icon {
@@ -693,7 +693,7 @@ svg {
 .stat-card--total {
   border-color: rgba(45, 212, 191, 0.2);
 }
-.stat-card--total .stat-card__value { color: var(--color-teal); }
+.stat-card--total .stat-card__value { color: var(--color-biru); }
 
 .stat-card--active .stat-card__value { color: var(--color-text-primary); }
 
@@ -761,14 +761,14 @@ svg {
 .btn:active { transform: scale(0.98); }
 
 .btn--primary {
-  background: var(--color-teal);
+  background: var(--color-biru);
   color: var(--color-text-inverse);
   border: 1px solid transparent;
 }
 
 .btn--primary:hover {
   filter: brightness(1.08);
-  box-shadow: 0 4px 16px var(--color-teal-glow);
+  box-shadow: 0 4px 16px var(--color-biru-glow);
 }
 
 .btn--danger {
@@ -813,13 +813,13 @@ svg {
 .btn-text {
   font-size: 12px;
   font-weight: 500;
-  color: var(--color-teal);
+  color: var(--color-biru);
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-sm);
   transition: background var(--transition-fast);
 }
 
-.btn-text:hover { background: var(--color-teal-glow); }
+.btn-text:hover { background: var(--color-biru-glow); }
 
 .btn-text--danger { color: var(--color-merah); }
 .btn-text--danger:hover { background: var(--color-merah-bg); }
@@ -1026,8 +1026,8 @@ svg {
 }
 
 .search-box:focus-within {
-  border-color: var(--color-teal);
-  box-shadow: 0 0 0 3px var(--color-teal-glow);
+  border-color: var(--color-biru);
+  box-shadow: 0 0 0 3px var(--color-biru-glow);
 }
 
 .search-box svg {
@@ -1075,9 +1075,9 @@ svg {
 
 .chip--active,
 .chip[data-filter="all"].chip--active {
-  background: var(--color-teal-glow);
-  border-color: var(--color-teal);
-  color: var(--color-teal);
+  background: var(--color-biru-glow);
+  border-color: var(--color-biru);
+  color: var(--color-biru);
 }
 
 .chip--hijau.chip--active  {
@@ -1152,8 +1152,8 @@ svg {
   font-weight: 700;
   font-family: var(--font-mono);
   letter-spacing: 0.06em;
-  background: var(--color-teal-glow);
-  color: var(--color-teal);
+  background: var(--color-biru-glow);
+  color: var(--color-biru);
   border: 1px solid rgba(45, 212, 191, 0.2);
   padding: 2px 10px;
   border-radius: 20px;
@@ -1375,8 +1375,8 @@ svg {
 .smartwatch-id {
   font-size: 10.5px;
   font-family: var(--font-mono);
-  color: var(--color-teal);
-  background: var(--color-teal-glow);
+  color: var(--color-biru);
+  background: var(--color-biru-glow);
   padding: 2px 8px;
   border-radius: 10px;
   flex-shrink: 0;
@@ -1547,7 +1547,7 @@ svg {
   gap: var(--space-2);
   font-size: 11px;
   font-weight: 600;
-  color: var(--color-teal);
+  color: var(--color-biru);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   padding: var(--space-2) 0;
@@ -1684,13 +1684,13 @@ svg {
 .settings-section__icon {
   width: 36px;
   height: 36px;
-  background: var(--color-teal-glow);
+  background: var(--color-biru-glow);
   border: 1px solid rgba(45, 212, 191, 0.15);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-teal);
+  color: var(--color-biru);
   flex-shrink: 0;
 }
 
@@ -1755,8 +1755,8 @@ svg {
 }
 
 .badge--admin {
-  background: var(--color-teal-glow);
-  color: var(--color-teal);
+  background: var(--color-biru-glow);
+  color: var(--color-biru);
   border: 1px solid rgba(45, 212, 191, 0.2);
 }
 
@@ -1816,7 +1816,7 @@ svg {
 }
 
 .settings-card--add:hover .settings-card__add-btn {
-  color: var(--color-teal);
+  color: var(--color-biru);
 }
 
 /* Supervisor List */
@@ -1953,8 +1953,8 @@ svg {
 .subtab:hover { color: var(--color-text-primary); }
 
 .subtab--active {
-  color: var(--color-teal);
-  border-bottom-color: var(--color-teal);
+  color: var(--color-biru);
+  border-bottom-color: var(--color-biru);
 }
 
 .subtab-panel {
@@ -2000,8 +2000,8 @@ svg {
 
 .form-input:focus,
 .form-select:focus {
-  border-color: var(--color-teal);
-  box-shadow: 0 0 0 3px var(--color-teal-glow);
+  border-color: var(--color-biru);
+  box-shadow: 0 0 0 3px var(--color-biru-glow);
 }
 
 .form-input--sm {
@@ -2047,7 +2047,7 @@ svg {
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 700;
-  color: var(--color-teal);
+  color: var(--color-biru);
 }
 
 .smartwatch-card__name {
@@ -2132,7 +2132,7 @@ svg {
 
 .distribusi-table td:first-child {
   font-family: var(--font-mono);
-  color: var(--color-teal);
+  color: var(--color-biru);
   font-size: 12px;
 }
 
@@ -2253,8 +2253,8 @@ svg {
 }
 
 .toggle__input:checked + .toggle__slider {
-  background: var(--color-teal);
-  border-color: var(--color-teal);
+  background: var(--color-biru);
+  border-color: var(--color-biru);
 }
 
 .toggle__input:checked + .toggle__slider::before {
@@ -2263,7 +2263,7 @@ svg {
 }
 
 .toggle__input:focus-visible + .toggle__slider {
-  box-shadow: 0 0 0 3px var(--color-teal-glow);
+  box-shadow: 0 0 0 3px var(--color-biru-glow);
 }
 
 /* Threshold grid */
@@ -2394,7 +2394,7 @@ svg {
 
 .jm-source-tab--active {
   background: var(--color-surface);
-  color: var(--color-teal);
+  color: var(--color-biru);
   box-shadow: var(--shadow-sm);
 }
 
@@ -2439,7 +2439,7 @@ svg {
 }
 
 .jm-manual-table input:focus {
-  border-color: var(--color-teal);
+  border-color: var(--color-biru);
 }
 
 .jm-manual-table .jm-remove-row {
@@ -2555,7 +2555,7 @@ svg {
 .toast--success { border-left: 3px solid var(--color-hijau); }
 .toast--warning { border-left: 3px solid var(--color-kuning); }
 .toast--danger  { border-left: 3px solid var(--color-merah); }
-.toast--info    { border-left: 3px solid var(--color-teal); }
+.toast--info    { border-left: 3px solid var(--color-biru); }
 
 .toast__icon { font-size: 16px; flex-shrink: 0; }
 
@@ -2712,7 +2712,7 @@ svg {
    21. FOCUS VISIBLE (Accessibility)
    ============================================================ */
 :focus-visible {
-  outline: 2px solid var(--color-teal);
+  outline: 2px solid var(--color-biru);
   outline-offset: 2px;
 }
 
@@ -2744,7 +2744,7 @@ button:focus:not(:focus-visible) { outline: none; }
   right: -200px;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, var(--color-teal-glow) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--color-biru-glow) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -2798,7 +2798,7 @@ button:focus:not(:focus-visible) { outline: none; }
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: var(--color-teal);
+  color: var(--color-biru);
 }
 
 .login-card__brand-tagline {
@@ -2872,14 +2872,14 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 
 .login-input:focus {
-  border-color: var(--color-teal);
+  border-color: var(--color-biru);
   background: var(--color-surface);
-  box-shadow: 0 0 0 3px var(--color-teal-glow);
+  box-shadow: 0 0 0 3px var(--color-biru-glow);
 }
 
 .login-input:focus + .login-input-icon,
 .login-input-wrap:focus-within .login-input-icon {
-  color: var(--color-teal);
+  color: var(--color-biru);
 }
 
 .login-input::placeholder {
@@ -2938,7 +2938,7 @@ button:focus:not(:focus-visible) { outline: none; }
 /* Submit button */
 .login-submit {
   width: 100%;
-  background: var(--color-teal);
+  background: var(--color-biru);
   color: var(--color-text-inverse);
   font-family: var(--font-sans);
   font-size: 14px;
@@ -2957,7 +2957,7 @@ button:focus:not(:focus-visible) { outline: none; }
 
 .login-submit:hover:not(:disabled) {
   filter: brightness(1.08);
-  box-shadow: 0 4px 16px var(--color-teal-glow);
+  box-shadow: 0 4px 16px var(--color-biru-glow);
 }
 
 .login-submit:active:not(:disabled) {
@@ -3036,7 +3036,7 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 
 .sidebar__user:hover .user__avatar {
-  border-color: var(--color-teal);
+  border-color: var(--color-biru);
 }
 
 /* Profile popup */
@@ -3069,9 +3069,9 @@ button:focus:not(:focus-visible) { outline: none; }
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--color-teal-glow);
-  color: var(--color-teal);
-  border: 1.5px solid var(--color-teal-dim);
+  background: var(--color-biru-glow);
+  color: var(--color-biru);
+  border: 1.5px solid var(--color-biru-dim);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3098,7 +3098,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .profile-popup__role {
   font-size: 10px;
   font-family: var(--font-mono);
-  color: var(--color-teal);
+  color: var(--color-biru);
   margin-top: 2px;
 }
 
@@ -3198,7 +3198,7 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 
 .profile-account-item--active {
-  background: var(--color-teal-glow);
+  background: var(--color-biru-glow);
 }
 
 .profile-account-item__avatar {
@@ -3217,8 +3217,8 @@ button:focus:not(:focus-visible) { outline: none; }
 }
 
 .profile-account-item--active .profile-account-item__avatar {
-  background: var(--color-teal-glow);
-  color: var(--color-teal);
+  background: var(--color-biru-glow);
+  color: var(--color-biru);
   border: 1px solid rgba(45, 212, 191, 0.2);
 }
 
@@ -3245,7 +3245,7 @@ button:focus:not(:focus-visible) { outline: none; }
 .profile-account-item__check {
   width: 14px;
   height: 14px;
-  color: var(--color-teal);
+  color: var(--color-biru);
   flex-shrink: 0;
 }
 
@@ -3275,11 +3275,11 @@ button:focus:not(:focus-visible) { outline: none; }
 
 .sidebar__user--open .user__chevron {
   transform: rotate(180deg);
-  color: var(--color-teal);
+  color: var(--color-biru);
 }
 
 .sidebar__user--open .user__avatar {
-  border-color: var(--color-teal);
+  border-color: var(--color-biru);
 }
 
 /* ============================================================
