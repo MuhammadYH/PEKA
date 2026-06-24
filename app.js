@@ -1618,7 +1618,7 @@ async function handleJmSubmitClick() {
   const payload = JM_STATE.validatedRows.map(r => ({
     nama: r.nama,
     umur: r.umur,
-    riwayatKesehatan: r.riwayatKesehatan,
+    riwayat_kesehatan: r.riwayatKesehatan,
     armada_id: r.armadaId,
   }));
 

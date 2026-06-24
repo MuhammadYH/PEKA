@@ -1,5 +1,5 @@
 /* ============================================================
-   RIHLAH DASHBOARD — app.js
+   PEKA DASHBOARD — app.js
    Batch 3: Full JS — data, routing, rendering, interactions
    ============================================================ */
 
@@ -89,7 +89,7 @@ function initLogin() {
     loginSubmit.classList.add('login-submit--loading');
     loginSubmit.disabled = true;
 
-    const result = await window.RIHLAH_DB.authLogin(inputId, inputPw);
+    const result = await window.PEKA_DB.authLogin(inputId, inputPw);
 
     loginSubmit.classList.remove('login-submit--loading');
     loginSubmit.disabled = false;
@@ -242,7 +242,7 @@ function initProfilePopup() {
   // Logout
   logoutBtn?.addEventListener('click', async () => {
     closePopup();
-    await window.RIHLAH_DB.authLogout();
+    await window.PEKA_DB.authLogout();
     clearSession();
     showLoginScreen();
     if (typeof showToast === 'function') {
@@ -396,6 +396,17 @@ const DOM = {
   alertModalClose:$('#alertModalClose'),
   alertModalCancel:$('#alertModalCancel'),
   btnHubungiK3: $('#btnHubungiK3'),
+
+  // Settings: Daftar Armada
+  armadaCardList:         $('#armadaCardList'),
+  btnTambahArmada:        $('#btnTambahArmada'),
+
+  // Modal: Tambah Armada
+  armadaModal:        $('#armadaModal'),
+  armadaModalClose:   $('#armadaModalClose'),
+  armadaModalCancel:  $('#armadaModalCancel'),
+  armadaNama:         $('#armadaNama'),
+  btnSimpanArmada:    $('#btnSimpanArmada'),
 
   // Modal: Tambah Supervisor
   supervisorModal:        $('#supervisorModal'),
@@ -1019,9 +1030,25 @@ function initMonitoringFilters() {
    14. SETTINGS — RENDER
    ============================================================ */
 function renderSettings() {
+  renderArmadaList();
   renderSupervisorList();
   renderSmartwatchStatus();
   renderDistribusiTable();
+}
+
+function renderArmadaList() {
+  if (!DOM.armadaCardList) return;
+
+  DOM.armadaCardList.innerHTML = DATA.armada.map(k => `
+    <div class="settings-card">
+      <div class="settings-card__body">
+        <h3 class="settings-card__name">${k.nama}</h3>
+        <p class="settings-card__detail">
+          <span>Supervisor: ${k.supervisor && k.supervisor !== '-' ? k.supervisor : 'Belum ditugaskan'}</span>
+        </p>
+      </div>
+    </div>
+  `).join('');
 }
 
 function renderSupervisorList() {
@@ -1256,6 +1283,56 @@ function closeAlertModal() {
   document.body.style.overflow = '';
 }
 
+/* ----- Modal: Tambah Armada ----- */
+function openArmadaModal() {
+  DOM.armadaNama.value = '';
+  DOM.armadaModal.hidden = false;
+  document.body.style.overflow = 'hidden';
+  DOM.armadaNama.focus();
+}
+
+function closeArmadaModal() {
+  DOM.armadaModal.hidden = true;
+  document.body.style.overflow = '';
+}
+
+async function submitArmadaForm() {
+  const nama = DOM.armadaNama.value.trim();
+
+  if (!nama) {
+    showToast('warning', 'Form Belum Lengkap', 'Harap isi nama armada sebelum menyimpan.');
+    return;
+  }
+
+  // Cegah duplikat nama armada (case-insensitive) di sisi client
+  const sudahAda = DATA.armada.some(k => k.nama.trim().toLowerCase() === nama.toLowerCase());
+  if (sudahAda) {
+    showToast('warning', 'Armada Sudah Ada', `Armada dengan nama "${nama}" sudah terdaftar.`);
+    return;
+  }
+
+  DOM.btnSimpanArmada.disabled = true;
+  DOM.btnSimpanArmada.textContent = 'Menyimpan...';
+
+  const result = await window.PEKA_DB.insertArmada(nama);
+
+  DOM.btnSimpanArmada.disabled = false;
+  DOM.btnSimpanArmada.textContent = 'Simpan';
+
+  if (result.error) {
+    showToast('error', 'Gagal Menyimpan', result.error.message || 'Gagal menambah armada.');
+    return;
+  }
+
+  showToast('success', 'Armada Ditambahkan', `"${nama}" berhasil ditambahkan.`);
+  closeArmadaModal();
+
+  // Refresh data armada dari server supaya list & dropdown ter-update
+  if (typeof loadAppData === 'function') await loadAppData();
+  renderArmadaList();
+  renderSupervisorList();
+}
+
 /* ----- Modal: Tambah Supervisor Armada ----- */
 function openSupervisorModal() {
   // Isi dropdown armada yang BELUM punya supervisor (supervisorId masih placeholder/'-')
@@ -1299,7 +1376,7 @@ async function submitSupervisorForm() {
   DOM.btnSimpanSupervisor.disabled = true;
   DOM.btnSimpanSupervisor.textContent = 'Menyimpan...';
 
-  const result = await window.RIHLAH_DB.createSupervisorArmada({
+  const result = await window.PEKA_DB.createSupervisorArmada({
     displayId, nama, shortName, password, armadaId,
   });
 
@@ -1548,7 +1625,7 @@ async function handleJmSubmitClick() {
   DOM.jmBtnSubmit.disabled = true;
   DOM.jmBtnSubmit.textContent = 'Mengirim...';
 
-  const { data, error } = await window.RIHLAH_DB.insertSopirBulk(payload);
+  const { data, error } = await window.PEKA_DB.insertSopirBulk(payload);
 
   DOM.jmBtnSubmit.disabled = false;
   DOM.jmBtnSubmit.textContent = 'Kirim ke Database';
@@ -1694,6 +1771,11 @@ function initSettingsActions() {
     });
   }
 
+  // Tambah Armada
+  if (DOM.btnTambahArmada) {
+    DOM.btnTambahArmada.addEventListener('click', openArmadaModal);
+  }
+
   // Tambah Supervisor Armada
   const btnTambah = $('#btnTambahSupervisor');
   if (btnTambah) {
@@ -1789,6 +1871,14 @@ function initEventListeners() {
   // --- Modal Hubungi K3 ---
   DOM.btnHubungiK3?.addEventListener('click', handleHubungiK3);
 
+  // --- Modal: Tambah Armada ---
+  DOM.armadaModalClose?.addEventListener('click',  closeArmadaModal);
+  DOM.armadaModalCancel?.addEventListener('click', closeArmadaModal);
+  DOM.armadaModal?.addEventListener('click', (e) => {
+    if (e.target === DOM.armadaModal) closeArmadaModal();
+  });
+  DOM.btnSimpanArmada?.addEventListener('click', submitArmadaForm);
+
   // --- Modal: Tambah Supervisor Armada ---
   DOM.supervisorModalClose?.addEventListener('click',  closeSupervisorModal);
   DOM.supervisorModalCancel?.addEventListener('click', closeSupervisorModal);
@@ -1810,6 +1900,7 @@ function initEventListeners() {
   // Escape closes modal
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !DOM.alertModal.hidden) closeAlertModal();
+    if (e.key === 'Escape' && DOM.armadaModal && !DOM.armadaModal.hidden) closeArmadaModal();
     if (e.key === 'Escape' && DOM.supervisorModal && !DOM.supervisorModal.hidden) closeSupervisorModal();
     if (e.key === 'Escape' && DOM.sopirMassalModal && !DOM.sopirMassalModal.hidden) closeSopirMassalModal();
   });
@@ -1855,9 +1946,9 @@ async function loadAppData() {
   // Muat data dari Supabase dan update DATA global
   try {
     const [sopirRes, armadaRes, alertsRes] = await Promise.all([
-      window.RIHLAH_DB.fetchSopir(),
-      window.RIHLAH_DB.fetchArmada(),
-      window.RIHLAH_DB.fetchActiveAlerts(),
+      window.PEKA_DB.fetchSopir(),
+      window.PEKA_DB.fetchArmada(),
+      window.PEKA_DB.fetchActiveAlerts(),
     ]);
 
     if (!sopirRes.error && sopirRes.data) {
@@ -1895,36 +1986,47 @@ async function loadAppData() {
     renderAlerts();
     requestAnimationFrame(() => renderTrendChart());
 
-    // Subscribe realtime updates
-    window.RIHLAH_DB.subscribeSopirUpdates((payload) => {
-      const updated = payload.new;
-      const idx = DATA.sopir.findIndex(j => j.id === updated.id);
-      if (idx >= 0) {
-        DATA.sopir[idx].status = updated.last_status || DATA.sopir[idx].status;
-        DATA.sopir[idx].spo2   = updated.last_spo2   ?? DATA.sopir[idx].spo2;
-        DATA.sopir[idx].hr     = updated.last_hr     ?? DATA.sopir[idx].hr;
-        DATA.sopir[idx].rr     = updated.last_rr     ?? DATA.sopir[idx].rr;
-        if (STATE.activePage === 'dashboard') { renderStats(); renderAlerts(); }
-      }
-    });
+    // Subscribe realtime updates — HANYA SEKALI per sesi.
+    // loadAppData() dipanggil berulang (setelah tambah armada/supervisor, dll),
+    // tapi channel realtime tidak boleh di-subscribe dua kali dengan nama yang sama.
+    subscribeRealtimeOnce();
 
-    window.RIHLAH_DB.subscribeNewAlerts((payload) => {
-      const a = payload.new;
-      showToast(
-        a.severity === 'merah' ? 'danger' : 'warning',
-        'Alert Baru',
-        a.pesan || a.nilai || 'Cek monitoring segera.',
-        6000
-      );
-      if (STATE.activePage === 'dashboard') renderAlerts();
-    });
-
-    showToast('info', 'RIHLAH Aktif', 'Sistem monitoring sopir berjalan normal.', 4000);
+    showToast('info', 'PEKA Aktif', 'Sistem monitoring sopir berjalan normal.', 4000);
 
   } catch (err) {
     console.error('loadAppData error:', err);
     showToast('warning', 'Gagal memuat data', 'Periksa koneksi internet Anda.', 5000);
   }
+}
+
+let _realtimeSubscribed = false;
+
+function subscribeRealtimeOnce() {
+  if (_realtimeSubscribed) return;
+  _realtimeSubscribed = true;
+
+  window.PEKA_DB.subscribeSopirUpdates((payload) => {
+    const updated = payload.new;
+    const idx = DATA.sopir.findIndex(j => j.id === updated.id);
+    if (idx >= 0) {
+      DATA.sopir[idx].status = updated.last_status || DATA.sopir[idx].status;
+      DATA.sopir[idx].spo2   = updated.last_spo2   ?? DATA.sopir[idx].spo2;
+      DATA.sopir[idx].hr     = updated.last_hr     ?? DATA.sopir[idx].hr;
+      DATA.sopir[idx].rr     = updated.last_rr     ?? DATA.sopir[idx].rr;
+      if (STATE.activePage === 'dashboard') { renderStats(); renderAlerts(); }
+    }
+  });
+
+  window.PEKA_DB.subscribeNewAlerts((payload) => {
+    const a = payload.new;
+    showToast(
+      a.severity === 'merah' ? 'danger' : 'warning',
+      'Alert Baru',
+      a.pesan || a.nilai || 'Cek monitoring segera.',
+      6000
+    );
+    if (STATE.activePage === 'dashboard') renderAlerts();
+  });
 }
 
 /* ============================================================
@@ -1935,11 +2037,11 @@ async function boot() {
   initProfilePopup();
 
   // Cek sesi Supabase yang masih aktif (misal: refresh halaman)
-  const session = await window.RIHLAH_DB.authGetSession();
+  const session = await window.PEKA_DB.authGetSession();
 
   if (session) {
     // Sudah login — ambil profil & langsung buka app
-    const profileRes = await window.RIHLAH_DB.fetchCurrentUserProfile();
+    const profileRes = await window.PEKA_DB.fetchCurrentUserProfile();
     if (profileRes.data) {
       _currentProfile = profileRes.data;
       saveAccount(profileRes.data);
