@@ -595,20 +595,31 @@ function computeStats() {
 }
 
 function animateCounter(el, target, duration = 700) {
-  const start = parseInt(el.textContent) || 0;
+  // Batalkan animasi sebelumnya pada elemen ini kalau masih berjalan —
+  // tanpa ini, panggilan beruntun (realtime update / interval) membuat
+  // beberapa loop requestAnimationFrame jalan bersamaan dan saling
+  // menimpa textContent, sehingga angka terlihat loncat-loncat kembali kecil.
+  if (el._counterFrame) cancelAnimationFrame(el._counterFrame);
+
+  // Pakai nilai target terakhir yang TERSIMPAN sebagai start, bukan baca dari
+  // textContent (yang bisa berada di tengah animasi / belum sinkron).
+  const start = Number.isFinite(el._counterValue) ? el._counterValue : (parseInt(el.textContent) || 0);
   const step  = (target - start) / (duration / 16);
   let current = start;
 
   const tick = () => {
     current += step;
-    if ((step > 0 && current >= target) || (step < 0 && current <= target)) {
+    if ((step > 0 && current >= target) || (step < 0 && current <= target) || step === 0) {
       el.textContent = target;
+      el._counterValue = target;
+      el._counterFrame = null;
       return;
     }
     el.textContent = Math.round(current);
-    requestAnimationFrame(tick);
+    el._counterValue = current;
+    el._counterFrame = requestAnimationFrame(tick);
   };
-  requestAnimationFrame(tick);
+  el._counterFrame = requestAnimationFrame(tick);
 }
 
 function renderStats() {
@@ -812,19 +823,6 @@ function renderMonitoring() {
   $$('.vitals-toggle').forEach(btn => {
     btn.addEventListener('click', () => toggleVitals(btn));
   });
-
-  // Pulihkan kartu yang sedang terbuka (supaya update realtime tidak menutupnya)
-  if (STATE.expandedSopir) {
-    const btn    = $(`[aria-controls="detail-${STATE.expandedSopir}"]`);
-    const detail = $(`#detail-${STATE.expandedSopir}`);
-    if (btn && detail) {
-      btn.setAttribute('aria-expanded', 'true');
-      detail.hidden = false;
-    } else {
-      // Sopir yang sebelumnya terbuka tidak lagi ada di hasil filter saat ini
-      STATE.expandedSopir = null;
-    }
-  }
 }
 
 function renderGroupBlock({ armada, members }) {
@@ -2027,7 +2025,6 @@ function subscribeRealtimeOnce() {
       DATA.sopir[idx].hr     = updated.last_hr     ?? DATA.sopir[idx].hr;
       DATA.sopir[idx].rr     = updated.last_rr     ?? DATA.sopir[idx].rr;
       if (STATE.activePage === 'dashboard') { renderStats(); renderAlerts(); }
-      if (STATE.activePage === 'monitoring') { renderMonitoring(); }
     }
   });
 

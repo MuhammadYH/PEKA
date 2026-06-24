@@ -812,6 +812,19 @@ function renderMonitoring() {
   $$('.vitals-toggle').forEach(btn => {
     btn.addEventListener('click', () => toggleVitals(btn));
   });
+
+  // Pulihkan kartu yang sedang terbuka (supaya update realtime tidak menutupnya)
+  if (STATE.expandedSopir) {
+    const btn    = $(`[aria-controls="detail-${STATE.expandedSopir}"]`);
+    const detail = $(`#detail-${STATE.expandedSopir}`);
+    if (btn && detail) {
+      btn.setAttribute('aria-expanded', 'true');
+      detail.hidden = false;
+    } else {
+      // Sopir yang sebelumnya terbuka tidak lagi ada di hasil filter saat ini
+      STATE.expandedSopir = null;
+    }
+  }
 }
 
 function renderGroupBlock({ armada, members }) {
@@ -2014,6 +2027,7 @@ function subscribeRealtimeOnce() {
       DATA.sopir[idx].hr     = updated.last_hr     ?? DATA.sopir[idx].hr;
       DATA.sopir[idx].rr     = updated.last_rr     ?? DATA.sopir[idx].rr;
       if (STATE.activePage === 'dashboard') { renderStats(); renderAlerts(); }
+      if (STATE.activePage === 'monitoring') { renderMonitoring(); }
     }
   });
 
