@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RIHLAH — Sistem Monitoring Sopir</title>
+  <title>PEKA — Sistem Monitoring Sopir</title>
   <link rel="icon" type="image/x-icon" href="assets/icons/x-favicon.ico" />
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -44,8 +44,8 @@
       <!-- Brand -->
       <div class="login-card__brand">
         <div class="login-card__logo">
-          <img class="logo-img logo-img--dark" src="assets/icons/x-darkLogo.png" alt="RIHLAH" />
-          <img class="logo-img logo-img--light" src="assets/icons/x-lightLogo.png" alt="RIHLAH" />
+          <img class="logo-img logo-img--dark" src="assets/icons/x-darkLogo.png" alt="PEKA" />
+          <img class="logo-img logo-img--light" src="assets/icons/x-lightLogo.png" alt="PEKA" />
         </div>
       </div>
 
@@ -131,8 +131,8 @@
   <aside class="sidebar" id="sidebar">
     <div class="sidebar__brand">
       <div class="brand__logo">
-        <img class="logo-img logo-img--dark" src="assets/icons/x-darkLogo.png" alt="RIHLAH" />
-        <img class="logo-img logo-img--light" src="assets/icons/x-lightLogo.png" alt="RIHLAH" />
+        <img class="logo-img logo-img--dark" src="assets/icons/x-darkLogo.png" alt="PEKA" />
+        <img class="logo-img logo-img--light" src="assets/icons/x-lightLogo.png" alt="PEKA" />
       </div>
     </div>
 
@@ -309,6 +309,12 @@
           <div class="stat-card__meta">Smartwatch terhubung</div>
         </div>
 
+        <div class="stat-card stat-card--alert">
+          <div class="stat-card__label">Alert Aktif</div>
+          <div class="stat-card__value" id="statAlert">—</div>
+          <div class="stat-card__meta">Perlu respons</div>
+        </div>
+
         <div class="stat-card stat-card--hijau">
           <div class="stat-card__indicator"></div>
           <div class="stat-card__label">Status Hijau</div>
@@ -328,12 +334,6 @@
           <div class="stat-card__label">Status Merah</div>
           <div class="stat-card__value" id="statMerah">—</div>
           <div class="stat-card__meta">Butuh penanganan segera</div>
-        </div>
-
-        <div class="stat-card stat-card--alert">
-          <div class="stat-card__label">Alert Aktif</div>
-          <div class="stat-card__value" id="statAlert">—</div>
-          <div class="stat-card__meta">Perlu respons</div>
         </div>
 
       </section>
@@ -475,11 +475,44 @@
 
       <section class="page__header">
         <h1 class="page__title">Settings</h1>
-        <p class="page__subtitle">Administrasi sistem RIHLAH</p>
+        <p class="page__subtitle">Administrasi sistem PEKA</p>
       </section>
 
       <!-- SETTINGS SECTIONS -->
       <div class="settings-container">
+
+        <!-- ARMADA -->
+        <section class="settings-section">
+          <div class="settings-section__header">
+            <div class="settings-section__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="6" width="14" height="9" rx="1.5"/>
+                <path d="M3 10h14"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="settings-section__title">Armada</h2>
+              <p class="settings-section__desc">Kelola daftar armada</p>
+            </div>
+          </div>
+
+          <div class="settings-cards" id="armadaCardList">
+            <!-- Populated by JS -->
+          </div>
+
+          <div class="settings-cards">
+            <div class="settings-card settings-card--add">
+              <button class="settings-card__add-btn" id="btnTambahArmada">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="10" cy="10" r="8"/>
+                  <line x1="10" y1="6" x2="10" y2="14"/>
+                  <line x1="6" y1="10" x2="14" y2="10"/>
+                </svg>
+                Tambah Armada
+              </button>
+            </div>
+          </div>
+        </section>
 
         <!-- AKUN -->
         <section class="settings-section">
@@ -559,7 +592,7 @@
           </div>
         </section>
 
-        <!-- SMARTWATCH RIHLAH -->
+        <!-- SMARTWATCH PEKA -->
         <section class="settings-section">
           <div class="settings-section__header">
             <div class="settings-section__icon">
@@ -570,7 +603,7 @@
               </svg>
             </div>
             <div>
-              <h2 class="settings-section__title">Smartwatch RIHLAH</h2>
+              <h2 class="settings-section__title">Smartwatch PEKA</h2>
               <p class="settings-section__desc">Registrasi, status, dan distribusi smartwatch</p>
             </div>
           </div>
@@ -768,6 +801,33 @@
   </div>
 
   <!-- ==============================
+       MODAL: TAMBAH ARMADA
+  ============================== -->
+  <div class="modal-overlay" id="armadaModal" hidden role="dialog" aria-modal="true" aria-labelledby="armadaModalTitle">
+    <div class="modal">
+      <div class="modal__header">
+        <h2 class="modal__title" id="armadaModalTitle">Tambah Armada</h2>
+        <button class="modal__close" id="armadaModalClose" aria-label="Tutup">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="5" x2="15" y2="15"/>
+            <line x1="15" y1="5" x2="5" y2="15"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal__body">
+        <div class="form-row">
+          <label class="form-label" for="armadaNama">Nama Armada</label>
+          <input type="text" class="form-input" id="armadaNama" placeholder="Contoh: Armada 4" autocomplete="off" />
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--primary" id="btnSimpanArmada">Simpan</button>
+        <button class="btn btn--secondary" id="armadaModalCancel">Batal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================
        MODAL: TAMBAH SUPERVISOR ARMADA
   ============================== -->
   <div class="modal-overlay" id="supervisorModal" hidden role="dialog" aria-modal="true" aria-labelledby="supervisorModalTitle">
@@ -915,9 +975,9 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <!-- SheetJS — untuk parsing file XLSX upload Tambah Sopir -->
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-  <!-- RIHLAH Supabase client & queries -->
+  <!-- PEKA Supabase client & queries -->
   <script src="supabase.js"></script>
-  <!-- RIHLAH App -->
+  <!-- PEKA App -->
   <script src="app.js"></script>
 </body>
 </html>

@@ -309,6 +309,12 @@
           <div class="stat-card__meta">Smartwatch terhubung</div>
         </div>
 
+        <div class="stat-card stat-card--alert">
+          <div class="stat-card__label">Alert Aktif</div>
+          <div class="stat-card__value" id="statAlert">—</div>
+          <div class="stat-card__meta">Perlu respons</div>
+        </div>
+
         <div class="stat-card stat-card--hijau">
           <div class="stat-card__indicator"></div>
           <div class="stat-card__label">Status Hijau</div>
@@ -328,12 +334,6 @@
           <div class="stat-card__label">Status Merah</div>
           <div class="stat-card__value" id="statMerah">—</div>
           <div class="stat-card__meta">Butuh penanganan segera</div>
-        </div>
-
-        <div class="stat-card stat-card--alert">
-          <div class="stat-card__label">Alert Aktif</div>
-          <div class="stat-card__value" id="statAlert">—</div>
-          <div class="stat-card__meta">Perlu respons</div>
         </div>
 
       </section>
@@ -412,6 +412,7 @@
           <button class="chip chip--hijau" data-filter="hijau">🟩 Hijau</button>
           <button class="chip chip--kuning" data-filter="kuning">🟨 Kuning</button>
           <button class="chip chip--merah" data-filter="merah">🟥 Merah</button>
+          <button class="chip chip--offline" data-filter="offline">⬜ Offline</button>
         </div>
       </section>
 

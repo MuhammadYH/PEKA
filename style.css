@@ -44,6 +44,10 @@
   --color-merah-bg:    rgba(239, 68, 68, 0.08);
   --color-merah-glow:  rgba(239, 68, 68, 0.25);
 
+  --color-offline:      #6b7280;
+  --color-offline-bg:   rgba(107, 114, 128, 0.1);
+  --color-offline-glow: rgba(107, 114, 128, 0.2);
+
   /* --- Sidebar --- */
   --sidebar-width:     240px;
   --sidebar-bg:        #0d1117;
@@ -122,6 +126,10 @@
   --color-merah-dim:   #fee2e2;
   --color-merah-bg:    rgba(220, 38, 38, 0.08);
   --color-merah-glow:  rgba(220, 38, 38, 0.20);
+
+  --color-offline:      #6b7280;
+  --color-offline-bg:   rgba(107, 114, 128, 0.10);
+  --color-offline-glow: rgba(107, 114, 128, 0.18);
 
   /* --- Sidebar (switches to light too, stays in sync with the rest) --- */
   --sidebar-bg:        #ffffff;
@@ -1090,6 +1098,12 @@ svg {
   color: var(--color-merah);
 }
 
+.chip--offline.chip--active {
+  background: var(--color-offline-bg);
+  border-color: var(--color-offline);
+  color: var(--color-offline);
+}
+
 /* ============================================================
    13. GROUP BLOCKS & SOPIR LIST
    ============================================================ */
@@ -1192,6 +1206,11 @@ svg {
   background: var(--color-merah-bg);
   border-color: rgba(239, 68, 68, 0.2);
 }
+.dot--offline {
+  color: var(--color-offline);
+  background: var(--color-offline-bg);
+  border-color: rgba(107, 114, 128, 0.2);
+}
 
 /* Sopir List */
 .sopir-list {
@@ -1216,7 +1235,24 @@ svg {
   text-align: left;
   transition: background var(--transition-fast);
   border-radius: 0;
+  position: relative;
 }
+
+.sopir-row__toggle::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: background var(--transition-fast);
+}
+
+.sopir-row[data-status="hijau"] .sopir-row__toggle::before   { background: var(--color-hijau); }
+.sopir-row[data-status="kuning"] .sopir-row__toggle::before  { background: var(--color-kuning); }
+.sopir-row[data-status="merah"] .sopir-row__toggle::before   { background: var(--color-merah); }
+.sopir-row[data-offline="true"] .sopir-row__toggle::before   { background: var(--color-offline); }
 
 .sopir-row__toggle:hover {
   background: var(--color-surface-2);
@@ -1224,6 +1260,53 @@ svg {
 
 .sopir-row__toggle[aria-expanded="true"] {
   background: var(--color-surface-2);
+}
+
+.sopir-row__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  background: var(--color-surface-3);
+  color: var(--color-text-secondary);
+  position: relative;
+}
+
+.sopir-row__avatar::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--color-surface);
+}
+
+.sopir-row[data-status="hijau"] .sopir-row__avatar::after  { background: var(--color-hijau); }
+.sopir-row[data-status="kuning"] .sopir-row__avatar::after { background: var(--color-kuning); }
+.sopir-row[data-status="merah"] .sopir-row__avatar::after  { background: var(--color-merah); animation: pulse-dot 1.5s ease-in-out infinite; }
+.sopir-row[data-offline="true"] .sopir-row__avatar::after  { background: var(--color-offline); animation: none; }
+
+.sopir-row__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sopir-row__top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
 }
 
 .status-dot {
@@ -1246,6 +1329,10 @@ svg {
   box-shadow: 0 0 8px var(--color-merah-glow);
   animation: pulse-dot 1.5s ease-in-out infinite;
 }
+.status-dot--offline {
+  background: var(--color-offline);
+  box-shadow: none;
+}
 
 @keyframes pulse-dot {
   0%, 100% { box-shadow: 0 0 0 0 var(--color-merah-glow); }
@@ -1253,33 +1340,105 @@ svg {
 }
 
 .sopir-row__name {
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--color-text-primary);
-  flex: 1;
-  min-width: 0;
-}
-
-.sopir-row__meta {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
   flex-shrink: 0;
 }
 
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 3px 9px;
+  border-radius: 20px;
+  border: 1px solid transparent;
+}
+
+.status-pill--hijau  { color: var(--color-hijau);  background: var(--color-hijau-bg);  border-color: rgba(34, 197, 94, 0.2); }
+.status-pill--kuning  { color: var(--color-kuning); background: var(--color-kuning-bg); border-color: rgba(245, 158, 11, 0.2); }
+.status-pill--merah  { color: var(--color-merah);  background: var(--color-merah-bg);  border-color: rgba(239, 68, 68, 0.2); }
+.status-pill--offline { color: var(--color-offline); background: var(--color-offline-bg); border-color: rgba(107, 114, 128, 0.2); }
+
+.status-pill__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
 .smartwatch-id {
-  font-size: 11px;
+  font-size: 10.5px;
   font-family: var(--font-mono);
   color: var(--color-teal);
   background: var(--color-teal-glow);
   padding: 2px 8px;
   border-radius: 10px;
+  flex-shrink: 0;
 }
 
-.vitals-mini {
-  font-size: 11px;
+.sopir-row__stats {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.stat-chip {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: var(--font-mono);
+}
+
+.stat-chip__label {
+  font-size: 10px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.stat-chip__value {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+.stat-chip--warn .stat-chip__value { color: var(--color-kuning); }
+.stat-chip--danger .stat-chip__value { color: var(--color-merah); }
+.stat-chip--muted .stat-chip__value { color: var(--color-text-muted); font-weight: 500; }
+
+.sopir-row__lastseen {
+  font-size: 10.5px;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.battery-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10.5px;
   font-family: var(--font-mono);
   color: var(--color-text-muted);
+}
+
+.battery-chip svg { width: 12px; height: 12px; }
+.battery-chip--low { color: var(--color-kuning); }
+
+.sopir-row__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-shrink: 0;
 }
 
 .sopir-row__chevron {
@@ -1370,6 +1529,11 @@ svg {
   background: var(--color-merah-bg);
   color: var(--color-merah);
   border: 1px solid rgba(239, 68, 68, 0.25);
+}
+.triage-badge--offline {
+  background: var(--color-offline-bg);
+  color: var(--color-offline);
+  border: 1px solid rgba(107, 114, 128, 0.25);
 }
 
 /* Vitals dropdown */
@@ -2467,7 +2631,11 @@ svg {
     grid-column: 1 / -1;
   }
 
-  .sopir-row__meta {
+  .sopir-row__stats {
+    display: none;
+  }
+
+  .sopir-row__lastseen {
     display: none;
   }
 
