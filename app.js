@@ -1788,46 +1788,6 @@ function updateTimestamp() {
 }
 
 /* ============================================================
-   18. SIMULATED LIVE DATA (mild fluctuation every 8s)
-   ============================================================ */
-function fluctuateData() {
-  DATA.sopir.forEach(j => {
-    if (!j.online) return;
-    // Small random walk on vitals
-    j.spo2 = Math.min(100, Math.max(80,  j.spo2  + (Math.random() > 0.5 ? 1 : -1)));
-    j.hr   = Math.min(150, Math.max(50,  j.hr    + Math.round((Math.random() - 0.5) * 4)));
-    j.rr   = Math.min(35,  Math.max(10,  j.rr    + (Math.random() > 0.5 ? 1 : -1)));
-
-    // Re-evaluate status
-    const prevStatus = j.status;
-    if (j.spo2 < 90 || j.hr > 115 || j.rr > 25) {
-      j.status = 'merah';
-    } else if (j.spo2 < 95 || j.hr > 100 || j.rr > 20) {
-      j.status = 'kuning';
-    } else {
-      j.status = 'hijau';
-    }
-
-    // Show toast if status escalated
-    if (prevStatus === 'hijau' && j.status === 'kuning') {
-      showToast('warning', 'Status Berubah', `${j.nama} berubah ke status Kuning`);
-      j.alertTerakhir = `Status berubah ke Kuning (SpO₂ ${j.spo2}%)`;
-      j.waktuAlert    = nowTimeString();
-    } else if (prevStatus !== 'merah' && j.status === 'merah') {
-      showToast('danger', '🚨 Status Kritis!', `${j.nama} masuk status Merah — butuh penanganan!`, 8000);
-      j.alertTerakhir = `Status kritis: SpO₂ ${j.spo2}%, HR ${j.hr}`;
-      j.waktuAlert    = nowTimeString();
-    }
-  });
-
-  // Refresh views
-  renderStats();
-  renderAlerts();
-  if (STATE.activePage === 'monitoring') renderMonitoring();
-  updateTimestamp();
-}
-
-/* ============================================================
    19. SETTINGS ACTIONS
    ============================================================ */
 function initSettingsActions() {
@@ -2164,9 +2124,6 @@ async function boot() {
 
   // Auto-refresh timestamp setiap detik
   setInterval(updateTimestamp, 1000);
-
-  // Realtime fluctuasi data (mock, hapus saat production penuh)
-  setInterval(fluctuateData, 8000);
 }
 
 // Run on DOM ready

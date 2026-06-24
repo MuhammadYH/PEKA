@@ -298,26 +298,26 @@ const DATA = {
 
   sopir: [
     // Armada 1
-    { id: 'SPR-001', smartwatch: 'SWT001', nama: 'Ahmad Fauzi',         umur: 58, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: 'Hipertensi',           spo2: 98, hr: 72,  rr: 16, online: true,  batt: 82, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '001A' },
-    { id: 'SPR-002', smartwatch: 'SWT002', nama: 'Siti Aminah',          umur: 63, armadaId: 'arm-1', status: 'kuning', riwayatKesehatan: 'Diabetes Tipe 2',      spo2: 95, hr: 88,  rr: 20, online: true,  batt: 61, alertTerakhir: 'SpO₂ turun ke 95%',      waktuAlert: '08:42',        noSmartwatch: '001B' },
-    { id: 'SPR-003', smartwatch: 'SWT003', nama: 'Yusuf Rahman',         umur: 71, armadaId: 'arm-1', status: 'merah',  riwayatKesehatan: 'Jantung Koroner',      spo2: 89, hr: 118, rr: 26, online: true,  batt: 45, alertTerakhir: 'HR melebihi 110 bpm',    waktuAlert: '09:15',        noSmartwatch: '001C' },
-    { id: 'SPR-004', smartwatch: 'SWT004', nama: 'Halimah Tusyadiah',    umur: 55, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 99, hr: 68,  rr: 14, online: true,  batt: 90, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '001D' },
-    { id: 'SPR-005', smartwatch: 'SWT005', nama: 'Ridwan Kamil',         umur: 60, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: 'Asma ringan',          spo2: 97, hr: 74,  rr: 17, online: true,  batt: 77, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '001E' },
-    { id: 'SPR-006', smartwatch: 'SWT006', nama: 'Nurul Hidayah',        umur: 49, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 98, hr: 70,  rr: 15, online: false, batt: 18, alertTerakhir: 'Smartwatch offline',          waktuAlert: '07:30',        noSmartwatch: '001F' },
+    { id: 'SPR-001', smartwatch: 'SWT001', nama: 'Ahmad Fauzi',         umur: 58, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: 'Hipertensi',           spo2: 98, hr: 72,  rr: 16, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 82, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '001A' },
+    { id: 'SPR-002', smartwatch: 'SWT002', nama: 'Siti Aminah',          umur: 63, armadaId: 'arm-1', status: 'kuning', riwayatKesehatan: 'Diabetes Tipe 2',      spo2: 95, hr: 88,  rr: 20, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 61, alertTerakhir: 'SpO₂ turun ke 95%',      waktuAlert: '08:42',        noSmartwatch: '001B' },
+    { id: 'SPR-003', smartwatch: 'SWT003', nama: 'Yusuf Rahman',         umur: 71, armadaId: 'arm-1', status: 'merah',  riwayatKesehatan: 'Jantung Koroner',      spo2: 89, hr: 118, rr: 26, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 45, alertTerakhir: 'HR melebihi 110 bpm',    waktuAlert: '09:15',        noSmartwatch: '001C' },
+    { id: 'SPR-004', smartwatch: 'SWT004', nama: 'Halimah Tusyadiah',    umur: 55, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 99, hr: 68,  rr: 14, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 90, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '001D' },
+    { id: 'SPR-005', smartwatch: 'SWT005', nama: 'Ridwan Kamil',         umur: 60, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: 'Asma ringan',          spo2: 97, hr: 74,  rr: 17, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 77, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '001E' },
+    { id: 'SPR-006', smartwatch: 'SWT006', nama: 'Nurul Hidayah',        umur: 49, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 98, hr: 70,  rr: 15, online: false,  lastReadingAt: '2026-06-23T02:46:34.000Z', batt: 18, alertTerakhir: 'Smartwatch offline',          waktuAlert: '07:30',        noSmartwatch: '001F' },
     // Armada 2
-    { id: 'SPR-007', smartwatch: 'SWT007', nama: 'Bambang Sutrisno',     umur: 67, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: 'Hipertensi',           spo2: 96, hr: 78,  rr: 18, online: true,  batt: 55, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002A' },
-    { id: 'SPR-008', smartwatch: 'SWT008', nama: 'Aisyah Putri',         umur: 52, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 99, hr: 65,  rr: 14, online: true,  batt: 93, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002B' },
-    { id: 'SPR-009', smartwatch: 'SWT009', nama: 'Darmawan Hadi',        umur: 74, armadaId: 'arm-2', status: 'kuning', riwayatKesehatan: 'Stroke Ringan',        spo2: 94, hr: 92,  rr: 21, online: true,  batt: 38, alertTerakhir: 'RR meningkat 21 bpm',     waktuAlert: '09:02',        noSmartwatch: '002C' },
-    { id: 'SPR-010', smartwatch: 'SWT010', nama: 'Sumiati',              umur: 59, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: 'Kolesterol',           spo2: 97, hr: 75,  rr: 16, online: true,  batt: 72, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002D' },
-    { id: 'SPR-011', smartwatch: 'SWT011', nama: 'Fathur Rozy',          umur: 64, armadaId: 'arm-2', status: 'merah',  riwayatKesehatan: 'Diabetes + Hipertensi', spo2: 88, hr: 125, rr: 28, online: true,  batt: 50, alertTerakhir: 'SpO₂ kritis 88%',        waktuAlert: '09:20',        noSmartwatch: '002E' },
-    { id: 'SPR-012', smartwatch: 'SWT012', nama: 'Kartini Wulandari',    umur: 56, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 98, hr: 69,  rr: 15, online: true,  batt: 84, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002F' },
+    { id: 'SPR-007', smartwatch: 'SWT007', nama: 'Bambang Sutrisno',     umur: 67, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: 'Hipertensi',           spo2: 96, hr: 78,  rr: 18, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 55, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002A' },
+    { id: 'SPR-008', smartwatch: 'SWT008', nama: 'Aisyah Putri',         umur: 52, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 99, hr: 65,  rr: 14, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 93, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002B' },
+    { id: 'SPR-009', smartwatch: 'SWT009', nama: 'Darmawan Hadi',        umur: 74, armadaId: 'arm-2', status: 'kuning', riwayatKesehatan: 'Stroke Ringan',        spo2: 94, hr: 92,  rr: 21, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 38, alertTerakhir: 'RR meningkat 21 bpm',     waktuAlert: '09:02',        noSmartwatch: '002C' },
+    { id: 'SPR-010', smartwatch: 'SWT010', nama: 'Sumiati',              umur: 59, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: 'Kolesterol',           spo2: 97, hr: 75,  rr: 16, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 72, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002D' },
+    { id: 'SPR-011', smartwatch: 'SWT011', nama: 'Fathur Rozy',          umur: 64, armadaId: 'arm-2', status: 'merah',  riwayatKesehatan: 'Diabetes + Hipertensi', spo2: 88, hr: 125, rr: 28, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 50, alertTerakhir: 'SpO₂ kritis 88%',        waktuAlert: '09:20',        noSmartwatch: '002E' },
+    { id: 'SPR-012', smartwatch: 'SWT012', nama: 'Kartini Wulandari',    umur: 56, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 98, hr: 69,  rr: 15, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 84, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002F' },
     // Armada 3
-    { id: 'SPR-013', smartwatch: 'SWT013', nama: 'Mariyam',          umur: 68, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: 'Asam Urat',            spo2: 97, hr: 71,  rr: 16, online: true,  batt: 66, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003A' },
-    { id: 'SPR-014', smartwatch: 'SWT014', nama: 'Abdul Hamid',          umur: 70, armadaId: 'arm-3', status: 'kuning', riwayatKesehatan: 'Jantung + Hipertensi', spo2: 93, hr: 96,  rr: 22, online: true,  batt: 41, alertTerakhir: 'HR 96 bpm — pantau',      waktuAlert: '08:55',        noSmartwatch: '003B' },
-    { id: 'SPR-015', smartwatch: 'SWT015', nama: 'Zainab Alatas',        umur: 61, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 99, hr: 67,  rr: 14, online: true,  batt: 89, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003C' },
-    { id: 'SPR-016', smartwatch: 'SWT016', nama: 'Mochtar Effendi',      umur: 66, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: 'Hipertensi',           spo2: 96, hr: 80,  rr: 17, online: true,  batt: 73, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003D' },
-    { id: 'SPR-017', smartwatch: 'SWT017', nama: 'Robiatul Adawiyah',    umur: 54, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 98, hr: 66,  rr: 13, online: true,  batt: 95, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003E' },
-    { id: 'SPR-018', smartwatch: 'SWT018', nama: 'Syamsuddin Latif',     umur: 72, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: 'Kolesterol + Asma',    spo2: 96, hr: 77,  rr: 18, online: false, batt: 12, alertTerakhir: 'Baterai rendah 12%',      waktuAlert: '06:50',        noSmartwatch: '003F' },
+    { id: 'SPR-013', smartwatch: 'SWT013', nama: 'Mariyam',          umur: 68, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: 'Asam Urat',            spo2: 97, hr: 71,  rr: 16, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 66, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003A' },
+    { id: 'SPR-014', smartwatch: 'SWT014', nama: 'Abdul Hamid',          umur: 70, armadaId: 'arm-3', status: 'kuning', riwayatKesehatan: 'Jantung + Hipertensi', spo2: 93, hr: 96,  rr: 22, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 41, alertTerakhir: 'HR 96 bpm — pantau',      waktuAlert: '08:55',        noSmartwatch: '003B' },
+    { id: 'SPR-015', smartwatch: 'SWT015', nama: 'Zainab Alatas',        umur: 61, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 99, hr: 67,  rr: 14, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 89, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003C' },
+    { id: 'SPR-016', smartwatch: 'SWT016', nama: 'Mochtar Effendi',      umur: 66, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: 'Hipertensi',           spo2: 96, hr: 80,  rr: 17, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 73, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003D' },
+    { id: 'SPR-017', smartwatch: 'SWT017', nama: 'Robiatul Adawiyah',    umur: 54, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 98, hr: 66,  rr: 13, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 95, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003E' },
+    { id: 'SPR-018', smartwatch: 'SWT018', nama: 'Syamsuddin Latif',     umur: 72, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: 'Kolesterol + Asma',    spo2: 96, hr: 77,  rr: 18, online: false,  lastReadingAt: '2026-06-23T02:46:34.000Z', batt: 12, alertTerakhir: 'Baterai rendah 12%',      waktuAlert: '06:50',        noSmartwatch: '003F' },
   ],
 
   // Smartwatch yang belum dibagikan
@@ -445,7 +445,34 @@ const DOM = {
    4. UTILITIES
    ============================================================ */
 function getStatusLabel(status) {
-  return { hijau: 'Hijau', kuning: 'Kuning', merah: 'Merah' }[status] || status;
+  return { hijau: 'Hijau', kuning: 'Kuning', merah: 'Merah', offline: 'Offline' }[status] || status;
+}
+
+const OFFLINE_THRESHOLD_MS = 24 * 60 * 60 * 1000; // 24 jam
+
+/**
+ * Tentukan apakah sopir offline: TIDAK ada perubahan data (vital_readings)
+ * selama 24 jam terakhir, dihitung dari last_reading_at.
+ * Jika last_reading_at tidak ada sama sekali, dianggap offline (belum pernah lapor).
+ */
+function isSopirOffline(lastReadingAt) {
+  if (!lastReadingAt) return true;
+  const last = new Date(lastReadingAt).getTime();
+  if (Number.isNaN(last)) return true;
+  return (Date.now() - last) > OFFLINE_THRESHOLD_MS;
+}
+
+function formatLastSeen(lastReadingAt) {
+  if (!lastReadingAt) return 'Belum ada data';
+  const diffMs = Date.now() - new Date(lastReadingAt).getTime();
+  if (Number.isNaN(diffMs)) return 'Belum ada data';
+  const mins = Math.floor(diffMs / 60000);
+  if (mins < 1)   return 'Baru saja';
+  if (mins < 60)  return `${mins} menit lalu`;
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24)   return `${hrs} jam lalu`;
+  const days = Math.floor(hrs / 24);
+  return `${days} hari lalu`;
 }
 
 function getStatusEmoji(status) {
@@ -791,9 +818,11 @@ function renderMonitoring() {
   const query  = STATE.searchQuery.toLowerCase().trim();
   const filter = STATE.filterStatus;
 
-  // Filter sopir
+  // Filter sopir — gunakan status tampilan (offline-aware), bukan status mentah,
+  // supaya sopir yang offline tidak ikut masuk filter warna kesehatan yang sudah usang.
   let filtered = DATA.sopir.filter(j => {
-    const matchStatus = filter === 'all' || j.status === filter;
+    const displayStatus = isSopirOffline(j.lastReadingAt) ? 'offline' : j.status;
+    const matchStatus = filter === 'all' || displayStatus === filter;
     const matchSearch = !query || j.nama.toLowerCase().includes(query) || j.smartwatch.toLowerCase().includes(query);
     return matchStatus && matchSearch;
   });
@@ -826,9 +855,10 @@ function renderMonitoring() {
 }
 
 function renderGroupBlock({ armada, members }) {
-  const hijauC  = members.filter(m => m.status === 'hijau').length;
-  const kuningC = members.filter(m => m.status === 'kuning').length;
-  const merahC  = members.filter(m => m.status === 'merah').length;
+  const hijauC   = members.filter(m => m.status === 'hijau'  && !isSopirOffline(m.lastReadingAt)).length;
+  const kuningC  = members.filter(m => m.status === 'kuning' && !isSopirOffline(m.lastReadingAt)).length;
+  const merahC   = members.filter(m => m.status === 'merah'  && !isSopirOffline(m.lastReadingAt)).length;
+  const offlineC = members.filter(m => isSopirOffline(m.lastReadingAt)).length;
 
   return `
     <div class="group-block" data-group="${armada.id}">
@@ -843,6 +873,7 @@ function renderGroupBlock({ armada, members }) {
             <span class="dot dot--hijau">${hijauC}</span>
             <span class="dot dot--kuning">${kuningC}</span>
             <span class="dot dot--merah">${merahC}</span>
+            ${offlineC > 0 ? `<span class="dot dot--offline">${offlineC}</span>` : ''}
           </span>
         </div>
       </div>
@@ -853,28 +884,64 @@ function renderGroupBlock({ armada, members }) {
   `;
 }
 
+function getInitials(nama) {
+  if (!nama) return '?';
+  const parts = nama.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+
 function renderSopirRow(j) {
-  const klp = getArmada(j.armadaId);
+  const klp     = getArmada(j.armadaId);
+  const offline = isSopirOffline(j.lastReadingAt);
+  // Saat offline, tampilan status netral (abu-abu) — tidak menampilkan warna triase
+  // lama yang sudah tidak relevan karena data tidak lagi mengalir.
+  const displayStatus = offline ? 'offline' : j.status;
+
+  const spo2Class = offline ? 'stat-chip--muted' : (j.spo2 < 90 ? 'stat-chip--danger' : j.spo2 < 95 ? 'stat-chip--warn' : '');
+  const hrClass   = offline ? 'stat-chip--muted' : (j.hr > 115 ? 'stat-chip--danger' : j.hr > 100 ? 'stat-chip--warn' : '');
+  const rrClass   = offline ? 'stat-chip--muted' : (j.rr > 25 ? 'stat-chip--danger' : j.rr > 20 ? 'stat-chip--warn' : '');
+
   return `
-    <li class="sopir-row" data-id="${j.id}" data-status="${j.status}">
+    <li class="sopir-row" data-id="${j.id}" data-status="${displayStatus}" data-offline="${offline}">
       <button class="sopir-row__toggle" 
               aria-expanded="false" 
               aria-controls="detail-${j.id}"
               data-id="${j.id}">
-        <span class="status-dot status-dot--${j.status}" 
-              aria-label="Status ${getStatusLabel(j.status)}"></span>
-        <span class="sopir-row__name">${j.nama}</span>
-        <span class="sopir-row__meta">
-          <span class="smartwatch-id">${j.smartwatch}</span>
-          <span class="vitals-mini">
-            SpO₂ ${j.spo2}% &nbsp;·&nbsp; HR ${j.hr}
-            ${!j.online ? ' &nbsp;·&nbsp; <span style="color:var(--color-text-muted)">Offline</span>' : ''}
+        <span class="sopir-row__avatar">${getInitials(j.nama)}</span>
+
+        <span class="sopir-row__body">
+          <span class="sopir-row__top">
+            <span class="sopir-row__name">${j.nama}</span>
+            <span class="status-pill status-pill--${displayStatus}">
+              <span class="status-pill__dot"></span>
+              ${getStatusLabel(displayStatus)}
+            </span>
+            <span class="smartwatch-id">${j.smartwatch}</span>
+          </span>
+          <span class="sopir-row__stats">
+            <span class="stat-chip ${spo2Class}">
+              <span class="stat-chip__label">SpO₂</span>
+              <span class="stat-chip__value">${offline ? '—' : j.spo2 + '%'}</span>
+            </span>
+            <span class="stat-chip ${hrClass}">
+              <span class="stat-chip__label">HR</span>
+              <span class="stat-chip__value">${offline ? '—' : j.hr}</span>
+            </span>
+            <span class="stat-chip ${rrClass}">
+              <span class="stat-chip__label">RR</span>
+              <span class="stat-chip__value">${offline ? '—' : j.rr}</span>
+            </span>
           </span>
         </span>
-        <span class="sopir-row__chevron">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M4 6l4 4 4-4"/>
-          </svg>
+
+        <span class="sopir-row__right">
+          <span class="sopir-row__lastseen">${formatLastSeen(j.lastReadingAt)}</span>
+          <span class="sopir-row__chevron">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 6l4 4 4-4"/>
+            </svg>
+          </span>
         </span>
       </button>
 
@@ -904,8 +971,8 @@ function renderSopirRow(j) {
           </div>
           <div class="detail-row">
             <span class="detail-row__key">Koneksi</span>
-            <span class="detail-row__val" style="color:${j.online ? 'var(--color-hijau)' : 'var(--color-text-muted)'}">
-              ${j.online ? 'Online' : 'Offline'}
+            <span class="detail-row__val" style="color:${offline ? 'var(--color-offline)' : 'var(--color-hijau)'}">
+              ${offline ? 'Offline' : 'Online'} · ${formatLastSeen(j.lastReadingAt)}
             </span>
           </div>
         </div>
@@ -915,8 +982,14 @@ function renderSopirRow(j) {
           <div class="detail-section__title">Kondisi Kesehatan</div>
           <div class="detail-row">
             <span class="detail-row__key">Status Triase</span>
-            <span class="triage-badge triage-badge--${j.status}">${getStatusLabel(j.status)}</span>
+            <span class="triage-badge triage-badge--${displayStatus}">${getStatusLabel(displayStatus)}</span>
           </div>
+          ${offline ? `
+          <div class="detail-row" style="grid-column:1/-1">
+            <span class="detail-row__val" style="color:var(--color-text-muted);font-family:var(--font-sans);font-size:12px;font-weight:400;text-align:left">
+              Tidak ada data baru selama lebih dari 24 jam — status kesehatan terakhir tidak ditampilkan karena mungkin sudah tidak akurat.
+            </span>
+          </div>` : ''}
           <div class="detail-row">
             <span class="detail-row__key">Riwayat Kesehatan</span>
             <span class="detail-row__val" style="font-family:var(--font-sans);font-size:12px;text-align:right">${j.riwayatKesehatan}</span>
@@ -935,21 +1008,24 @@ function renderSopirRow(j) {
             Detail Medis
           </button>
           <div class="vitals-content" id="vitals-${j.id}" hidden>
-            <div class="vital-card ${getVitalClass('spo2', j.spo2)}">
+            <div class="vital-card ${offline ? '' : getVitalClass('spo2', j.spo2)}">
               <span class="vital-card__label">SpO₂</span>
               <span class="vital-card__value">${j.spo2}</span>
               <span class="vital-card__unit">%</span>
             </div>
-            <div class="vital-card ${getVitalClass('hr', j.hr)}">
+            <div class="vital-card ${offline ? '' : getVitalClass('hr', j.hr)}">
               <span class="vital-card__label">Heart Rate</span>
               <span class="vital-card__value">${j.hr}</span>
               <span class="vital-card__unit">bpm</span>
             </div>
-            <div class="vital-card ${getVitalClass('rr', j.rr)}">
+            <div class="vital-card ${offline ? '' : getVitalClass('rr', j.rr)}">
               <span class="vital-card__label">Resp. Rate</span>
               <span class="vital-card__value">${j.rr}</span>
               <span class="vital-card__unit">bpm</span>
             </div>
+            ${offline ? `<div style="grid-column:1/-1;font-size:11px;color:var(--color-text-muted);font-family:var(--font-sans)">
+              Nilai di atas adalah pembacaan terakhir (${formatLastSeen(j.lastReadingAt)}), kemungkinan sudah tidak mencerminkan kondisi terkini.
+            </div>` : ''}
           </div>
         </div>
 
@@ -1975,7 +2051,9 @@ async function loadAppData() {
         spo2:         j.last_spo2 || 0,
         hr:           j.last_hr   || 0,
         rr:           j.last_rr   || 0,
-        online:       j.smart_band?.is_active ?? false,
+        // Offline = tidak ada data baru (vital_readings) selama 24 jam terakhir
+        lastReadingAt: j.last_reading_at || null,
+        online:       !isSopirOffline(j.last_reading_at),
         batt:         j.smart_band?.battery_pct ?? 0,
         alertTerakhir: null,
         waktuAlert:   null,
@@ -2024,7 +2102,12 @@ function subscribeRealtimeOnce() {
       DATA.sopir[idx].spo2   = updated.last_spo2   ?? DATA.sopir[idx].spo2;
       DATA.sopir[idx].hr     = updated.last_hr     ?? DATA.sopir[idx].hr;
       DATA.sopir[idx].rr     = updated.last_rr     ?? DATA.sopir[idx].rr;
+      if (updated.last_reading_at) {
+        DATA.sopir[idx].lastReadingAt = updated.last_reading_at;
+        DATA.sopir[idx].online        = !isSopirOffline(updated.last_reading_at);
+      }
       if (STATE.activePage === 'dashboard') { renderStats(); renderAlerts(); }
+      if (STATE.activePage === 'monitoring') { renderMonitoring(); }
     }
   });
 

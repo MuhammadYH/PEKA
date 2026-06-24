@@ -2625,10 +2625,24 @@ svg {
 
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
   }
 
-  .stats-grid .stat-card:last-child {
-    grid-column: 1 / -1;
+  .stat-card {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .stat-card__label {
+    margin-bottom: var(--space-2);
+  }
+
+  .stat-card__value {
+    font-size: 26px;
+    margin-bottom: var(--space-1);
+  }
+
+  .stat-card__meta {
+    font-size: 10px;
   }
 
   .sopir-row__stats {
@@ -2681,14 +2695,6 @@ svg {
 }
 
 @media (max-width: 480px) {
-  .stats-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .stats-grid .stat-card:last-child {
-    grid-column: auto;
-  }
-
   .quick-actions {
     flex-direction: column;
   }
