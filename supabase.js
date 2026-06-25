@@ -187,6 +187,8 @@ async function fetchSopir() {
       last_rr,
       last_status,
       last_reading_at,
+      last_lat,
+      last_lng,
       armada:armada_id ( nama ),
       smart_band:smart_band_id ( band_code, is_active, battery_pct, last_seen_at )
     `)
@@ -213,6 +215,8 @@ async function fetchSopirById(sopirId) {
       last_rr,
       last_status,
       last_reading_at,
+      last_lat,
+      last_lng,
       armada:armada_id ( nama ),
       smart_band:smart_band_id ( band_code, is_active, battery_pct, last_seen_at )
     `)
@@ -314,10 +318,11 @@ async function fetchLatestVitalsAll() {
  * create or replace function get_latest_vitals()
  * returns table (
  *   sopir_id uuid, spo2 smallint, hr smallint,
- *   rr smallint, battery_pct smallint, recorded_at timestamptz
+ *   rr smallint, battery_pct smallint, lat double precision,
+ *   lng double precision, recorded_at timestamptz
  * ) language sql security definer as $$
  *   select distinct on (sopir_id)
- *     sopir_id, spo2, hr, rr, battery_pct, recorded_at
+ *     sopir_id, spo2, hr, rr, battery_pct, lat, lng, recorded_at
  *   from vital_readings
  *   order by sopir_id, recorded_at desc;
  * $$;
@@ -389,6 +394,83 @@ async function fetchAlertsBySopir(sopirId, limit = 30) {
     .limit(limit);
 
   return { data, error };
+}
+
+/* ============================================================
+   SOS — Penekanan tombol darurat dari smart band
+   ============================================================ */
+
+/**
+ * Ambil semua SOS yang masih aktif (belum resolved), terbaru duluan.
+ * Dipakai untuk banner SOS saat dashboard pertama dimuat / refresh,
+ * supaya SOS yang sudah aktif sebelum halaman dibuka tetap terlihat.
+ */
+async function fetchActiveSosEvents() {
+  const { data, error } = await db
+    .from('sos_events')
+    .select(`
+      id,
+      sopir_id,
+      lat,
+      lng,
+      spo2,
+      hr,
+      rr,
+      created_at,
+      sopir:sopir_id ( id, nama, armada_id,
+        armada:armada_id ( nama )
+      )
+    `)
+    .eq('is_resolved', false)
+    .order('created_at', { ascending: false });
+
+  return { data, error };
+}
+
+/**
+ * Tandai SOS sebagai sudah ditangani/diselesaikan.
+ * @param {number} sosEventId
+ * @param {string|null} catatan — catatan penanganan (opsional)
+ */
+async function resolveSos(sosEventId, catatan = null) {
+  const { error } = await db.rpc('resolve_sos', {
+    p_sos_event_id: sosEventId,
+    p_catatan: catatan,
+  });
+  return { error };
+}
+
+/**
+ * Subscribe ke SOS baru (INSERT di sos_events) — realtime.
+ * @param {function} onInsert — dipanggil dengan payload perubahan
+ * @returns channel
+ */
+function subscribeNewSos(onInsert) {
+  return db
+    .channel('new-sos')
+    .on('postgres_changes', {
+      event:  'INSERT',
+      schema: 'public',
+      table:  'sos_events',
+    }, onInsert)
+    .subscribe();
+}
+
+/**
+ * Subscribe ke perubahan status SOS (mis. di-resolve dari device/admin lain)
+ * — supaya banner SOS otomatis hilang di semua client begitu ditangani.
+ * @param {function} onUpdate
+ * @returns channel
+ */
+function subscribeSosResolved(onUpdate) {
+  return db
+    .channel('sos-resolved')
+    .on('postgres_changes', {
+      event:  'UPDATE',
+      schema: 'public',
+      table:  'sos_events',
+    }, onUpdate)
+    .subscribe();
 }
 
 /* ============================================================
@@ -485,9 +567,15 @@ window.PEKA_DB = {
   resolveAlert,
   fetchAlertsBySopir,
 
+  // SOS
+  fetchActiveSosEvents,
+  resolveSos,
+
   // Realtime
   subscribeSopirUpdates,
   subscribeNewAlerts,
+  subscribeNewSos,
+  subscribeSosResolved,
   unsubscribe,
 
   // Helpers

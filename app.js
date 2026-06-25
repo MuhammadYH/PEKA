@@ -298,26 +298,26 @@ const DATA = {
 
   sopir: [
     // Armada 1
-    { id: 'SPR-001', smartwatch: 'SWT001', nama: 'Ahmad Fauzi',         umur: 58, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: 'Hipertensi',           spo2: 98, hr: 72,  rr: 16, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 82, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '001A' },
-    { id: 'SPR-002', smartwatch: 'SWT002', nama: 'Siti Aminah',          umur: 63, armadaId: 'arm-1', status: 'kuning', riwayatKesehatan: 'Diabetes Tipe 2',      spo2: 95, hr: 88,  rr: 20, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 61, alertTerakhir: 'SpO₂ turun ke 95%',      waktuAlert: '08:42',        noSmartwatch: '001B' },
-    { id: 'SPR-003', smartwatch: 'SWT003', nama: 'Yusuf Rahman',         umur: 71, armadaId: 'arm-1', status: 'merah',  riwayatKesehatan: 'Jantung Koroner',      spo2: 89, hr: 118, rr: 26, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 45, alertTerakhir: 'HR melebihi 110 bpm',    waktuAlert: '09:15',        noSmartwatch: '001C' },
-    { id: 'SPR-004', smartwatch: 'SWT004', nama: 'Halimah Tusyadiah',    umur: 55, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 99, hr: 68,  rr: 14, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 90, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '001D' },
-    { id: 'SPR-005', smartwatch: 'SWT005', nama: 'Ridwan Kamil',         umur: 60, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: 'Asma ringan',          spo2: 97, hr: 74,  rr: 17, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 77, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '001E' },
-    { id: 'SPR-006', smartwatch: 'SWT006', nama: 'Nurul Hidayah',        umur: 49, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 98, hr: 70,  rr: 15, online: false,  lastReadingAt: '2026-06-23T02:46:34.000Z', batt: 18, alertTerakhir: 'Smartwatch offline',          waktuAlert: '07:30',        noSmartwatch: '001F' },
+    { id: 'SPR-001', smartwatch: 'SWT001', nama: 'Ahmad Fauzi',         umur: 58, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: 'Hipertensi',           spo2: 98, hr: 72,  rr: 16, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 82, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '001A', lokasi: { lat: -7.6967, lng: 112.5594, label: 'Jl. Raya Pacet KM 12, Mojokerto' } },
+    { id: 'SPR-002', smartwatch: 'SWT002', nama: 'Siti Aminah',          umur: 63, armadaId: 'arm-1', status: 'kuning', riwayatKesehatan: 'Diabetes Tipe 2',      spo2: 95, hr: 88,  rr: 20, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 61, alertTerakhir: 'SpO₂ turun ke 95%',      waktuAlert: '08:42',        noSmartwatch: '001B', lokasi: { lat: -7.4664, lng: 112.4339, label: 'Terminal Kertajaya, Mojokerto' } },
+    { id: 'SPR-003', smartwatch: 'SWT003', nama: 'Yusuf Rahman',         umur: 71, armadaId: 'arm-1', status: 'merah',  riwayatKesehatan: 'Jantung Koroner',      spo2: 89, hr: 118, rr: 26, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 45, alertTerakhir: 'HR melebihi 110 bpm',    waktuAlert: '09:15',        noSmartwatch: '001C', lokasi: { lat: -7.5460, lng: 112.2351, label: 'Jl. Raya Jombang - Mojokerto' } },
+    { id: 'SPR-004', smartwatch: 'SWT004', nama: 'Halimah Tusyadiah',    umur: 55, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 99, hr: 68,  rr: 14, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 90, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '001D', lokasi: { lat: -7.2575, lng: 112.7521, label: 'Jl. Ahmad Yani, Surabaya' } },
+    { id: 'SPR-005', smartwatch: 'SWT005', nama: 'Ridwan Kamil',         umur: 60, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: 'Asma ringan',          spo2: 97, hr: 74,  rr: 17, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 77, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '001E', lokasi: { lat: -7.6478, lng: 112.7028, label: 'Jl. Raya Pandaan, Pasuruan' } },
+    { id: 'SPR-006', smartwatch: 'SWT006', nama: 'Nurul Hidayah',        umur: 49, armadaId: 'arm-1', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 98, hr: 70,  rr: 15, online: false,  lastReadingAt: '2026-06-23T02:46:34.000Z', batt: 18, alertTerakhir: 'Smartwatch offline',          waktuAlert: '07:30',        noSmartwatch: '001F', lokasi: { lat: -7.4478, lng: 112.7183, label: 'Jl. Lingkar Timur, Sidoarjo (lokasi terakhir sebelum offline)' } },
     // Armada 2
-    { id: 'SPR-007', smartwatch: 'SWT007', nama: 'Bambang Sutrisno',     umur: 67, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: 'Hipertensi',           spo2: 96, hr: 78,  rr: 18, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 55, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002A' },
-    { id: 'SPR-008', smartwatch: 'SWT008', nama: 'Aisyah Putri',         umur: 52, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 99, hr: 65,  rr: 14, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 93, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002B' },
-    { id: 'SPR-009', smartwatch: 'SWT009', nama: 'Darmawan Hadi',        umur: 74, armadaId: 'arm-2', status: 'kuning', riwayatKesehatan: 'Stroke Ringan',        spo2: 94, hr: 92,  rr: 21, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 38, alertTerakhir: 'RR meningkat 21 bpm',     waktuAlert: '09:02',        noSmartwatch: '002C' },
-    { id: 'SPR-010', smartwatch: 'SWT010', nama: 'Sumiati',              umur: 59, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: 'Kolesterol',           spo2: 97, hr: 75,  rr: 16, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 72, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002D' },
-    { id: 'SPR-011', smartwatch: 'SWT011', nama: 'Fathur Rozy',          umur: 64, armadaId: 'arm-2', status: 'merah',  riwayatKesehatan: 'Diabetes + Hipertensi', spo2: 88, hr: 125, rr: 28, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 50, alertTerakhir: 'SpO₂ kritis 88%',        waktuAlert: '09:20',        noSmartwatch: '002E' },
-    { id: 'SPR-012', smartwatch: 'SWT012', nama: 'Kartini Wulandari',    umur: 56, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 98, hr: 69,  rr: 15, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 84, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002F' },
+    { id: 'SPR-007', smartwatch: 'SWT007', nama: 'Bambang Sutrisno',     umur: 67, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: 'Hipertensi',           spo2: 96, hr: 78,  rr: 18, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 55, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002A', lokasi: { lat: -7.1547, lng: 112.6532, label: 'Jl. Raya Gresik - Surabaya' } },
+    { id: 'SPR-008', smartwatch: 'SWT008', nama: 'Aisyah Putri',         umur: 52, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 99, hr: 65,  rr: 14, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 93, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002B', lokasi: { lat: -7.2459, lng: 112.6437, label: 'Jl. Mastrip, Surabaya Barat' } },
+    { id: 'SPR-009', smartwatch: 'SWT009', nama: 'Darmawan Hadi',        umur: 74, armadaId: 'arm-2', status: 'kuning', riwayatKesehatan: 'Stroke Ringan',        spo2: 94, hr: 92,  rr: 21, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 38, alertTerakhir: 'RR meningkat 21 bpm',     waktuAlert: '09:02',        noSmartwatch: '002C', lokasi: { lat: -7.6453, lng: 112.9075, label: 'Jl. Raya Pasuruan - Probolinggo' } },
+    { id: 'SPR-010', smartwatch: 'SWT010', nama: 'Sumiati',              umur: 59, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: 'Kolesterol',           spo2: 97, hr: 75,  rr: 16, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 72, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002D', lokasi: { lat: -7.7543, lng: 113.2159, label: 'Terminal Bayuangga, Probolinggo' } },
+    { id: 'SPR-011', smartwatch: 'SWT011', nama: 'Fathur Rozy',          umur: 64, armadaId: 'arm-2', status: 'merah',  riwayatKesehatan: 'Diabetes + Hipertensi', spo2: 88, hr: 125, rr: 28, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 50, alertTerakhir: 'SpO₂ kritis 88%',        waktuAlert: '09:20',        noSmartwatch: '002E', lokasi: { lat: -7.9925, lng: 112.6309, label: 'Jl. Veteran, Kota Malang' } },
+    { id: 'SPR-012', smartwatch: 'SWT012', nama: 'Kartini Wulandari',    umur: 56, armadaId: 'arm-2', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 98, hr: 69,  rr: 15, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 84, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '002F', lokasi: { lat: -7.9666, lng: 112.6326, label: 'Terminal Arjosari, Malang' } },
     // Armada 3
-    { id: 'SPR-013', smartwatch: 'SWT013', nama: 'Mariyam',          umur: 68, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: 'Asam Urat',            spo2: 97, hr: 71,  rr: 16, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 66, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003A' },
-    { id: 'SPR-014', smartwatch: 'SWT014', nama: 'Abdul Hamid',          umur: 70, armadaId: 'arm-3', status: 'kuning', riwayatKesehatan: 'Jantung + Hipertensi', spo2: 93, hr: 96,  rr: 22, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 41, alertTerakhir: 'HR 96 bpm — pantau',      waktuAlert: '08:55',        noSmartwatch: '003B' },
-    { id: 'SPR-015', smartwatch: 'SWT015', nama: 'Zainab Alatas',        umur: 61, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 99, hr: 67,  rr: 14, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 89, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003C' },
-    { id: 'SPR-016', smartwatch: 'SWT016', nama: 'Mochtar Effendi',      umur: 66, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: 'Hipertensi',           spo2: 96, hr: 80,  rr: 17, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 73, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003D' },
-    { id: 'SPR-017', smartwatch: 'SWT017', nama: 'Robiatul Adawiyah',    umur: 54, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 98, hr: 66,  rr: 13, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 95, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003E' },
-    { id: 'SPR-018', smartwatch: 'SWT018', nama: 'Syamsuddin Latif',     umur: 72, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: 'Kolesterol + Asma',    spo2: 96, hr: 77,  rr: 18, online: false,  lastReadingAt: '2026-06-23T02:46:34.000Z', batt: 12, alertTerakhir: 'Baterai rendah 12%',      waktuAlert: '06:50',        noSmartwatch: '003F' },
+    { id: 'SPR-013', smartwatch: 'SWT013', nama: 'Mariyam',          umur: 68, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: 'Asam Urat',            spo2: 97, hr: 71,  rr: 16, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 66, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003A', lokasi: { lat: -7.3358, lng: 112.7298, label: 'Jl. Raya Krian, Sidoarjo' } },
+    { id: 'SPR-014', smartwatch: 'SWT014', nama: 'Abdul Hamid',          umur: 70, armadaId: 'arm-3', status: 'kuning', riwayatKesehatan: 'Jantung + Hipertensi', spo2: 93, hr: 96,  rr: 22, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 41, alertTerakhir: 'HR 96 bpm — pantau',      waktuAlert: '08:55',        noSmartwatch: '003B', lokasi: { lat: -7.1942, lng: 112.5806, label: 'Jl. Raya Driyorejo, Gresik' } },
+    { id: 'SPR-015', smartwatch: 'SWT015', nama: 'Zainab Alatas',        umur: 61, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 99, hr: 67,  rr: 14, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 89, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003C', lokasi: { lat: -7.4724, lng: 112.4858, label: 'Jl. Raya Mojosari, Mojokerto' } },
+    { id: 'SPR-016', smartwatch: 'SWT016', nama: 'Mochtar Effendi',      umur: 66, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: 'Hipertensi',           spo2: 96, hr: 80,  rr: 17, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 73, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003D', lokasi: { lat: -7.5483, lng: 112.2384, label: 'Terminal Kepuhsari, Jombang' } },
+    { id: 'SPR-017', smartwatch: 'SWT017', nama: 'Robiatul Adawiyah',    umur: 54, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: '-',                    spo2: 98, hr: 66,  rr: 13, online: true,  lastReadingAt: '2026-06-24T08:41:34.000Z',  batt: 95, alertTerakhir: null,                       waktuAlert: null,           noSmartwatch: '003E', lokasi: { lat: -7.6967, lng: 112.5594, label: 'Jl. Raya Pacet KM 8, Mojokerto' } },
+    { id: 'SPR-018', smartwatch: 'SWT018', nama: 'Syamsuddin Latif',     umur: 72, armadaId: 'arm-3', status: 'hijau',  riwayatKesehatan: 'Kolesterol + Asma',    spo2: 96, hr: 77,  rr: 18, online: false,  lastReadingAt: '2026-06-23T02:46:34.000Z', batt: 12, alertTerakhir: 'Baterai rendah 12%',      waktuAlert: '06:50',        noSmartwatch: '003F', lokasi: { lat: -7.4664, lng: 112.4339, label: 'Terminal Kertajaya, Mojokerto (lokasi terakhir sebelum offline)' } },
   ],
 
   // Smartwatch yang belum dibagikan
@@ -333,6 +333,9 @@ const DATA = {
     { hari: 'Sab', hijau: 13, kuning: 3, merah: 2 },
     { hari: 'Min', hijau: 12, kuning: 4, merah: 2 },
   ],
+
+  // SOS aktif — diisi dari Supabase (sos_events, is_resolved = false)
+  sosEvents: [],
 };
 
 /* ============================================================
@@ -363,6 +366,16 @@ const DOM = {
   alertBadge:     $('#alertBadge'),
   alertBellBtn:   $('#alertBellBtn'),
   themeToggleBtn: $('#themeToggleBtn'),
+
+  // SOS
+  sosBanner:      $('#sosBanner'),
+  sosBannerList:  $('#sosBannerList'),
+  sosBannerCount: $('#sosBannerCount'),
+  sosModal:       $('#sosModal'),
+  sosModalBody:   $('#sosModalBody'),
+  sosModalClose:  $('#sosModalClose'),
+  btnResolveSos:  $('#btnResolveSos'),
+  btnHubungiSosK3:$('#btnHubungiSosK3'),
 
   // Dashboard
   statTotal:      $('#statTotal'),
@@ -479,6 +492,20 @@ function getStatusEmoji(status) {
   return { hijau: '🟩', kuning: '🟨', merah: '🟥' }[status] || '⬜';
 }
 
+/**
+ * Teks lokasi yang ditampilkan di kartu & detail sopir.
+ * - Mock data: pakai `label` (alamat tulisan tangan untuk demo).
+ * - Data asli dari Supabase: belum ada `label` (GPS hanya kasih lat/lng),
+ *   jadi ditampilkan sebagai koordinat. Kalau nanti mau alamat jalan asli,
+ *   perlu reverse-geocoding (lihat catatan di README/chat) — sengaja belum
+ *   dipasang otomatis supaya tidak diam-diam memanggil API eksternal pihak ketiga.
+ */
+function formatLokasiLabel(lokasi) {
+  if (!lokasi || lokasi.lat == null || lokasi.lng == null) return 'Lokasi tidak tersedia';
+  if (lokasi.label) return lokasi.label;
+  return `${lokasi.lat.toFixed(5)}, ${lokasi.lng.toFixed(5)}`;
+}
+
 function getVitalClass(key, val) {
   if (key === 'spo2') {
     if (val < 90) return 'vital-card--danger';
@@ -557,6 +584,219 @@ function dismissToast(id) {
   el.style.transform = 'translateX(20px)';
   el.style.transition = 'opacity 0.2s, transform 0.2s';
   setTimeout(() => el.remove(), 220);
+}
+
+/* ============================================================
+   5b. SOS — Tombol darurat smart band
+   ============================================================
+   Alur: smart band → report_sos (RPC) → tabel sos_events →
+   trigger DB update sopir.sos_active → Supabase Realtime →
+   browser ini terima INSERT → alarm + banner + kartu kedip.
+   ============================================================ */
+
+let _sosAudioCtx   = null;
+let _sosAudioTimer = null;
+
+/**
+ * Bangkitkan alarm sederhana pakai WebAudio (tanpa file suara eksternal),
+ * berulang selama masih ada SOS aktif yang belum ditangani.
+ */
+function startSosAlarm() {
+  if (_sosAudioTimer) return; // sudah berjalan
+
+  const playBeep = () => {
+    try {
+      if (!_sosAudioCtx) _sosAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const ctx = _sosAudioCtx;
+      const t0  = ctx.currentTime;
+
+      [0, 0.35].forEach(offset => {
+        const osc  = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(880, t0 + offset);
+        gain.gain.setValueAtTime(0.0001, t0 + offset);
+        gain.gain.exponentialRampToValueAtTime(0.18, t0 + offset + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t0 + offset + 0.28);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(t0 + offset);
+        osc.stop(t0 + offset + 0.3);
+      });
+    } catch (e) {
+      // WebAudio mungkin diblokir sebelum interaksi user pertama — abaikan diam-diam
+    }
+  };
+
+  playBeep();
+  _sosAudioTimer = setInterval(playBeep, 2500);
+}
+
+function stopSosAlarm() {
+  if (_sosAudioTimer) {
+    clearInterval(_sosAudioTimer);
+    _sosAudioTimer = null;
+  }
+}
+
+/**
+ * Render banner SOS full-width di atas konten (semua halaman).
+ * Banner hilang otomatis kalau tidak ada SOS aktif.
+ */
+function renderSosBanner() {
+  const events = DATA.sosEvents;
+
+  if (!events.length) {
+    DOM.sosBanner.hidden = true;
+    document.body.classList.remove('has-sos-banner');
+    stopSosAlarm();
+    return;
+  }
+
+  document.body.classList.add('has-sos-banner');
+  DOM.sosBanner.hidden = false;
+  DOM.sosBannerCount.textContent = events.length;
+
+  DOM.sosBannerList.innerHTML = events.map(ev => `
+    <button class="sos-banner__chip" data-sos-id="${ev.id}">
+      <span class="sos-banner__chip-dot"></span>
+      ${ev.nama} <span class="sos-banner__chip-armada">· ${ev.armadaNama}</span>
+    </button>
+  `).join('');
+
+  $$('.sos-banner__chip', DOM.sosBannerList).forEach(btn => {
+    btn.addEventListener('click', () => openSosModal(Number(btn.dataset.sosId)));
+  });
+
+  startSosAlarm();
+}
+
+/**
+ * Tandai/lepas kedip-merah pada kartu sopir di halaman Monitoring
+ * untuk setiap sopir yang sedang SOS aktif.
+ */
+function applySosRowHighlight() {
+  const activeSopirIds = new Set(DATA.sosEvents.map(ev => ev.sopirId));
+  $$('.sopir-row').forEach(row => {
+    row.classList.toggle('sopir-row--sos', activeSopirIds.has(row.dataset.id));
+  });
+}
+
+function openSosModal(sosEventId) {
+  const ev = DATA.sosEvents.find(e => e.id === sosEventId);
+  if (!ev) return;
+
+  DOM.sosModalBody.innerHTML = `
+    <div class="sos-modal__alert">
+      <span class="sos-modal__pulse-dot"></span>
+      <div>
+        <div class="sos-modal__nama">${ev.nama}</div>
+        <div class="sos-modal__meta">${ev.armadaNama} · SOS ditekan ${formatLastSeen(ev.createdAt)}</div>
+      </div>
+    </div>
+
+    <div class="sos-modal__vitals">
+      <div class="vital-card ${ev.spo2 != null ? getVitalClass('spo2', ev.spo2) : ''}">
+        <span class="vital-card__label">SpO₂</span>
+        <span class="vital-card__value">${ev.spo2 ?? '—'}</span>
+        <span class="vital-card__unit">%</span>
+      </div>
+      <div class="vital-card ${ev.hr != null ? getVitalClass('hr', ev.hr) : ''}">
+        <span class="vital-card__label">Heart Rate</span>
+        <span class="vital-card__value">${ev.hr ?? '—'}</span>
+        <span class="vital-card__unit">bpm</span>
+      </div>
+      <div class="vital-card ${ev.rr != null ? getVitalClass('rr', ev.rr) : ''}">
+        <span class="vital-card__label">Resp. Rate</span>
+        <span class="vital-card__value">${ev.rr ?? '—'}</span>
+        <span class="vital-card__unit">bpm</span>
+      </div>
+    </div>
+
+    <div class="sos-modal__lokasi">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M10 18s6-5.6 6-10.2a6 6 0 10-12 0C4 12.4 10 18 10 18z"/>
+        <circle cx="10" cy="7.8" r="2"/>
+      </svg>
+      ${ev.lat != null && ev.lng != null
+        ? `${ev.lat.toFixed(5)}, ${ev.lng.toFixed(5)}`
+        : 'Lokasi tidak tersedia'}
+    </div>
+  `;
+
+  DOM.btnResolveSos.dataset.sosId = String(ev.id);
+  DOM.btnHubungiSosK3.dataset.sopirId = ev.sopirId;
+
+  DOM.sosModal.hidden = false;
+  document.body.style.overflow = 'hidden';
+  DOM.sosModalClose.focus();
+}
+
+function closeSosModal() {
+  DOM.sosModal.hidden = true;
+  document.body.style.overflow = '';
+}
+
+async function handleResolveSos() {
+  const sosId = Number(DOM.btnResolveSos.dataset.sosId);
+  if (!sosId) return;
+
+  DOM.btnResolveSos.disabled = true;
+  const { error } = await window.PEKA_DB.resolveSos(sosId);
+  DOM.btnResolveSos.disabled = false;
+
+  if (error) {
+    showToast('warning', 'Gagal menandai selesai', error.message || 'Coba lagi.', 5000);
+    return;
+  }
+
+  removeSosEvent(sosId);
+  closeSosModal();
+  showToast('success', 'SOS ditandai selesai', 'Kejadian darurat telah ditangani.', 4000);
+}
+
+/**
+ * Hapus satu SOS dari state lokal & re-render banner + highlight kartu.
+ * Dipanggil setelah resolve manual ATAU setelah realtime UPDATE
+ * (is_resolved = true) datang dari device/operator lain.
+ */
+function removeSosEvent(sosEventId) {
+  DATA.sosEvents = DATA.sosEvents.filter(e => e.id !== sosEventId);
+  renderSosBanner();
+  applySosRowHighlight();
+  renderStats();
+}
+
+/**
+ * Tambah SOS baru ke state lokal (dari fetch awal ATAU realtime INSERT)
+ * & re-render banner + highlight kartu.
+ */
+function addSosEvent(ev) {
+  if (DATA.sosEvents.some(e => e.id === ev.id)) return;
+  DATA.sosEvents.unshift(ev);
+  renderSosBanner();
+  applySosRowHighlight();
+  renderStats();
+  if (STATE.activePage === 'monitoring') renderMonitoring();
+}
+
+/**
+ * Normalisasi baris dari Supabase (fetchActiveSosEvents) ke bentuk
+ * ringkas yang dipakai banner/modal di sini.
+ */
+function normalizeSosRow(row) {
+  return {
+    id:        row.id,
+    sopirId:   row.sopir_id,
+    nama:      row.sopir?.nama || 'Sopir',
+    armadaNama: row.sopir?.armada?.nama || '-',
+    lat:       row.lat,
+    lng:       row.lng,
+    spo2:      row.spo2,
+    hr:        row.hr,
+    rr:        row.rr,
+    createdAt: row.created_at,
+  };
 }
 
 /* ============================================================
@@ -834,6 +1074,7 @@ function renderMonitoring() {
   })).filter(g => g.members.length > 0);
 
   if (!grouped.length) {
+    clearSopirMaps(); // DOM lama akan dibuang — lepas instance peta yang masih menempel
     DOM.groupsContainer.innerHTML = `
       <div class="groups-placeholder">
         Tidak ada sopir yang sesuai dengan filter atau pencarian.
@@ -841,6 +1082,7 @@ function renderMonitoring() {
     return;
   }
 
+  clearSopirMaps(); // DOM lama akan dibuang — lepas instance peta yang masih menempel
   DOM.groupsContainer.innerHTML = grouped.map(g => renderGroupBlock(g)).join('');
 
   // Re-attach expand listeners
@@ -851,6 +1093,19 @@ function renderMonitoring() {
   // Re-attach vitals toggle
   $$('.vitals-toggle').forEach(btn => {
     btn.addEventListener('click', () => toggleVitals(btn));
+  });
+
+  // Badge SOS → buka modal detail SOS (jangan ikut toggle expand baris)
+  $$('[data-sos-open]').forEach(badge => {
+    badge.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const sopirId = badge.dataset.sosOpen;
+      const ev = DATA.sosEvents.find(s => s.sopirId === sopirId);
+      if (ev) openSosModal(ev.id);
+    });
+    badge.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); badge.click(); }
+    });
   });
 }
 
@@ -897,13 +1152,14 @@ function renderSopirRow(j) {
   // Saat offline, tampilan status netral (abu-abu) — tidak menampilkan warna triase
   // lama yang sudah tidak relevan karena data tidak lagi mengalir.
   const displayStatus = offline ? 'offline' : j.status;
+  const isSos = DATA.sosEvents.some(ev => ev.sopirId === j.id);
 
   const spo2Class = offline ? 'stat-chip--muted' : (j.spo2 < 90 ? 'stat-chip--danger' : j.spo2 < 95 ? 'stat-chip--warn' : '');
   const hrClass   = offline ? 'stat-chip--muted' : (j.hr > 115 ? 'stat-chip--danger' : j.hr > 100 ? 'stat-chip--warn' : '');
   const rrClass   = offline ? 'stat-chip--muted' : (j.rr > 25 ? 'stat-chip--danger' : j.rr > 20 ? 'stat-chip--warn' : '');
 
   return `
-    <li class="sopir-row" data-id="${j.id}" data-status="${displayStatus}" data-offline="${offline}">
+    <li class="sopir-row${isSos ? ' sopir-row--sos' : ''}" data-id="${j.id}" data-status="${displayStatus}" data-offline="${offline}">
       <button class="sopir-row__toggle" 
               aria-expanded="false" 
               aria-controls="detail-${j.id}"
@@ -913,6 +1169,9 @@ function renderSopirRow(j) {
         <span class="sopir-row__body">
           <span class="sopir-row__top">
             <span class="sopir-row__name">${j.nama}</span>
+            ${isSos ? `<span class="sos-badge" role="button" tabindex="0" data-sos-open="${j.id}">
+              <span class="sos-badge__dot"></span> SOS
+            </span>` : ''}
             <span class="status-pill status-pill--${displayStatus}">
               <span class="status-pill__dot"></span>
               ${getStatusLabel(displayStatus)}
@@ -932,6 +1191,13 @@ function renderSopirRow(j) {
               <span class="stat-chip__label">RR</span>
               <span class="stat-chip__value">${offline ? '—' : j.rr}</span>
             </span>
+          </span>
+          <span class="sopir-row__location">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M10 18s6-5.6 6-10.2a6 6 0 10-12 0C4 12.4 10 18 10 18z"/>
+              <circle cx="10" cy="7.8" r="2"/>
+            </svg>
+            ${formatLokasiLabel(j.lokasi)}
           </span>
         </span>
 
@@ -994,6 +1260,19 @@ function renderSopirRow(j) {
             <span class="detail-row__key">Riwayat Kesehatan</span>
             <span class="detail-row__val" style="font-family:var(--font-sans);font-size:12px;text-align:right">${j.riwayatKesehatan}</span>
           </div>
+        </div>
+
+        <!-- Lokasi Terakhir (GPS smartwatch) -->
+        <div class="detail-section sopir-map-section">
+          <div class="detail-section__title">Lokasi Terakhir</div>
+          <div class="detail-row">
+            <span class="detail-row__key">Alamat</span>
+            <span class="detail-row__val" style="font-family:var(--font-sans);font-size:12px;text-align:right">${formatLokasiLabel(j.lokasi)}</span>
+          </div>
+          ${j.lokasi && j.lokasi.lat != null && j.lokasi.lng != null
+            ? `<div class="sopir-map" id="map-${j.id}" data-lat="${j.lokasi.lat}" data-lng="${j.lokasi.lng}"></div>`
+            : `<div class="sopir-map"><span class="sopir-map-empty">Data lokasi tidak tersedia</span></div>`
+          }
         </div>
 
         <!-- Detail Medis (Dropdown) -->
@@ -1082,6 +1361,9 @@ function toggleSopirDetail(btn) {
   btn.setAttribute('aria-expanded', String(!isOpen));
   detail.hidden = isOpen;
   STATE.expandedSopir = isOpen ? null : id;
+
+  // Baru dibuka (bukan ditutup) → render peta Leaflet-nya (lazy init)
+  if (!isOpen) initSopirMap(id);
 }
 
 function toggleVitals(btn) {
@@ -1090,6 +1372,62 @@ function toggleVitals(btn) {
   const isOpen  = btn.getAttribute('aria-expanded') === 'true';
   btn.setAttribute('aria-expanded', String(!isOpen));
   content.hidden = isOpen;
+}
+
+/* ============================================================
+   12B. MONITORING — PETA LOKASI TERAKHIR (Leaflet)
+   Peta hanya dibuat (lazy-init) saat detail sopir dibuka, karena
+   Leaflet butuh container yang sudah terlihat (bukan `hidden`)
+   saat L.map() dipanggil. Instance disimpan di _sopirMaps supaya
+   tidak dibuat ulang setiap kali toggle, dan dibersihkan setiap
+   kali #groupsContainer di-render ulang (DOM lama akan dibuang).
+   ============================================================ */
+const _sopirMaps = {};
+
+function initSopirMap(id) {
+  const j = DATA.sopir.find(s => s.id === id);
+  if (!j || !j.lokasi || j.lokasi.lat == null || j.lokasi.lng == null) return;
+  if (typeof L === 'undefined') return; // Leaflet gagal/belum termuat (mis. tidak ada internet)
+
+  const container = document.getElementById(`map-${id}`);
+  if (!container) return;
+
+  const { lat, lng } = j.lokasi;
+
+  // Sudah pernah dibuat sebelumnya (mis. tutup-buka cepat) — refresh ukuran & posisi saja
+  if (_sopirMaps[id]) {
+    requestAnimationFrame(() => {
+      _sopirMaps[id].invalidateSize();
+      _sopirMaps[id].setView([lat, lng], _sopirMaps[id].getZoom());
+    });
+    return;
+  }
+
+  // requestAnimationFrame: tunggu satu frame supaya container sudah benar-benar
+  // ter-render (tidak hidden) dan punya ukuran sebelum Leaflet mengukur dimensinya.
+  requestAnimationFrame(() => {
+    try {
+      const map = L.map(container).setView([lat, lng], 14);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap',
+      }).addTo(map);
+
+      L.marker([lat, lng]).addTo(map);
+
+      _sopirMaps[id] = map;
+    } catch (e) {
+      console.error('Gagal memuat peta lokasi sopir:', e);
+    }
+  });
+}
+
+function clearSopirMaps() {
+  Object.keys(_sopirMaps).forEach(id => {
+    try { _sopirMaps[id].remove(); } catch (e) { /* noop — DOM mungkin sudah hilang */ }
+    delete _sopirMaps[id];
+  });
 }
 
 /* ============================================================
@@ -1776,6 +2114,33 @@ function handleHubungiK3(sopirId) {
   showToast('danger', 'Tim K3/HSE Dihubungi', `Permintaan bantuan untuk ${j.nama} telah dikirim ke tim K3/HSE.`);
 }
 
+function handleHubungiSosK3() {
+  const sopirId = DOM.btnHubungiSosK3.dataset.sopirId;
+  const j = DATA.sopir.find(j => j.id === sopirId);
+  showToast('danger', 'Tim K3/HSE Dihubungi', `Permintaan bantuan darurat untuk ${j?.nama || 'sopir'} telah dikirim ke tim K3/HSE.`);
+}
+
+/**
+ * DEV/TESTING ONLY — simulasikan tombol SOS ditekan, tanpa hardware.
+ * Panggil dari console browser: simulateSos('001A')
+ * (gunakan kode smartwatch/band yang sudah terdaftar di Supabase).
+ * Tidak dipasang ke tombol UI manapun — sengaja, supaya tidak
+ * tersentuh tidak sengaja di lingkungan produksi.
+ */
+async function simulateSos(bandCode) {
+  const { error } = await window.PEKA_DB.client.rpc('report_sos', {
+    p_band_code: bandCode,
+    p_lat: -7.25 + Math.random() * 0.1,
+    p_lng: 112.7 + Math.random() * 0.1,
+    p_spo2: 86,
+    p_hr: 132,
+    p_rr: 30,
+  });
+  if (error) console.error('simulateSos error:', error.message);
+  else console.log('SOS simulasi terkirim untuk band', bandCode);
+}
+window.simulateSos = simulateSos;
+
 // Expose to inline onclick
 window.handleHubungiK3 = handleHubungiK3;
 window.openAlertModal = openAlertModal;
@@ -1918,6 +2283,14 @@ function initEventListeners() {
   // --- Modal Hubungi K3 ---
   DOM.btnHubungiK3?.addEventListener('click', handleHubungiK3);
 
+  // --- Modal SOS ---
+  DOM.sosModalClose?.addEventListener('click', closeSosModal);
+  DOM.sosModal?.addEventListener('click', (e) => {
+    if (e.target === DOM.sosModal) closeSosModal();
+  });
+  DOM.btnResolveSos?.addEventListener('click', handleResolveSos);
+  DOM.btnHubungiSosK3?.addEventListener('click', handleHubungiSosK3);
+
   // --- Modal: Tambah Armada ---
   DOM.armadaModalClose?.addEventListener('click',  closeArmadaModal);
   DOM.armadaModalCancel?.addEventListener('click', closeArmadaModal);
@@ -1947,6 +2320,7 @@ function initEventListeners() {
   // Escape closes modal
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !DOM.alertModal.hidden) closeAlertModal();
+    if (e.key === 'Escape' && DOM.sosModal && !DOM.sosModal.hidden) closeSosModal();
     if (e.key === 'Escape' && DOM.armadaModal && !DOM.armadaModal.hidden) closeArmadaModal();
     if (e.key === 'Escape' && DOM.supervisorModal && !DOM.supervisorModal.hidden) closeSupervisorModal();
     if (e.key === 'Escape' && DOM.sopirMassalModal && !DOM.sopirMassalModal.hidden) closeSopirMassalModal();
@@ -1992,10 +2366,11 @@ async function loadAppData() {
 
   // Muat data dari Supabase dan update DATA global
   try {
-    const [sopirRes, armadaRes, alertsRes] = await Promise.all([
+    const [sopirRes, armadaRes, alertsRes, sosRes] = await Promise.all([
       window.PEKA_DB.fetchSopir(),
       window.PEKA_DB.fetchArmada(),
       window.PEKA_DB.fetchActiveAlerts(),
+      window.PEKA_DB.fetchActiveSosEvents(),
     ]);
 
     if (!sopirRes.error && sopirRes.data) {
@@ -2018,6 +2393,13 @@ async function loadAppData() {
         alertTerakhir: null,
         waktuAlert:   null,
         noSmartwatch:     j.smart_band?.band_code || '-',
+        // Lokasi GPS terakhir — kolom last_lat/last_lng BELUM ada di tabel `sopir`
+        // (vital_readings sudah punya lat/lng, tapi snapshot di sopir belum).
+        // Jalankan add_lokasi_sopir.sql lalu sambungkan trigger snapshot agar
+        // kolom ini ikut terisi — sebelum itu, field ini akan selalu null.
+        lokasi: (j.last_lat != null && j.last_lng != null)
+          ? { lat: j.last_lat, lng: j.last_lng, label: null }
+          : null,
       }));
     }
 
@@ -2030,9 +2412,15 @@ async function loadAppData() {
       }));
     }
 
+    if (!sosRes.error && sosRes.data) {
+      DATA.sosEvents = sosRes.data.map(normalizeSosRow);
+    }
+
     // Re-render dengan data asli
     renderStats();
     renderAlerts();
+    renderSosBanner();
+    applySosRowHighlight();
     requestAnimationFrame(() => renderTrendChart());
 
     // Subscribe realtime updates — HANYA SEKALI per sesi.
@@ -2066,6 +2454,14 @@ function subscribeRealtimeOnce() {
         DATA.sopir[idx].lastReadingAt = updated.last_reading_at;
         DATA.sopir[idx].online        = !isSopirOffline(updated.last_reading_at);
       }
+      // Lokasi GPS terakhir — lihat catatan di loadAppData() / add_lokasi_sopir.sql
+      if (updated.last_lat != null && updated.last_lng != null) {
+        DATA.sopir[idx].lokasi = {
+          lat: updated.last_lat,
+          lng: updated.last_lng,
+          label: DATA.sopir[idx].lokasi?.label || null,
+        };
+      }
       if (STATE.activePage === 'dashboard') { renderStats(); renderAlerts(); }
       if (STATE.activePage === 'monitoring') { renderMonitoring(); }
     }
@@ -2080,6 +2476,36 @@ function subscribeRealtimeOnce() {
       6000
     );
     if (STATE.activePage === 'dashboard') renderAlerts();
+  });
+
+  // --- SOS: tombol darurat ditekan di smart band ---
+  window.PEKA_DB.subscribeNewSos(async (payload) => {
+    const row = payload.new;
+    // payload realtime tidak include join (sopir/armada), jadi ambil dari
+    // DATA.sopir yang sudah ada di memori (lebih cepat daripada fetch ulang).
+    const sopir = DATA.sopir.find(s => s.id === row.sopir_id);
+    const armada = sopir ? getArmada(sopir.armadaId) : {};
+
+    addSosEvent({
+      id: row.id,
+      sopirId: row.sopir_id,
+      nama: sopir?.nama || 'Sopir',
+      armadaNama: armada?.nama || '-',
+      lat: row.lat,
+      lng: row.lng,
+      spo2: row.spo2,
+      hr: row.hr,
+      rr: row.rr,
+      createdAt: row.created_at,
+    });
+
+    showToast('danger', '🆘 SOS DITEKAN', `${sopir?.nama || 'Sopir'} menekan tombol darurat!`, 8000);
+  });
+
+  // --- SOS: ditandai selesai dari device/operator lain ---
+  window.PEKA_DB.subscribeSosResolved((payload) => {
+    const row = payload.new;
+    if (row.is_resolved) removeSosEvent(row.id);
   });
 }
 

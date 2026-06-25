@@ -1,5 +1,5 @@
 /* ============================================================
-   RIHLAH — supabase.js
+   PEKA — supabase.js
    Supabase client, auth, dan semua query ke database.
    Import file ini sebelum app.js di index.html.
    ============================================================ */
@@ -146,6 +146,25 @@ async function fetchArmada() {
   return { data, error };
 }
 
+/**
+ * Tambah armada baru.
+ * Hanya kolom `nama` yang diisi — supervisor_id tetap null
+ * sampai ditugaskan lewat fitur "Tambah Supervisor Armada".
+ * RLS di tabel armada harus mengizinkan INSERT untuk role 'admin'.
+ *
+ * @param {string} nama — e.g. "Armada 4"
+ * @returns {{ data, error }}
+ */
+async function insertArmada(nama) {
+  const { data, error } = await db
+    .from('armada')
+    .insert({ nama })
+    .select()
+    .single();
+
+  return { data, error };
+}
+
 /* ============================================================
    SOPIR
    ============================================================ */
@@ -168,6 +187,8 @@ async function fetchSopir() {
       last_rr,
       last_status,
       last_reading_at,
+      last_lat,
+      last_lng,
       armada:armada_id ( nama ),
       smart_band:smart_band_id ( band_code, is_active, battery_pct, last_seen_at )
     `)
@@ -194,6 +215,8 @@ async function fetchSopirById(sopirId) {
       last_rr,
       last_status,
       last_reading_at,
+      last_lat,
+      last_lng,
       armada:armada_id ( nama ),
       smart_band:smart_band_id ( band_code, is_active, battery_pct, last_seen_at )
     `)
@@ -295,10 +318,11 @@ async function fetchLatestVitalsAll() {
  * create or replace function get_latest_vitals()
  * returns table (
  *   sopir_id uuid, spo2 smallint, hr smallint,
- *   rr smallint, battery_pct smallint, recorded_at timestamptz
+ *   rr smallint, battery_pct smallint, lat double precision,
+ *   lng double precision, recorded_at timestamptz
  * ) language sql security definer as $$
  *   select distinct on (sopir_id)
- *     sopir_id, spo2, hr, rr, battery_pct, recorded_at
+ *     sopir_id, spo2, hr, rr, battery_pct, lat, lng, recorded_at
  *   from vital_readings
  *   order by sopir_id, recorded_at desc;
  * $$;
@@ -439,7 +463,7 @@ function calcStats(sopirList) {
 /* ============================================================
    EXPORT — semua fungsi tersedia global (vanilla JS, no bundler)
    ============================================================ */
-window.RIHLAH_DB = {
+window.PEKA_DB = {
   client: db,
 
   // Auth
@@ -454,6 +478,7 @@ window.RIHLAH_DB = {
 
   // Data
   fetchArmada,
+  insertArmada,
   fetchSopir,
   fetchSopirById,
   insertSopirBulk,

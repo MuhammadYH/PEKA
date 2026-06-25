@@ -6,6 +6,8 @@
   <title>PEKA — Sistem Monitoring Sopir</title>
   <link rel="icon" type="image/x-icon" href="assets/icons/x-favicon.ico" />
   <link rel="stylesheet" href="style.css" />
+  <!-- Leaflet — untuk peta lokasi terakhir sopir (Detail Medis → Lokasi Terakhir) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <script>
@@ -251,6 +253,17 @@
        MAIN CONTENT WRAPPER
   ============================== -->
   <div class="main-wrapper">
+
+    <!-- SOS BANNER — tampil hanya saat ada SOS aktif -->
+    <div class="sos-banner" id="sosBanner" hidden role="alert" aria-live="assertive">
+      <div class="sos-banner__main">
+        <span class="sos-banner__icon">🆘</span>
+        <span class="sos-banner__text">
+          <strong><span id="sosBannerCount">0</span> SOS AKTIF</strong> — tombol darurat smart band ditekan
+        </span>
+      </div>
+      <div class="sos-banner__list" id="sosBannerList"></div>
+    </div>
 
     <!-- TOP BAR -->
     <header class="topbar">
@@ -816,6 +829,31 @@
   </div>
 
   <!-- ==============================
+       MODAL: SOS DETAIL
+  ============================== -->
+  <div class="modal-overlay" id="sosModal" hidden role="dialog" aria-modal="true" aria-labelledby="sosModalTitle">
+    <div class="modal modal--sos">
+      <div class="modal__header modal__header--sos">
+        <h2 class="modal__title" id="sosModalTitle">🆘 SOS — Tombol Darurat Ditekan</h2>
+        <button class="modal__close" id="sosModalClose" aria-label="Tutup">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="5" x2="15" y2="15"/>
+            <line x1="15" y1="5" x2="5" y2="15"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal__body" id="sosModalBody">
+        <!-- Populated by JS -->
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--danger" id="btnHubungiSosK3">Hubungi Tim K3/HSE</button>
+        <button class="btn btn--success" id="btnResolveSos">Tandai Selesai Ditangani</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==============================
        MODAL: TAMBAH ARMADA
   ============================== -->
   <div class="modal-overlay" id="armadaModal" hidden role="dialog" aria-modal="true" aria-labelledby="armadaModalTitle">
@@ -990,6 +1028,8 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <!-- SheetJS — untuk parsing file XLSX upload Tambah Sopir -->
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <!-- Leaflet — peta lokasi terakhir sopir, harus dimuat sebelum app.js -->
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
   <!-- PEKA Supabase client & queries -->
   <script src="supabase.js"></script>
   <!-- PEKA App -->
